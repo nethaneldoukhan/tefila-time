@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="he">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" href="../public/assets/img/site/ShurtLogo.png" />
+		<title>תפילה טיים | דף הבית</title>
+		<link rel="stylesheet" href="../public/css/style.css"> <!-- sur serveur /css/style.css -->
+		<script src="https://kit.fontawesome.com/1406b0d971.js"></script>
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<!-- add tefila -->
+		<div class="message_box">
+			<div class="con-box wid700 allBor">
+				<div class="btn_close col-w right--20 top-0">
+					<i class="fas fa-times"></i>
+				</div>
+	
+				<div class="con-header">
+					<h4 class="col-w pad10-0 bc_blu-lin bor_rad5-top">
+						הוסף תפילה
+					</h4>
+				</div>
+	
+				<!-- register -->
+				<div class="con-body pad10">
+	
+					<form action="/synagogue/addTefila" method="post" id="add_tefila_form" class="ta-r">
+	
+						<div>
+							<div class="mar20-0 wid44pc floatR">
+
+								<label for="name">שם התפילה</label>
+								<input type="text" name="name" id="name" placeholder="שם התפילה" class="input_design input_addTefila wid96pc bs">
+	
+							</div>
+	
+							<div class="mar20-0 wid44pc floatL">
+
+								<input type="radio" name="hours" id="hours" value="fixed" checked>
+								<label for="hours">שעה קבועה</label>
+								<input type="time" name="hour" id="hour" class="input_design input_addTefila wid96pc bs">
+								<span class="comment_error fs-13 col-r"></span> <br />
+	
+							</div>
+
+							<div class="mar20-0 wid44pc floatR">
+	
+								<input type="radio" name="hours" id="day_time" value="day_time">
+								<label for="day_time">שעה לפי זמני היום</label>
+								<input type="time" name="hour_day_time" id="hour_day_time" class="input_design input_addTefila wid96pc bs" disabled>
+								<span class="comment_error fs-13 col-r"></span> <br />
+	
+							</div>
+	
+							<div class="mar20-0 wid44pc floatL">
+	
+								<label for="select_day_time">בחר זמני היום</label>
+								<select name="day_time" id="select_day_time" class="input_addTefila wid96pc bs" disabled>
+									<option value="0">-----</option>
+									<option value="1">ע"מ</option>
+									<option value="2">אשכנז</option>
+									<option value="3">ספרד</option>
+								</select>
+								<span class="comment_error fs-13 col-r"></span> <br />
+	
+							</div>
+	
+							<div class="mar20-0 wid44pc floatR">
+	
+								<input type="radio" name="days" id="all_days" value="yes" checked>
+								<label for="all_days">כל יום</label>
+
+								<input type="radio" name="days" id="partial_days" value="no">
+								<label for="partial_days">ימים</label>
+								
+							</div>
+
+							<div id="days_box" class="mar20-0 wid44pc floatL">
+								<input type="checkbox" name="א" id="day1" disabled>
+								<label for="day1">א'</label>
+								<input type="checkbox" name="ב'" id="day2" disabled>
+								<label for="day2">ב'</label>
+								<input type="checkbox" name="ג'" id="day3" disabled>
+								<label for="day3">ג'</label>
+								<input type="checkbox" name="ד'" id="day4" disabled>
+								<label for="day4">ד'</label>
+								<input type="checkbox" name="ה'" id="day5" disabled>
+								<label for="day5">ה'</label>
+								<input type="checkbox" name="ו'" id="day6" disabled>
+								<label for="day6">ו'</label>
+							</div>
+
+							<div class="clear"></div>
+
+						</div>
+		
+						<div class="ta-c">
+							<input type="submit" value="הוסף" class="btn mar20-0 col-w c-yw_h ta-c pad9-40 bor_rad5">
+						</div>
+	
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<script type="module" src="../public/js/app.js"></script>
+		<script src="../public/js/modules/jquery.js"> </script>
+
+	</body>
+</html>

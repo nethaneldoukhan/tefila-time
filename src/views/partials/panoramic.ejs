@@ -1,0 +1,59 @@
+<!-- image panoramic -->
+<section>
+    <div class="container">
+        <figure class="slider-area wid1024 heig256 mar-auto marT10">
+            <% if (areaData[0]) {
+                areaData.forEach((item, index) => { %>
+                <div class="abso <% if (!item[0]) { %>disp-n <% } %>">
+                    <img src="assets/img/panoram/<%= item.panoramic %>" alt="תמונה פנורמי <%= item.name %>" class="img_pano" />
+
+                    <p class="tag_pano ta-l pad10 bor_rad5">
+
+                        <span class="syna_name bold shad"><%= item.name %></span>
+                        <br>
+                        <span class="syna_city"><%= item.city %></span>
+                        
+                    </p>
+                </div>
+                <% }); 
+            } %>
+
+            <!-- <div class="abso">
+                <img src="assets/img/panoram/magen_david_calcutta.jpg" alt="" class="img_pano" />
+
+                <p class="tag_pano ta-l pad10 bor_rad5">
+
+                    <span class="syna_name bold shad">מגן דוד</span>
+                    <br>
+                    <span class="syna_city">קלקוטה</span>
+                    
+                </p>
+            </div>
+
+            <div class="abso disp-n">
+                <img src="assets/img/panoram/eliahou_hanavi_tel_aviv.jpg" alt="" class="img_pano" />
+
+                <p class="tag_pano ta-l pad10 bor_rad5">
+
+                    <span class="syna_name bold shad">אליהו הנביא</span>
+                    <br>
+                    <span class="syna_city">תל אביב</span>
+                    
+                </p>
+            </div>
+
+            <div class="abso disp-n">
+                <img src="assets/img/panoram/85941996.jpg" alt="" class="img_pano" />
+
+                <p class="tag_pano ta-l pad10 bor_rad5">
+
+                    <span class="syna_name bold shad">בית המדרש הגדול</span>
+                    <br>
+                    <span class="syna_city">מנהטן</span>
+                    
+                </p>
+            </div> -->
+
+        </figure>
+    </div>
+</section>

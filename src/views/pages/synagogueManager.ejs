@@ -1,0 +1,839 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navBar&search&connexion') %>
+
+<!-- Page synagogue -->
+		<section>
+			<div class="container">
+
+				<div class="wid682 heig170 marB120 mar-auto rel">
+
+					<div>
+						<% if(synagogue.detail.panoramic) { %>
+						<img src="/assets/img/panoram/<%= synagogue.detail.panoramic %>" alt="תמונת <%= synagogue.detail.name %>" class="wid682 heig170" />
+						<% } %>
+					</div>
+
+					<div class="abso wid96pc bot--80 right20">
+
+						<div class="floatR wid115x115 upload_img">
+						<% if(synagogue.detail.photo) { %>
+							<img src="/assets/img/BK/<%= synagogue.detail.photo %>" alt="תמונת <%= synagogue.detail.name %>" class="wid115x115 b_sh-w bor_rad5" />
+						<% } %>
+						</div>
+
+						<div class="floatR marT60">
+							<div class="floatR">
+								<h2 id="synagogue_name" class="mar10 fs-40 bold">
+									<%= synagogue.detail.name %>
+								</h2>
+
+								<h2 id="synagogue_name_en" class="mar10 fs-20 bold">
+									<%= synagogue.detail.nameEn %>
+								</h2>
+							</div>
+							
+						</div>
+							
+						<div class="floatL marT60">
+
+							<h4 class="mar10 fs-20">
+								נוסח 
+								<span class="bold fs-20">
+									<%= synagogue.detail.rite %>
+								</span>
+							</h4>
+
+							<p class="fs-13">
+								עודכן ב: <%= synagogue.detail.lastUpdateDate %> UTC
+							</p>
+
+						</div>
+
+						<div class="clear"></div>
+
+					</div>
+				</div>
+
+				<div>
+					<div class="floatR wid250 marL30 bkAsideBar">
+
+						<h3 class="pad5 col-w ta-c">
+							שנה פרטים
+						</h3>
+			
+						<ul>
+			
+							<li>
+								עידכון פרטים
+							</li>
+			
+							<li>
+								החלפת סיסמא
+							</li>
+			
+							<li>
+								הוספת/החלפת תמונות
+							</li>
+			
+							<li>
+								הגדרות (payPal)
+							</li>
+			
+							<li>
+								<a href="javascript:void(0)" id="del_synagogue" data-id="<%= synagogue.detail._id %>">מחק בית הכנסת</a>
+							</li>
+			
+						</ul>
+					</div>
+
+					<div class="floatR">
+
+						<!-- Menu synagogue -->
+						<nav class="synagogue-header">
+							<ul>
+								<li class="ta-c col-w borL wid150 pad10-0 point bc-gy-l_h actif">
+									לו"ז תפילות
+								</li>
+
+								<li class="ta-c col-w borL wid150 pad10-0 point bc-gy-l_h">
+									לו"ז שיעורים
+								</li>
+
+								<li class="ta-c col-w wid150 pad10-0 point bc-gy-l_h">
+									דבר תורה והודעות
+								</li>
+							</ul>
+							<hr>
+						</nav>
+
+
+						<div class="wid800">
+
+							<!-- Times tfilot -->
+							<div class="synagogue-body">
+
+								<!-- חול -->
+								<div>
+									<h3 class="ta-c col-w pad5">
+										תפילות חול
+									</h3>
+
+									<!-- shaharit -->								
+									<nav id="list_tefila_1" class="mar20-0">
+
+										<div class="floatR">
+
+											<h4 class="wid150 mar0">
+												שחרית
+											</h4>
+
+											<hr>
+										
+										</div>
+										
+										<ul class="mar0-20 pad0-10 borR floatR">
+
+										<% if (synagogue.data.tefilot[0][0]) { %>
+											<% synagogue.data.tefilot[0].forEach(item => { %>
+													
+											<li class="wid600 pad10-0">
+	
+												<div class="data_name wid150 bold floatR">
+													<%= item.name %>
+												</div>
+	
+												<div class="wid400 floatR">
+	
+													<div class="wid60 floatR">
+													<% if (item.hour_day_time) { %>
+														~
+													<% } %>
+														<%= item.hour %>
+													</div>
+	
+													<div class="wid190 floatR">
+													<% if (item.hour_day_time) { %>
+														לפי <span><%= item.hour_day_time %></span> <%= item.day_hours %>
+													<% } %>
+													</div>
+	
+													<div class="wid200 floatR">
+														ימים: <span><%= item.days %></span>
+													</div>
+													
+													<div class="wid200 floatL ta-l">
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="1" class="edit_data pad3 col-blu bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="שנה"><i class="fas fa-pen"></i></a>
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="1" class="remove_data pad3 col-r bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="מחק"><i class="far fa-trash-alt"></i></a>
+													</div>
+	
+													<div class="clear"></div>
+													
+												</div>
+	
+												<div class="clear"></div>
+	
+											</li>
+										
+											<% });
+										
+										} else { %>
+											<p class="wid400 marR-20 pad0-10 floatR fs-13 ta-c">הרשימה ריקה</p>
+										<% } %>
+
+										</ul>
+
+										<div class="clear"></div>
+										
+										<div class="wid100pc ta-l">
+											<a href="javascript:void(0)" class="btn-box add_tefila c-yw_h" data-synagogueId="<%= synagogue.detail._id %>" data-tefilaType="1">
+												הוסף תפילה
+											</a>
+										</div>
+
+									</nav>
+
+									
+
+									<!-- minha -->
+									<nav id="list_tefila_2" class="mar20-0">
+
+										<div class="floatR">
+
+											<h4 class="wid150 mar0">
+												מנחה
+											</h4>
+
+											<hr>
+										
+										</div>
+										
+										<ul class="mar0-20 pad0-10 borR floatR">
+
+										<% if (synagogue.data.tefilot[1][0]) { %>
+											<% synagogue.data.tefilot[1].forEach(item => { %>
+													
+											<li class="wid600 pad10-0">
+	
+												<div class="data_name wid150 bold floatR">
+													<%= item.name %>
+												</div>
+	
+												<div class="wid400 floatR">
+	
+													<div class="wid60 floatR">
+													<% if (item.hour_day_time) { %>
+														~
+													<% } %>
+														<%= item.hour %>
+													</div>
+	
+													<div class="wid190 floatR">
+													<% if (item.hour_day_time) { %>
+														לפי <span><%= item.hour_day_time %></span> <%= item.day_hours %>
+													<% } %>
+													</div>
+	
+													<div class="wid200 floatR">
+														ימים: <span><%= item.days %></span>
+													</div>
+													
+													<div class="wid200 floatL ta-l">
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="2" class="edit_data pad3 col-blu bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="שנה"><i class="fas fa-pen"></i></a>
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="2" class="remove_data pad3 col-r bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="מחק"><i class="far fa-trash-alt"></i></a>
+													</div>
+	
+													<div class="clear"></div>
+													
+												</div>
+	
+												<div class="clear"></div>
+	
+											</li>
+	
+											<% });
+										
+										} else { %>
+											<p class="wid400 marR-20 pad0-10 floatR fs-13 ta-c">הרשימה ריקה</p>
+										<% } %>
+									
+										</ul>
+
+										<div class="clear"></div>
+										
+										<div class="wid100pc ta-l">
+											<a href="javascript:void(0)" class="btn-box add_tefila c-yw_h" data-synagogueId="<%= synagogue.detail._id %>" data-tefilaType="2">
+												הוסף תפילה
+											</a>
+										</div>
+
+									</nav>
+
+									<!-- arvit -->
+									<nav id="list_tefila_3" class="mar20-0">
+
+										<div class="floatR">
+
+											<h4 class="wid150 mar0">
+												ערבית
+											</h4>
+
+											<hr>
+										
+										</div>
+										
+										<ul class="mar0-20 pad0-10 borR floatR">
+
+										<% if (synagogue.data.tefilot[2][0]) { %>
+											<% synagogue.data.tefilot[2].forEach(item => { %>
+													
+											<li class="wid600 pad10-0">
+	
+												<div class="data_name wid150 bold floatR">
+													<%= item.name %>
+												</div>
+	
+												<div class="wid400 floatR">
+	
+													<div class="wid60 floatR">
+													<% if (item.hour_day_time) { %>
+														~
+													<% } %>
+														<%= item.hour %>
+													</div>
+	
+													<div class="wid190 floatR">
+													<% if (item.hour_day_time) { %>
+														לפי <span><%= item.hour_day_time %></span> <%= item.day_hours %>
+													<% } %>
+													</div>
+	
+													<div class="wid200 floatR">
+														ימים: <span><%= item.days %></span>
+													</div>
+													
+													<div class="wid200 floatL ta-l">
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="3" class="edit_data pad3 col-blu bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="שנה"><i class="fas fa-pen"></i></a>
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="3" class="remove_data pad3 col-r bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="מחק"><i class="far fa-trash-alt"></i></a>
+													</div>
+	
+													<div class="clear"></div>
+													
+												</div>
+	
+												<div class="clear"></div>
+	
+											</li>
+	
+											<% });
+										
+										} else { %>
+											<p class="wid400 marR-20 pad0-10 floatR fs-13 ta-c">הרשימה ריקה</p>
+										<% } %>
+										
+										</ul>
+
+										<div class="clear"></div>
+										
+										<div class="wid100pc ta-l">
+											<a href="javascript:void(0)" class="btn-box add_tefila c-yw_h" data-synagogueId="<%= synagogue.detail._id %>" data-tefilaType="3">
+												הוסף תפילה
+											</a>
+										</div>
+
+									</nav>
+								</div>
+
+
+								<!-- shabbat -->
+								<div>
+									<h3 class="ta-c col-w pad5">
+										תפילות שבת קודש
+									</h3>
+
+									<!-- minha erev shabbat -->
+									<nav id="list_tefila_4" class="mar20-0">
+
+										<div class="floatR">
+
+											<h4 class="wid150 mar0">
+												מנחה ער"ש
+											</h4>
+
+											<hr>
+										
+										</div>
+										
+										<ul class="mar0-20 pad0-10 borR floatR">
+
+										<% if (synagogue.data.tefilot[3][0]) { %>
+											<% synagogue.data.tefilot[3].forEach(item => { %>
+													
+											<li class="wid600 pad10-0">
+	
+												<div class="data_name wid150 bold floatR">
+													<%= item.name %>
+												</div>
+	
+												<div class="wid400 floatR">
+	
+													<div class="wid60 floatR">
+													<% if (item.hour_day_time) { %>
+														~
+													<% } %>
+														<%= item.hour %>
+													</div>
+	
+													<div class="wid190 floatR">
+													<% if (item.hour_day_time) { %>
+														לפי <span><%= item.hour_day_time %></span> <%= item.day_hours %>
+													<% } %>
+													</div>
+													
+													<div class="wid200 floatL ta-l">
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="4" class="edit_data pad3 col-blu bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="שנה"><i class="fas fa-pen"></i></a>
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="4" class="remove_data pad3 col-r bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="מחק"><i class="far fa-trash-alt"></i></a>
+													</div>
+	
+													<div class="clear"></div>
+													
+												</div>
+	
+												<div class="clear"></div>
+	
+											</li>
+	
+											<% });
+										} else { %>
+											<p class="wid400 marR-20 pad0-10 floatR fs-13 ta-c">הרשימה ריקה</p>
+										<% } %>
+
+										</ul>
+
+										<div class="clear"></div>
+										
+										<div class="wid100pc ta-l">
+											<a href="javascript:void(0)" class="btn-box add_tefila c-yw_h" data-synagogueId="<%= synagogue.detail._id %>" data-tefilaType="4">
+												הוסף תפילה
+											</a>
+										</div>
+
+									</nav>
+
+									<!-- shaharit shabbat -->							
+									<nav id="list_tefila_5" class="mar20-0">
+
+										<div class="floatR">
+
+											<h4 class="wid150 mar0">
+												שחרית
+											</h4>
+
+											<hr>
+										
+										</div>
+
+										<ul class="mar0-20 pad0-10 borR floatR">
+
+										<% if (synagogue.data.tefilot[4][0]) { %>
+											<% synagogue.data.tefilot[4].forEach(item => { %>
+													
+											<li class="wid600 pad10-0">
+	
+												<div class="data_name wid150 bold floatR">
+													<%= item.name %>
+												</div>
+	
+												<div class="wid400 floatR">
+	
+													<div class="wid60 floatR">
+													<% if (item.hour_day_time) { %>
+														~
+													<% } %>
+														<%= item.hour %>
+													</div>
+	
+													<div class="wid190 floatR">
+													<% if (item.hour_day_time) { %>
+														לפי <span><%= item.hour_day_time %></span> <%= item.day_hours %>
+													<% } %>
+													</div>
+													
+													<div class="wid200 floatL ta-l">
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="5" class="edit_data pad3 col-blu bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="שנה"><i class="fas fa-pen"></i></a>
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="5" class="remove_data pad3 col-r bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="מחק"><i class="far fa-trash-alt"></i></a>
+													</div>
+	
+													<div class="clear"></div>
+													
+												</div>
+	
+												<div class="clear"></div>
+	
+											</li>
+	
+											<% });
+										} else { %>
+											<p class="wid400 marR-20 pad0-10 floatR fs-13 ta-c">הרשימה ריקה</p>
+										<% } %>
+
+										</ul>
+
+										<div class="clear"></div>
+										
+										<div class="wid100pc ta-l">
+											<a href="javascript:void(0)" class="btn-box add_tefila c-yw_h" data-synagogueId="<%= synagogue.detail._id %>" data-tefilaType="5">
+												הוסף תפילה
+											</a>
+										</div>
+
+
+									</nav>
+
+									<!-- minha shabbat -->
+									<nav id="list_tefila_6" class="mar20-0">
+
+										<div class="floatR">
+
+											<h4 class="wid150 mar0">
+												מנחה
+											</h4>
+
+											<hr>
+										
+										</div>
+
+										<ul class="mar0-20 pad0-10 borR floatR">
+
+										<% if (synagogue.data.tefilot[5][0]) { %>
+											<% synagogue.data.tefilot[5].forEach(item => { %>
+													
+											<li class="wid600 pad10-0">
+	
+												<div class="data_name wid150 bold floatR">
+													<%= item.name %>
+												</div>
+	
+												<div class="wid400 floatR">
+	
+													<div class="wid60 floatR">
+													<% if (item.hour_day_time) { %>
+														~
+													<% } %>
+														<%= item.hour %>
+													</div>
+	
+													<div class="wid190 floatR">
+													<% if (item.hour_day_time) { %>
+														לפי <span><%= item.hour_day_time %></span> <%= item.day_hours %>
+													<% } %>
+													</div>
+													
+													<div class="wid200 floatL ta-l">
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="6" class="edit_data pad3 col-blu bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="שנה"><i class="fas fa-pen"></i></a>
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="6" class="remove_data pad3 col-r bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="מחק"><i class="far fa-trash-alt"></i></a>
+													</div>
+	
+													<div class="clear"></div>
+													
+												</div>
+	
+												<div class="clear"></div>
+	
+											</li>
+	
+											<% });
+										} else { %>
+											<p class="wid400 marR-20 pad0-10 floatR fs-13 ta-c">הרשימה ריקה</p>
+										<% } %>
+
+										</ul>
+
+										<div class="clear"></div>
+										
+										<div class="wid100pc ta-l">
+											<a href="javascript:void(0)" class="btn-box add_tefila c-yw_h" data-synagogueId="<%= synagogue.detail._id %>" data-tefilaType="6">
+												הוסף תפילה
+											</a>
+										</div>
+
+									</nav>
+
+									<!-- arvit motsaei shabbat -->
+									<nav id="list_tefila_7" class="mar20-0">
+
+										<div class="floatR">
+
+											<h4 class="wid150 mar0">
+												ערבית מוצא"ש
+											</h4>
+
+											<hr>
+										
+										</div>
+
+										<ul class="mar0-20 pad0-10 borR floatR">
+
+										<% if (synagogue.data.tefilot[6][0]) { %>
+											<% synagogue.data.tefilot[6].forEach(item => { %>
+													
+											<li class="wid600 pad10-0">
+	
+												<div class="data_name wid150 bold floatR">
+													<%= item.name %>
+												</div>
+	
+												<div class="wid400 floatR">
+	
+													<div class="wid60 floatR">
+													<% if (item.hour_day_time) { %>
+														~
+													<% } %>
+														<%= item.hour %>
+													</div>
+	
+													<div class="wid190 floatR">
+													<% if (item.hour_day_time) { %>
+														לפי <span><%= item.hour_day_time %></span> <%= item.day_hours %>
+													<% } %>
+													</div>
+													
+													<div class="wid200 floatL ta-l">
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="7" class="edit_data pad3 col-blu bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="שנה"><i class="fas fa-pen"></i></a>
+														<a href="javascript:void(0)" data-id="<%= item._id %>" data-type="7" class="remove_data pad3 col-r bc-gy-l bc-w_h bor_rad5 allBor bor-gy" title="מחק"><i class="far fa-trash-alt"></i></a>
+													</div>
+	
+													<div class="clear"></div>
+													
+												</div>
+	
+												<div class="clear"></div>
+	
+											</li>
+	
+											<% });
+										} else { %>
+											<p class="wid400 marR-20 pad0-10 floatR fs-13 ta-c">הרשימה ריקה</p>
+										<% } %>
+
+										</ul>
+
+										<div class="clear"></div>
+										
+										<div class="wid100pc ta-l">
+											<a href="javascript:void(0)" class="btn-box add_tefila c-yw_h" data-synagogueId="<%= synagogue.detail._id %>" data-tefilaType="7">
+												הוסף תפילה
+											</a>
+										</div>
+
+									</nav>
+								</div>
+
+								<!-- messages -->
+								<div>
+									<h3 class="ta-c col-w pad5">
+										הערות
+									</h3>
+
+									<nav class="allBor wid600 floatL pad10">
+
+										<ul>
+											<li class="pad5 mar10-0">
+												<div class="floatR bold wid100 hidden_long">
+													הערה 1
+												</div>
+
+												<div class="floatR wid400 mar0-20">
+													חיד יחן כעיי כעןויכ  וכען עכ כןח ןח יכןי גכש ןךוע כגדןעי כשג ןהכש עיהגי דגןיע ןכ ןיכע יוןפע ןיע ןיגכע וןגכעי ןחיגכע ףעע וי חיכך/ 
+												</div>
+
+												<div class="clear"></div>
+											</li>
+
+											<li class="pad5 mar10-0">
+												<div class="floatR bold wid100 hidden_long">
+													הערה 2
+												</div>
+
+												<div class="floatR wid400 mar0-20">
+													חיד יחן כעיי כעןויכ  וכען עכ כןח ןח יכןי גכש ןךוע כגדןעי כשג ןהכש עיהגי דגןיע ןכ ןיכע יוןפע ןיע ןיגכע וןגכעי ןחיגכע ףעע וי חיכך/ 
+												</div>
+
+												<div class="clear"></div>
+											</li>
+
+										</ul>
+										
+										<div class="wid100pc ta-l">
+											<a href="javascript:void(0)" class="btn-box add_message" data-synagogueId="<%= synagogue.detail._id %>" data-messageType="1">
+												הוסף הערה
+											</a>
+										</div>
+
+									</nav>
+								</div>
+
+							</div> <!-- end section tefilot  -->
+
+							<!-- Times shiurim -->
+							<div class="synagogue-body disp-n">
+
+							</div>
+
+							<!-- Siha & messages -->
+							<div class="synagogue-body disp-n">
+
+								<!-- Siha -->
+								<div>
+
+									<h3 class="pad5 col-w ta-c">
+										דבר תורה
+									</h3>
+
+									<article  class="wid600 mar-auto">
+
+										<h6 class="ta-c fs-20 bold">
+											כותרת
+										</h6>
+
+										<p class="ta-j lin_heigh-25">
+											חיכג יגכןויפ כיןו כןויגכ כ ןוכי ןויכ ןחיגכ יךןיכג ןי'כ ןיכ ןיכ םןיג ךןחיכגך ןחי'כ ןי'כ ןי'כ ןיכ'ק ןחי ןי ןי ןחי ןךחיכ ןיע ויןוירים יען יכעןיןכ עיןי יכן גכי ןי כיי ען יןיןויגכ יכןחין כגיןחגכי גכיםויגכיכג גכי ןיגכןיגכםי םגכ כגיןיגכ יכגיןםגכ עכגויכגי םכגיןיכג יגכןגכ   יוןגכיםןו כגיםןיכג גכי כגןי גיןךי גכ יםןחיג יןגכיםןויגכ יןגכי יןיןםגכ יגכןיןםוגכ יגןכיןיגכן יכגןיןיכג יכגןחיןגכםיכג יכגןיםןיןגכ יכגןחיגכןי גכןחיגכןיםגכ 
+											וםןכגופןמגכמם כגוכגוםןגכו כ כגםןוחגכם כגםןופגכ כגםן כגם כגום וכגפםןו גכםןחו גכם גכם כגםןו גכן פגו9 כג וכיג וטכג ויןח גכי לחיכג חלגכי ךלחיגכ חכגיך ליחגכ חליכגך ןילכג ןחכגי ןחיגכ ךחיגכךל חיכג חכגי חלכגיךלחיכג חיכגך חיגכחי ךלחגכיך ליחגכך חיגכלחי גכלחיךלחגכי לחגכיךלחיגכך חיגכלי ךלחגכיך ליגכך ליגכליגכלחי לחגיכ ךחלגכי ךלגכיך גיכךלחיכג ךיךלגכי גכלחי לכגחיךלגכחיךליגכ יגכלחיכגךלילגכ יכגחיךגכליגכ יגכלחיגכךליגכך יגכחגכיךלכגיליכגלכ יכגליכג יכגליכג יכגחיכגלילגכ יכגיגכלחיגכךלי כגיגכיכגלי כגילגכ לגכילגכי כגךחליגכ לחגכיכגי כגילגכיךליגכ ךליגכלילכגיגכלך יגכך לחיגכךלחי כגלחךיכגלי גכךלחיגכ חליגכך יגכךליגכ לחיגכךלחי גכחיגכי ךחכגי ךחגכיךלגכי כגלחי גכךחלי גכלחיגכ לחךיגכ חליגכ ךלגכי גכלחי גכךלחיכג יךגכלחיגכ לחיגכ לךחגכי לגכי גכליגכ לחיכגך לגכחי ןיעךח
+										</p>
+
+										<p class="ta-l lin_heigh-25 marT40">
+											רב בית כנסת
+											<br>
+											שבת שלום
+										</p>
+
+										<a href="javascript:void(0)" class="col-w bc-gy-b bc-gy-l_h pad5 bor_rad5">
+											ערוך
+										</a>
+									</article>
+								</div>
+
+								<!-- Messages -->
+								<div class="marT60">
+									<h3 class="pad5 col-w ta-c">
+										הודעות
+									</h3>
+
+									<nav class="wid600 mar-auto">
+										<ul>
+											<li>
+												<p class="floatR bold wid150">
+													הודעה 1
+												</p>
+
+												<p class="ta-j floatR wid450">
+													חיגכיך יגכי ךכגחלי גכלחי גכחי גכלחי כגךלח כגךלחי כגךחי כגךלחי גכלח טוכן יחעל יעך חיע חיע חיעחליע יחע ליע עחיעל חי חיעיחע יחע יחע חיע לחיע חיע יע
+												</p>
+
+												<div class="clear"></div>
+											</li>
+
+											<li>
+												<p class="floatR bold wid150">
+													הודעה 2
+												</p>
+
+												<p class="ta-j floatR wid450">
+													חיגכיך יגכי ךכגחלי גכלחי גכחי גכלחי כגךלח כגךלחי כגךחי כגךלחי גכלח טוכן יחעל יעך חיע חיע חיעחליע יחע ליע עחיעל חי חיעיחע יחע יחע חיע לחיע חיע יע
+												</p>
+
+												<div class="clear"></div>
+											</li>
+										</ul>
+										
+										<div class="wid100pc ta-l">
+											<a href="javascript:void(0)" class="btn-box add_message" data-synagogueId="<%= synagogue.detail._id %>" data-messageType="2">
+												הוסף הודעה
+											</a>
+										</div>
+
+									</nav>
+
+								</div>
+
+							</div>
+						</div>
+					</div>				
+
+					<div class="clear"></div>
+				</div>
+
+			</div>
+
+			<hr class="marT40">
+
+			<!-- Infos synagogue & map -->
+			<div class="container">
+
+				<div class="wid800 mar-auto">
+					<nav class="floatR">
+
+						<h4 class="fs-20 bold">
+							פרטי בית הכנסת <%= synagogue.detail.name %>
+						</h4>
+
+						<ul>
+							<li class="mar10-0">
+								<div class="floatR wid50 bold">
+									כתובת:
+								</div>
+
+								<div class="floatR mar0-20">
+									<%= synagogue.detail.street %> <%= synagogue.detail.streetNumber %> <%= synagogue.detail.city %>
+								</div>
+								
+								<div class="clear"></div>
+								
+							</li>
+
+							<li class="mar10-0">
+								<div class="floatR wid50 bold">
+									טלפון:
+								</div>
+
+								<div class="floatR mar0-20">
+									<a href="tel:<%= synagogue.detail.phone %>" class="col-bl c-blu_h">
+										<%= synagogue.detail.phone %>
+									</a>
+								</div>
+
+								<div class="clear"></div>
+								
+							</li>
+
+							<li class="mar10-0">
+								<div class="floatR wid50 bold">
+									אימייל:
+								</div>
+
+								<div class="floatR mar0-20">
+									<a href="mailto:<%= synagogue.detail.email %>" class="col-bl c-blu_h">
+										<%= synagogue.detail.email %>
+									</a>
+								</div>
+
+								<div class="clear"></div>
+
+							</li>
+						</ul>
+
+					</nav>
+
+					<div class="floatL">
+						<iframe src="https://www.google.com/maps?q=<%= synagogue.detail.latitude %>,<%= synagogue.detail.longitude %>&amp;output=embed" width="500" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+					</div>
+
+					<div class="clear"></div>
+
+				</div>
+			</div>
+
+			<hr>
+
+		</section>
+
+<%- include('../partials/footer') %>

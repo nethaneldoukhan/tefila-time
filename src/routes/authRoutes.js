@@ -1,5 +1,4 @@
 const express = require('express');
-const {MongoClient, ObjectID} = require('mongodb');
 const passport = require('passport');
 const debug = require('debug')('app:authRoutes');
 const User = require('../schemas/UserSchema');
@@ -51,14 +50,6 @@ function router() {
         });
 
     authRouter.route('/profile')
-        // .all((req, res, next) => {
-        //     if(req.user) {
-        //         debug('authorized')
-        //         next();
-        //     } else {
-        //         res.redirect('/');
-        //     }
-        // })
         .get((req, res) => {
             if (req.user) {
                 debug('authorized')

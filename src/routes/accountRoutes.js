@@ -9,28 +9,6 @@ const pagesFunctions = require('../functions/pagesFunctions');
 const getSynagogueData = require('../functions/pagesSynagogueFunctions');
 
 
-// const posts = [
-//     {
-//       title: 'Title1',
-//       text: 'ghkjhk',
-//       fullText: 'hljkhl jh kjhml jhkhm jhmkjh:m khnk:bn: nkjn:k :k,nb: :,nb ::,nb:'
-//     },
-//     {
-//       title: 'Title2',
-//       text: 'mlkjm',
-//       fullText: 'mlkhnb jkgfcfhdxcj khgfcjgvckv khgvhbv; ,hvhv;'
-//     },
-//     {
-//       title: 'Title3',
-//       text: 'dg',
-//       fullText: 'fdj gfgch jygfkfi fdgfdfgh gfcgj'
-//     },
-//     {
-//       title: 'Title4',
-//       text: 'dfgh',
-//       fullText: 'ghjhfjhhg jhgfhgf hcgcjg jcgcj'
-//     }
-// ]
 
 
 function router() {

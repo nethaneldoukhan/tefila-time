@@ -10,15 +10,6 @@ const sendEmailsFunctions = require('../functions/sendEmailsFunctions');
 
 function router() {
 
-    // accountRouter.use((req, res, next) => {
-    //     if (req.user) {
-    //         next();
-    //     } else {
-    //         const string = encodeURIComponent('not_connected');
-    //         res.redirect('/?m=' + string);
-    //     }
-    // });
-
     forgotRouter.route('/')
         .get((req, res) => {
             (async () => {

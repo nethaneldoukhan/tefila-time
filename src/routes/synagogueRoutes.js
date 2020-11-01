@@ -9,7 +9,6 @@ const WeekTefila = require('../schemas/WeekTefilaSchema');
 const ShabbatTefila = require('../schemas/ShabbatTefilaSchema');
 const pagesFunctions = require('../functions/pagesFunctions');
 const getSynagogueData = require('../functions/pagesSynagogueFunctions.js');
-// const getZmanim = require('../functions/getZmanim');
 const synagogueRouter = express.Router();
 
 
@@ -335,31 +334,6 @@ function router() {
             })();
         });
 
-    // synagogueRouter.route('/synagogue?:q')
-    //     .get((req, res) => {
-    //         const q = req.query.q.split(' ');
-    //         (async () => {
-    //             try {
-    //                 const regex = q.map(function (k) { return new RegExp(k) });
-    //                 debug(regex);
-    //                 const synagogues = await Synagogue.collection.find({
-    //                     "$or": [{
-    //                         "name": {"$in": regex}
-    //                     }, {
-    //                         "street": {"$in": regex}
-    //                     }]}).toArray();
-    //                 debug(synagogues);
-    //                 res.json(synagogues);
-    //                 // res.render('pages/search', {
-    //                 //   title: 'BLOG',
-    //                 //   content: posts,
-    //                 //   nav
-    //                 // })
-    //             } catch (err) {
-    //                 debug('Error', err)
-    //             }
-    //         })();
-    //     });
 
     return synagogueRouter;
 }

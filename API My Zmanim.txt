@@ -1,4 +1,0 @@
-URL: https://api.myzmanim.com/engine1.svc
-EMAIL: natdoukhan@gmail.com
-USER: 0011861466
-KEY: 341512514d8fe572338ab440e19ce646bb5cce4c02dd446caf79ea5a6672512140d177edbdc83011

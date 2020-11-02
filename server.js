@@ -17,12 +17,12 @@ const upload = ('file-upload');
 const Synagogue = require('./src/schemas/SynagogueSchema');
 
 
-const authRouter = require('./src/routes/authRoutes');
-const synagogueRouter = require('./src/routes/synagogueRoutes');
-const accountRouter = require('./src/routes/accountRoutes');
-const searchRouter = require('./src/routes/searchRoutes');
-const calendarRouter = require('./src/routes/calendarRoutes');
-const forgotRouter = require('./src/routes/forgotRoutes');
+const authRouter = require('./src/routes/authRoutes')();
+const synagogueRouter = require('./src/routes/synagogueRoutes')();
+const accountRouter = require('./src/routes/accountRoutes')();
+const searchRouter = require('./src/routes/searchRoutes')();
+const calendarRouter = require('./src/routes/calendarRoutes')();
+const forgotRouter = require('./src/routes/forgotRoutes')();
 const fileUpload = require('express-fileupload');
 
 

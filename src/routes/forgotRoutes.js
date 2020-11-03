@@ -39,10 +39,10 @@ function router() {
                         debug(err);
                     }
                     if (doc) {
-                        sendEmailsFunctions.forgotPass(doc);
-                        res.json(0);
+                        const status = sendEmailsFunctions.forgotPass(doc);
+                        res.json(status);
                     } else {
-                        res.json(1);
+                        res.json(14);
                     }
                 } catch (err) {
                     debug('Error', err);

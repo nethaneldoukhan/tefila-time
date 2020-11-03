@@ -462,6 +462,10 @@ select {
     padding: 10px 20px;
 }
 
+.pad30-10 {
+    padding: 30px 10px;
+}
+
 .pad3 {
     padding: 3px;
 }
@@ -703,13 +707,13 @@ select {
     outline: none;
 }
 
-.newsLetter input{
+.newsLetter input, #form_forgotPass input {
     border: 1px #066093 solid;
     padding: 7px;
     outline: none;
 }
 
-.newsLetter button {
+.newsLetter button, #form_forgotPass button {
     padding: 8px;
     border: none;
     background: #066093 linear-gradient(to bottom, #066093 26%, #2e87b9 100%);

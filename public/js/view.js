@@ -198,9 +198,9 @@ function checkValues(vals, divError, allStatus) {
                 $(divError[i]).html('בית הכנסת כבר קיים במערכת');
                 break;
             case 10:
-                    $(val).addClass('error');
-                    $(divError[i]).html('השדה לא מקבל אותיות בעברית');
-                    break;
+                $(val).addClass('error');
+                $(divError[i]).html('השדה לא מקבל אותיות בעברית');
+                break;
             case 11:
                 $(val).addClass('error');
                 $(divError[i]).html('השדה מקבל רק אותיות בעברית');
@@ -212,6 +212,10 @@ function checkValues(vals, divError, allStatus) {
             case 13:
                 $(val).addClass('error');
                 $(divError[i]).html('הקובץ גדול יותר מ-2 MB');
+                break;
+            case 14:
+                $(val).addClass('error');
+                $(divError[i]).html('כתובת המייל לא קיימת במערכת.');
                 break;
             case 50:
                 alert($(divError[i]), 50);
@@ -379,6 +383,17 @@ function process(mainLoader, status) {
     }
 }
 
+function sendEmailForgot(main, emailInput, commentDiv, status) {
+    if (!status || status == 50) {
+        alert(main, 50);
+    } else if (status == 14) {
+        checkValues(emailInput, commentDiv, [14, 14]);
+    } else {
+        const html = views.sendEmailForgotDiv(status);
+        $(main).html(html);
+    }
+}
+
 export {
     dateAndTimeHeader,
     playAnimateSliderArea,
@@ -403,5 +418,6 @@ export {
     alertRemove,
     deleteDiv,
     addToList,
-    process
+    process,
+    sendEmailForgot
 };

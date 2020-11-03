@@ -275,8 +275,14 @@ $('#del_synagogue').click(function() {
 $('#form_forgotPass').submit(async function(e) {
     e.preventDefault();
     // view.process(mainLoader, true);
-    const email = $('#form_forgotPass input').val();
-    const status = await model.sendEmailForgot(email);
+    const main = $('#main_forgotPass');
+    const emailInput = $('#form_forgotPass input[type=email]');
+    console.log(emailInput);
+    const commentDiv = $('#form_forgotPass .comments');
+    console.log(commentDiv);
+    const status = await model.sendEmailForgot($(emailInput).val());
+    console.log(status);
+    view.sendEmailForgot(main, emailInput, commentDiv, status);
     // view.process(mainLoader, false);
     // view.alert(mainMessage, status);
 });

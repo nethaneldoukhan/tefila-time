@@ -4,14 +4,31 @@
 
 <div class="container">
     
-    <div id="main_forgotPass" class="ta-c">
+    <div id="main_forgotPass" class="ta-c pad30-10">
+
+        <!-- <p>
+            <i class="fas fa-check col-gn mar0-20"></i>
+            הסיסמא נשלחה למייל שלך בהצלחה.
+            <br>
+            אם המייל לא נמצא בתקייה "דואר נכנס", נא ליבדוק בתקייה "ספאם".
+        </p> -->
+
+        <!-- <p>
+            <i class="fas fa-times col-r mar0-20"></i>
+            המייל לא נשלח, 
+            כתובת המייל לא קיימת במערכת.
+            <br>
+            נא להכניס כתובת מייל של חשבון פעיל.
+        </p> -->
 
         <p>
-            הכנס כתובת המייל הרשומה במערכת
+            אם שכחת את הסיסמא שלך, 
+            הכנס כתובת המייל הרשומה במערכת <br> ותקבל דוא"ל אם הסיסמא.
         </p>
         <form id="form_forgotPass" action="" method="post">
-            <input type="email" name="email">
-            <input type="submit" value="שלח">
+            <input type="email" name="email"><button class="col-w c-yw_h point" type="submit"><i class="fas fa-arrow-left" aria-hidden="true"></i></button>
+            <!-- <input type="submit" value="שלח"> -->
+            <p class="comments col-r fs-13"></p>
         </form>
     </div>
 

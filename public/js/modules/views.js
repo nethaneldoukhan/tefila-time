@@ -611,6 +611,16 @@ function buildSelectSearchTefila(val) {
     return select;
 }
 
+function sendEmailForgotDiv(status) {
+    return `
+        <p>
+            <i class="fas fa-check col-gn mar0-20"></i>
+            הסיסמא נשלחה למייל שלך בהצלחה.
+            <br>
+            אם המייל לא נמצא בתקייה "דואר נכנס", נא ליבדוק בתקייה "ספאם".
+        </p>`;
+}
+
 function process() { 
         return `<div class="message_box">
             <div class="loader"></div>
@@ -625,5 +635,6 @@ export {
     htmlAddTefila,
     addListSynagogue,
     buildSelectSearchTefila,
+    sendEmailForgotDiv,
     process
 };

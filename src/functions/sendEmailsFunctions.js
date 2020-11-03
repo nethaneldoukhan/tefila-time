@@ -3,11 +3,12 @@ const nodemailer = require('nodemailer');
 const debug = require('debug')('app:sendEmails');
 
 
-function forgotPass(doc) {
-    const subject = 'Forgot Password';
+async function forgotPass(doc) {
+    const subject = 'שיחזור סיסמא';
     const email = buildForgotPassEmail(subject, doc);
     
-    sendMail(doc.email, subject, email);
+    const status = await sendMail(doc.email, subject, email);
+    return status;
 }
 
 
@@ -25,16 +26,18 @@ async function sendMail(receiversEmail, subject, email) {
         });
 
         let info = await transporter.sendMail({
-            from: '"do_not_reply@tefila-time.com"', // sender address
+            from: '"do_not_reply@tefila-time.com" <nsd.developpement@tefila-time.com>', // sender address
             to: receiversEmail, // list of receivers
             subject: subject, // Subject line
             text: email.text, // plain text body
             html: email.html, // html body
         });
 
-        debug("Message sent: %s", info.messageId);
+        debug("Message sent: %s", info);
+        return 0;
     } catch(err) {
         debug(err);
+        return 50;
     }
 }
 
@@ -46,7 +49,7 @@ function buildForgotPassEmail(title, doc) {
             <tr>
                 <td colspan="0" style="padding: 40px 30px 20px;">
                     <span style="color: #066093;font-size: 18px;">
-                        שלום ${doc.fName},
+                        שלום ${doc.firstName},
                     </span>
                 </td>
             </tr>
@@ -54,7 +57,7 @@ function buildForgotPassEmail(title, doc) {
             <tr>
 
                 <td style="padding: 20px 30px;">
-                    נשלח לך דוא"ל זה לפי לבקשתך לקבל את הסיסמא שלך בתפילה טיים.
+                    נשלח לך דוא"ל זה לפי בקשתך לקבל את הסיסמא שלך בתפילה טיים.
                     <br>
                     אם קבלת מייל זה ולא בקשת לקבל את הסיסמא שלך, נא להתעלם ממייל זה. אך ליתר ביטחון, עדיף לך לשנות את
                     הסיסמא שלך.
@@ -145,18 +148,18 @@ function templateEmail(title, message, unsuscribe) {
     }
     const templateEmail =
     `<!doctype html>
-    <html lang="he">
+    <html lang="he" >
     
     <head>
         <title>${title}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://kit.fontawesome.com/1406b0d971.js"></script>
         <style type="text/css">
             @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&display=swap');
     
             * {
                 font: 14px/16px 'Heebo', sans-serif;
+                direction: rtl;
             }
     
             body,
@@ -191,7 +194,7 @@ function templateEmail(title, message, unsuscribe) {
         </style>
     </head>
     
-    <body style='direction:rtl;'>
+    <body>
     
         <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 650px;"
             id="bodyTable">
@@ -259,61 +262,20 @@ function templateEmail(title, message, unsuscribe) {
                                                 http://tefila-time.com/faq
                                             </a>
                                             <br>
-                                            או לשאול אותנו במייל: <a href="mailto:support@tefila-time.com"
+                                            או לשאול אותנו במייל: 
+                                            <a href="mailto:support@tefila-time.com"
                                                 style="color: white; font-size: 10px;">
                                                 support@tefila-time.com
-                                            </a>
-                                            <br>
-                                            או לשלוח הודעה בוואטסאפ <a href="https://Wa.me/972525817356" target="_blank"
-                                                style="color: white; font-size: 10px;text-decoration-line: none;">
-                                                <i class="fab fa-whatsapp"></i>
-                                                00972-525-817-356
                                             </a>
                                         </span>
                                     </td>
                                 </tr>
     
+                                ${unsuscribeDiv}
                                 
-                                ${unsuscribe}
-                                
-                                
-    
-                                <tr>
-                                    <td style="padding: 0px 40px;">
-                                        <table border="0" align="left" style="font-size: 10px;">
-                                            <tr>
-                                                <td>
-                                                    <span>
-                                                        חפשו אותנו
-                                                    </span>
-                                                </td>
-                                                <td style="padding: 5px;">
-                                                    <a href="http://facebook.com" target="_blank" style="color: white;">
-                                                        <i class="fab fa-facebook-f "></i>
-                                                    </a>
-                                                </td>
-    
-                                                <td style="padding: 5px;">
-                                                    <a href="http://twitter.com" target="_blank" style="color: white;">
-                                                        <i class="fab fa-twitter"></i>
-                                                    </a>
-    
-                                                </td>
-    
-                                                <td style="padding: 5px;">
-                                                    <a href="http://linkedin.com" target="_blank" style="color: white;">
-                                                        <i class="fab fa-linkedin-in"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-    
-                                </tr>
-    
                                 <tr>
                                     <td align="center" style="font-size: 10px;">
-                                        &copy תפילה טיים.
+                                    &copy; תפילה טיים
                                     </td>
                                 </tr>
     

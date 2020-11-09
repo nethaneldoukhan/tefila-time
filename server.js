@@ -52,7 +52,7 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
     (async () => {
         const areaData = await pagesFunctions.getSlideArea();
-        debug(areaData);
+        // debug(areaData);
         const synagogues = await pagesFunctions.getSynagogueHomePage();
         const zmanim = await pagesFunctions.getAllZmanim();
         const userDiv = pagesFunctions.userDiv(req);

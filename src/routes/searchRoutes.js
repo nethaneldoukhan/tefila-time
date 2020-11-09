@@ -165,7 +165,7 @@ async function synagoguesSearch(req, search) {
         search.street = req.query.street;
     }
     if (req.query.city) {
-        let city = {'city': {"$regex": req.query.city, "$options": "i"}};
+        let city = {'city': {"$regex": "^" + req.query.city + "$", "$options": "i"}};
         querySynagoguesArray.push(city);
         search.city = req.query.city;
     }

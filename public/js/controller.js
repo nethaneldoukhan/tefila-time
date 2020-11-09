@@ -1,7 +1,7 @@
 import * as model from "./model.js";
 import * as view from "./view.js";
 
-export function init() {}
+export function init() { }
 
 
 
@@ -35,7 +35,7 @@ if (accessibility == 'on') {
 })();
 
 // btn scroll to top show/hide
-$(document).scroll(function() {
+$(document).scroll(function () {
     const heightWindow = $(window).height();
     const scroll = $('html, body').scrollTop();
     const btn = $('.toTop');
@@ -43,19 +43,19 @@ $(document).scroll(function() {
 });
 
 // btn scroll to top click
-$('.toTop').click(function(){
+$('.toTop').click(function () {
     const btn = $("html, body");
     view.clickToTop(btn);
 });
 
 // navBar soon
-$('.soon').click(function(){
+$('.soon').click(function () {
     view.alert(mainMessage, 45);
 });
 
 
 // get zmanim of location
-$('#form-city').submit(async function(e){
+$('#form-city').submit(async function (e) {
     e.preventDefault();
     view.process(mainLoader, true);
     const city = $('#form-city input').val();
@@ -67,13 +67,13 @@ $('#form-city').submit(async function(e){
 });
 
 // open window login/regist
-$('.btn-connexion').click(function(e){
+$('.btn-connexion').click(function (e) {
     // const connexionHtml = $('.window_connexion');
     view.connexion(e, mainWindow);
 });
 
 // header & footer btn account
-$('.account').click(function(e){
+$('.account').click(function (e) {
     const btnConnexion = $('.btn-connexion');
     if (btnConnexion.length === 1) {
         e.preventDefault();
@@ -82,33 +82,33 @@ $('.account').click(function(e){
 });
 
 // footer btn register
-$('.regist').click(function(){
+$('.regist').click(function () {
     $('.btn-connexion').trigger('click');
     $('.con-header li').trigger('click');
 });
 
 // close window connexion/pop-up
-$('.window_connexion, .message').on('click', '.btn_close, .cancel, .ok', function() {
+$('.window_connexion, .message').on('click', '.btn_close, .cancel, .ok', function () {
     const divToEmpty = $(this).parents('.message_close');
     view.closeWindow(divToEmpty);
 });
 
 // switch login/regist
-$('.window_connexion').on('click', '.con-header li', function() {
+$('.window_connexion').on('click', '.con-header li', function () {
     const listConnexion = $('.con-header li');
     const bodyConnexion = $('.con-body');
     view.switchWindow(this, listConnexion, bodyConnexion);
 });
 
 // switch menu synagogue
-$('.synagogue-header li').click(function(){
+$('.synagogue-header li').click(function () {
     const header = $('.synagogue-header li');
     const body = $('.synagogue-body');
     view.switchWindow(this, header, body);
 });
 
 // regist new user
-$('.window_connexion').on('submit', '#form-regist', async function(e) {
+$('.window_connexion').on('submit', '#form-regist', async function (e) {
     e.preventDefault();
     const formRegist = document.getElementById('form-regist');
     const status = await model.checkValuesRegist(formRegist);
@@ -124,7 +124,7 @@ $('.window_connexion').on('submit', '#form-regist', async function(e) {
 });
 
 // login
-$('.window_connexion').on('submit', '#form-log', async function(e) {
+$('.window_connexion').on('submit', '#form-log', async function (e) {
     e.preventDefault();
     const formLogin = document.getElementById('form-log');
     const userStatus = await model.login(formLogin);
@@ -136,13 +136,13 @@ $('.window_connexion').on('submit', '#form-log', async function(e) {
 });
 
 // window add new synagogue
-$('#add_synagogue').click(function() {
+$('#add_synagogue').click(function () {
     // const addSynagogueHtml = $('.window_connexion');
     view.addSynagogue(mainWindow);
 });
 
 // check synagogue's values
-$('.window_connexion').on('submit', '#add_syngogue_form', async function(e) {
+$('.window_connexion').on('submit', '#add_syngogue_form', async function (e) {
     e.preventDefault();
     const form = document.getElementById('add_syngogue_form');
     const synagogueStatus = await model.checkVakueNewSynagogue(form);
@@ -159,14 +159,14 @@ $('.window_connexion').on('submit', '#add_syngogue_form', async function(e) {
 });
 
 // load the image on select it
-$('.window_connexion').on('change', '.input_img', function() {
+$('.window_connexion').on('change', '.input_img', function () {
     const input = this;
     const img = $(this).parent().find('img');
     view.loadImage(input, img);
 });
 
 // check new email to newletter
-$('#addToNewLetter_form').submit(async function(e) {
+$('#addToNewLetter_form').submit(async function (e) {
     e.preventDefault();
     const form = document.getElementById('addToNewLetter_form');
     const synagogueId = $(this).data("id");
@@ -181,7 +181,7 @@ $('#addToNewLetter_form').submit(async function(e) {
 });
 
 // window add tefila
-$('.add_tefila').click(function() {
+$('.add_tefila').click(function () {
     const synagogueId = $(this).data('synagogueid');
     const tefilaType = $(this).data('tefilatype');
     // const addTefilaHtml = $('.window_connexion');
@@ -189,7 +189,7 @@ $('.add_tefila').click(function() {
 });
 
 // switch on window add tefila: fixed hours to hours by day zmanim
-$('.window_connexion').on('change', 'input[name=hours]', function(){
+$('.window_connexion').on('change', 'input[name=hours]', function () {
     const hoursValue = $(this).val();
     const select = $('#select_day_hours');
     const hour = $('#hour');
@@ -198,19 +198,19 @@ $('.window_connexion').on('change', 'input[name=hours]', function(){
 });
 
 // switch on window add tefila: all days to a few days of week
-$('.window_connexion').on('change', 'input[name=all_days]', function(){
+$('.window_connexion').on('change', 'input[name=all_days]', function () {
     const daysValue = $(this).val();
     const daysInput = $('input[name=days]');
     view.checked(daysValue, daysInput);
 });
 
 // if checkbox of week day changed, checked input radio partial_days
-$('.window_connexion').on('click', 'input[name=days]', function(){
+$('.window_connexion').on('click', 'input[name=days]', function () {
     $('#partial_days').trigger('click');
 });
 
 // check tefila values
-$('.window_connexion').on('submit', '#add_tefila_form', async function(e) {
+$('.window_connexion').on('submit', '#add_tefila_form', async function (e) {
     e.preventDefault();
     const form = document.getElementById('add_tefila_form');
     const synagogueId = $('input[type=submit]').data('synagogueid');
@@ -220,7 +220,7 @@ $('.window_connexion').on('submit', '#add_tefila_form', async function(e) {
     // const tefilaStatus = await model.checkVakueNewSynagogue(form);
     // console.log(tefilaStatus);
     // if (tefilaStatus[0] == 0) {
-        addTefila(form, synagogueId, tefilaType);
+    addTefila(form, synagogueId, tefilaType);
     //     console.log('ok');
     // } else {
     //     const divError = $('.comment_error');
@@ -231,7 +231,7 @@ $('.window_connexion').on('submit', '#add_tefila_form', async function(e) {
 });
 
 // check search tefila city empty
-$('#formSearchTefila').submit(function(e) {
+$('#formSearchTefila').submit(function (e) {
     const city = $('#city_search').val();
     const status = model.confirmNotEmpty(city);
     if (status == 1) {
@@ -241,7 +241,7 @@ $('#formSearchTefila').submit(function(e) {
 });
 
 // enabled/disabled select search tefila
-$('#week_days').change(function(){
+$('#week_days').change(function () {
     const daysValue = $(this).val();
     const daysCheckbox = $('input[name=day]');
     const daysSelect = $('#tefila');
@@ -250,7 +250,7 @@ $('#week_days').change(function(){
 });
 
 // delete synagogue data
-$('.remove_data').click(function() {
+$('.remove_data').click(function () {
     const dataId = $(this).data('id');
     const dataType = $(this).data('type');
     const divHtml = $(this).parents('li');
@@ -261,7 +261,7 @@ $('.remove_data').click(function() {
 });
 
 // delete synagogue
-$('#del_synagogue').click(function() {
+$('#del_synagogue').click(function () {
     const dataId = $(this).data('id');
     // const dataType = $(this).data('type');
     // const divHtml = $(this).parents('li');
@@ -272,20 +272,92 @@ $('#del_synagogue').click(function() {
 });
 
 // send email forgot password
-$('#form_forgotPass').submit(async function(e) {
+$('#form_forgotPass').submit(async function (e) {
     e.preventDefault();
     // view.process(mainLoader, true);
     const main = $('#main_forgotPass');
     const emailInput = $('#form_forgotPass input[type=email]');
-    console.log(emailInput);
     const commentDiv = $('#form_forgotPass .comments');
-    console.log(commentDiv);
     const status = await model.sendEmailForgot($(emailInput).val());
-    console.log(status);
     view.sendEmailForgot(main, emailInput, commentDiv, status);
     // view.process(mainLoader, false);
     // view.alert(mainMessage, status);
 });
+
+$(function () {
+    var suggests = [
+        "ActionScript", "a",
+        // {"titre": "AppleScript", "value": "a"},
+        // {"titre": "Asp", "value": "a"},
+        // {"titre": "BASIC", "value": "a"},
+        // {"titre": "C", "value": "a"},
+        // {"titre": "C ++", "value": "a"},
+        // {"titre": "Clojure", "value": "a"},
+        // {"titre": "COBOL", "value": "a"},
+        // {"titre": "ColdFusion", "value": "a"},
+        // {"titre": "Erlang", "value": "b"},
+        // {"titre": "Fortran", "value": "b"},
+        // {"titre": "Groovy", "value": "b"},
+        // {"titre": "Haskell", "value": "b"},
+        // {"titre": "Java", "value": "b"},
+        // {"titre": "JavaScript", "value": "b"},
+        // {"titre": "Lisp", "value": "b"},
+        // {"titre": "Perl", "value": "b"},
+        // {"titre": "PHP", "value": "b"},
+        // {"titre": "Python", "value": "b"},
+        // {"titre": "Ruby", "value": "b"},
+        // {"titre": "Scala", "value": "b"},
+        // {"titre": "Scheme", "value": "b"}
+        "aaa",
+        "sfsdf",
+        "dsgsfg"
+    ];
+
+    $("#search_synagogue_input").autocomplete({
+        source: suggests,
+        autoFocus: true,
+        minLength: 1,
+        select: function(event, ui) {
+            $(event.target).val(ui.item.value);
+            $('#search_synagogue').submit();
+            return false;
+        }
+    });
+
+    // $("#search_synagogue").autocomplete({
+    //     source: suggests,
+    //     minLength: 2
+    // });
+
+    // function ajaxCall() {
+    //     $.getJSON("/example/location/example.json?term=" + $('#dealerName').val(),
+    //         function(data) {
+    //         $.each(data.dealers, function(k, v) {                
+    //                 alert(k + ' : ' + v);
+    //         });
+    //     });        
+    // }
+
+
+    // $("#search_synagogue").multiAutocomplete(suggests, {
+    //     minChunkSize: 2,
+    //     delimiters:', ',
+    //     autosuggest:true,
+    //     ignoreCase:true,
+    //     maxShowSuggestion: 5
+    // });
+    // $(".suggests").keyup(function () {
+    //     const val = $(this).val();
+    //     console.log(val);
+    //     if (!val) {
+    //         $(".suggests").multiAutocomplete('destroy');
+    //         console.log(111);
+    //     }
+    // });
+});
+
+// event listener auto complete google maps
+google.maps.event.addDomListener(window, 'load', initialize);
 
 
 // functions
@@ -351,7 +423,7 @@ async function addToNewLetter(form, synagogueId, commentsDiv, input) {
 }
 
 function removeData(dataId, dataType, divHtml, main) {
-    $('.ok').click(async function() {
+    $('.ok').click(async function () {
         console.log('ok');
         console.log(dataId);
         const status = await model.removeData(dataId, dataType);
@@ -366,7 +438,7 @@ function removeData(dataId, dataType, divHtml, main) {
 }
 
 function delSynagogue(dataId) {
-    $('.ok').click(async function() {
+    $('.ok').click(async function () {
         console.log('ok');
         console.log(dataId);
         const status = await model.delSynagogue(dataId);
@@ -380,7 +452,7 @@ function delSynagogue(dataId) {
 }
 
 function confirmToReload() {
-    $('.ok').click(async function() {
+    $('.ok').click(async function () {
         location.href = location.href.split("?")[0];
     });
 }
@@ -400,7 +472,7 @@ function loopBarHours() {
 }
 
 // pause hover animate
-$('.bar_hours, .slider-area div').hover(function(){
+$('.bar_hours, .slider-area div').hover(function () {
     if (accessAnimFleg) {
         let animate = '';
         if ($(this).hasClass('bar_hours')) {
@@ -414,7 +486,7 @@ $('.bar_hours, .slider-area div').hover(function(){
 });
 
 // accessibility stop animation
-$('body').on('click', '#NLAnimations', function(){
+$('body').on('click', '#NLAnimations', function () {
     const clickAnim = $('#NLAnimationsVal').text();
     if (accessAnimFleg) {
         view.accessStopAnimation();
@@ -425,3 +497,9 @@ $('body').on('click', '#NLAnimations', function(){
         accessAnimFleg = true;
     }
 });
+
+// autocomplete gogle maps
+function initialize() {
+    var input = document.getElementById('form-dity_input');
+    new google.maps.places.Autocomplete(input);
+}

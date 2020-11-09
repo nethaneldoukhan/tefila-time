@@ -3,23 +3,23 @@
     <nav class="container navbar-menu">
         <ul class="menu_ul">
 
-            <li class="hamb pad10-20 col-w c-yw_h borL bor-w">
+            <li class="pad10-20 hamb col-w c-yw_h">
                 <!-- <a href="" class="hamb col-w c-yw_h"> -->
                     <i class="fas fa-bars"></i>
                 <!-- </a> -->
             </li>
 
 
-            <li class="borL bor-w">
-                <a href="/" class="pad10-20 col-w c-yw_h">
+            <li class="pad10-20 borR bor-w">
+                <a href="/" class="col-w c-yw_h">
                     דף הבית
                 </a>
             </li>
 
 
-            <li class="borL bor-w menu1">
+            <li class="pad10-20 borR bor-w menu1">
 
-                <a href="/search/synagogue?synagogues=all" class="pad10-20 col-w c-yw_h">
+                <a href="/search/synagogue?synagogues=all" class="col-w c-yw_h">
                     <i class="fas fa-synagogue"></i>
                     בית כנסת
                 </a>
@@ -50,7 +50,7 @@
             </li>
 
 
-            <li class="borL bor-w menu1">
+            <li class="borR bor-w menu1">
 
                 <a href="/search/tefila?tefila=all&city=<%= zmanim.location.city %>" class="pad10-20 col-w c-yw_h">
                     <i class="fas fa-torah"></i>
@@ -134,8 +134,8 @@
 
 
 
-            <li class="borL bor-w menu1">
-                <a href="javascript:void(0)" class="soon pad10-20 col-w c-yw_h">
+            <li class="pad10-20 borR bor-w menu1">
+                <a href="javascript:void(0)" class="soon col-w c-yw_h">
                     <i class="fas fa-users"></i>
                     שיעורים
                     <span class="soon_div_parent"><span class="soon_div">בקרוב !</span></span>
@@ -275,24 +275,24 @@
                 </div>
             </li>
 
-            <li class="borL bor-w menu1">
-                <a href="javascript:void(0)" class="soon pad10-20 col-w c-yw_h">
+            <li class="pad10-20 borR bor-w menu1">
+                <a href="javascript:void(0)" class="soon col-w c-yw_h">
                     <i class="fas fa-user-tie"></i>
                     רבנים
                     <span class="soon_div_parent"><span class="soon_div">בקרוב !</span></span>
                 </a>
             </li>
 
-            <li class="borL bor-w menu1">
-                <a href="javascript:void(0)" class="soon pad10-20 col-w c-yw_h">
+            <li class="pad10-20 borR bor-w menu1">
+                <a href="javascript:void(0)" class="soon col-w c-yw_h">
                     <i class="fab fa-youtube"></i>
                     שיעור חי
                     <span class="soon_div_parent"><span class="soon_div">בקרוב !</span></span>
                 </a>
             </li>
 
-            <li class="menu1">
-                <a href="javascript:void(0)" class="soon pad10-20 col-w c-yw_h">
+            <li class="pad10-20 borR bor-w menu1">
+                <a href="javascript:void(0)" class="soon col-w c-yw_h">
                     <i class="fas fa-balance-scale"></i>
                     בתי הלכה
                     <span class="soon_div_parent"><span class="soon_div">בקרוב !</span></span>
@@ -307,15 +307,16 @@
 <section class="marB40">
     <div class="window_connexion message_close"></div>
     <div class="container">
-        <form class="floatR mar0-150" action="/search/synagogue" method="GET">
+        <form id="search_synagogue" class="floatR mar0-150" action="/search/synagogue" method="GET">
             <div>
                 <i class="fa fa-search"></i>
-                <input name="q" type="text" class="search-control" placeholder="חפש בית כנסת" <% if (search) { %> value="<%= search.barSearch %>" <% } %> />
-                <div class="suggestions disp-n">
+                <input id="search_synagogue_input" name="q" type="text" class="search-control" placeholder="חפש בית כנסת" <% if (search) { %> value="<%= search.barSearch %>" <% } %> />
+                
+                <!-- <div class="suggestions disp-n">
                     <p>
                         אין הצעות
                     </p>
-                </div>
+                </div> -->
             </div>
         </form>
 
@@ -329,5 +330,17 @@
     
     <!-- div message -->
     <div class="message message_close"></div>
+
+
+    <!-- <div class="ui-widget">
+        <label for="tags"> tag: </label>
+        <input id="tags">
+    </div> -->
+
+    <!-- <input id="searchTextField" type="text" size="50"> -->
+
+    <!-- <input class="suggests" type="text" /> -->
+
+
 
 </section>

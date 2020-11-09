@@ -35,15 +35,16 @@ function userDiv(req) {
     let htmlData  = {};
     if (req.user) {
         htmlData = {
-            'nav': `<a href="/account" class="col-r">
+            'nav': `<a href="/account" class="col-blu">
                         <i class="fas fa-user-alt"></i>
                         שלום ${req.user.firstName}
                     </a>`,
             'connexion':  `<nav>
                                 <div>   
-                                    <span class="btn-user_command fs-20 pad15 col-r c-blu_h point menu1">
+                                    <span class="btn-user_command fs-20 pad15 col-blu c-blu_h point menu1">
                                         <i class="fas fa-user-alt"></i>
                                         ${req.user.firstName}
+                                        <i class="fas fa-chevron-down marR-20"></i>
                                     <span>
                                 
                                     <ul class="menu2 pad3-0">

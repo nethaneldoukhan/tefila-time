@@ -39,13 +39,13 @@ function router() {
             (async () => {
                 try {
                     const zmanim = await getZmanim(date, city, country, 'week');
-                    debug(zmanim);
+                    // debug(zmanim);
                     if (zmanim == 9) {
                         res.json(zmanim);
                     } else {
-                        debug(zmanim);
+                        // debug(zmanim);
                         const allZmanimAndParasha = await zmanimShabbat(zmanim);
-                        debug(allZmanimAndParasha);
+                        // debug(allZmanimAndParasha);
                         manageJson.addToJson(allZmanimAndParasha, 'zmanim.json');
                         res.json(51);
                     }

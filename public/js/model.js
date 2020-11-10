@@ -365,6 +365,21 @@ async function sendEmailForgot(email) {
     return settings;
 }
 
+async function autoComplete() {
+    const response = await ajax.getDataAutoComplete();
+    const autoCompleteOption = {
+        source: response,
+        autoFocus: true,
+        minLength: 1,
+        select: function(event, ui) {
+            $(event.target).val(ui.item.value);
+            $('#search_synagogue').submit();
+            return false;
+        }
+    }
+    return autoCompleteOption;
+}
+
 
 export {
     checkAccessibility,
@@ -381,5 +396,6 @@ export {
     delSynagogue,
     checkValuesAddNewLetter,
     addToNewLetter,
-    sendEmailForgot
+    sendEmailForgot,
+    autoComplete
 };

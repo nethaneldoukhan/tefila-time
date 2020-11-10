@@ -188,6 +188,17 @@ async function sendEmailForgot(form) {
     }
 }
 
+async function getDataAutoComplete () {
+    try{
+        const response = await fetch('http://localhost:3000/search/synagoguesAutoComplete', {
+            method: 'GET'
+        });
+        return response.json();
+    } catch(err) {
+        console.log(err);
+    }
+}
+
 function refactURI(object) {
     const data = Object.keys(object).map((key) => {
         return encodeURIComponent(key) + '=' + encodeURIComponent(object[key]);
@@ -208,5 +219,6 @@ export {
     delSynagogue, 
     existNewLetter,
     addToNewLetter,
-    sendEmailForgot
+    sendEmailForgot,
+    getDataAutoComplete
 };

@@ -947,18 +947,15 @@ select {
 .ui-menu .ui-menu-item {
     background-color: white;
     border-radius: 0px;
-}
-
-.ui-menu .ui-menu-item a {
     color: #066093;
 }
 
-.ui-state-hover,
-.ui-widget-content .ui-state-hover,
-.ui-widget-header .ui-state-hover,
-.ui-state-focus,
-.ui-widget-content .ui-state-focus,
-.ui-widget-header .ui-state-focus {
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
 	border: 1px solid transparent;
 	background: rgb(233, 233, 233);
 	color: #0088cc;

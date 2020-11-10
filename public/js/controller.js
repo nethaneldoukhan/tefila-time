@@ -284,77 +284,11 @@ $('#form_forgotPass').submit(async function (e) {
     // view.alert(mainMessage, status);
 });
 
-$(function () {
-    var suggests = [
-        "ActionScript", "a",
-        // {"titre": "AppleScript", "value": "a"},
-        // {"titre": "Asp", "value": "a"},
-        // {"titre": "BASIC", "value": "a"},
-        // {"titre": "C", "value": "a"},
-        // {"titre": "C ++", "value": "a"},
-        // {"titre": "Clojure", "value": "a"},
-        // {"titre": "COBOL", "value": "a"},
-        // {"titre": "ColdFusion", "value": "a"},
-        // {"titre": "Erlang", "value": "b"},
-        // {"titre": "Fortran", "value": "b"},
-        // {"titre": "Groovy", "value": "b"},
-        // {"titre": "Haskell", "value": "b"},
-        // {"titre": "Java", "value": "b"},
-        // {"titre": "JavaScript", "value": "b"},
-        // {"titre": "Lisp", "value": "b"},
-        // {"titre": "Perl", "value": "b"},
-        // {"titre": "PHP", "value": "b"},
-        // {"titre": "Python", "value": "b"},
-        // {"titre": "Ruby", "value": "b"},
-        // {"titre": "Scala", "value": "b"},
-        // {"titre": "Scheme", "value": "b"}
-        "aaa",
-        "sfsdf",
-        "dsgsfg"
-    ];
-
-    $("#search_synagogue_input").autocomplete({
-        source: suggests,
-        autoFocus: true,
-        minLength: 1,
-        select: function(event, ui) {
-            $(event.target).val(ui.item.value);
-            $('#search_synagogue').submit();
-            return false;
-        }
-    });
-
-    // $("#search_synagogue").autocomplete({
-    //     source: suggests,
-    //     minLength: 2
-    // });
-
-    // function ajaxCall() {
-    //     $.getJSON("/example/location/example.json?term=" + $('#dealerName').val(),
-    //         function(data) {
-    //         $.each(data.dealers, function(k, v) {                
-    //                 alert(k + ' : ' + v);
-    //         });
-    //     });        
-    // }
-
-
-    // $("#search_synagogue").multiAutocomplete(suggests, {
-    //     minChunkSize: 2,
-    //     delimiters:', ',
-    //     autosuggest:true,
-    //     ignoreCase:true,
-    //     maxShowSuggestion: 5
-    // });
-    // $(".suggests").keyup(function () {
-    //     const val = $(this).val();
-    //     console.log(val);
-    //     if (!val) {
-    //         $(".suggests").multiAutocomplete('destroy');
-    //         console.log(111);
-    //     }
-    // });
-});
+// event listener auto complete synagogues search
+(async () => {
+    const option = await model.autoComplete();
+    $("#search_synagogue_input").autocomplete(option);
+})();
 
 // event listener auto complete google maps
 google.maps.event.addDomListener(window, 'load', initialize);

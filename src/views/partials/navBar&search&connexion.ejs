@@ -305,21 +305,18 @@
 
 <!-- Search & Connexion -->
 <section class="marB40">
+
     <div class="window_connexion message_close"></div>
     <div class="container">
+
         <form id="search_synagogue" class="floatR mar0-150" action="/search/synagogue" method="GET">
             <div>
                 <i class="fa fa-search"></i>
                 <input id="search_synagogue_input" name="q" type="text" class="search-control" placeholder="חפש בית כנסת" <% if (search) { %> value="<%= search.barSearch %>" <% } %> />
-                
-                <!-- <div class="suggestions disp-n">
-                    <p>
-                        אין הצעות
-                    </p>
-                </div> -->
             </div>
         </form>
 
+        <!-- connexion/user name -->
         <div class="floatR">
             <%- userDiv.connexion %>
         </div>
@@ -330,17 +327,5 @@
     
     <!-- div message -->
     <div class="message message_close"></div>
-
-
-    <!-- <div class="ui-widget">
-        <label for="tags"> tag: </label>
-        <input id="tags">
-    </div> -->
-
-    <!-- <input id="searchTextField" type="text" size="50"> -->
-
-    <!-- <input class="suggests" type="text" /> -->
-
-
 
 </section>

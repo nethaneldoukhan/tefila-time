@@ -21,6 +21,21 @@ function router() {
             res.redirect('/search/synagogue');
         });
 
+    searchRouter.route('/synagoguesAutoComplete')
+        .get((req, res) => {
+            (async () => {
+                try {
+                    const synagoguesListHe = await Synagogue.collection.distinct("name");
+                    const synagoguesListEn = await Synagogue.collection.distinct("nameEn");
+                    const synagoguesList = synagoguesListHe.concat(synagoguesListEn);
+                    res.json(synagoguesList);
+                } catch (err) {
+                    debug('autoComplete', err);
+                    res.json('error');
+                }
+            })();
+        });
+
     searchRouter.route('/synagogue')
         .get((req, res) => {
             let synagogues = '';

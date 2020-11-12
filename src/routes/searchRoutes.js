@@ -5,7 +5,7 @@ const express = require('express');
 const searchRouter = express.Router();
 const debug = require('debug')('app:search');
 const {MongoClient, ObjectID} = require('mongodb');
-const getZmanim = require('../functions/getZmanim');
+const zmanimFunction = require('../functions/zmanim');
 const pagesFunctions = require('../functions/pagesFunctions');
 const Synagogue = require('../schemas/SynagogueSchema');
 const WeekTefila = require('../schemas/WeekTefilaSchema');
@@ -81,7 +81,7 @@ function router() {
                         const queryObject = "";
                         synagogues = await getSynagoguesSearch(queryObject);
                     }
-                    const zmanim = await pagesFunctions.getAllZmanim();
+                    const zmanim = await pagesFunctions.getAllZmanim(req, res);
                     const userDiv = pagesFunctions.userDiv(req);
                     res.render('pages/searchSynagogue', {
                         pageTitle: 'חיפוש בית כנסת',
@@ -128,10 +128,7 @@ function router() {
                                 let locZmanim = await getLocZmanim(synagogues);
                                 if (locZmanim) {
                                     refactCollecTefilot(tefilot, locZmanim, synagogues);
-                                    finalTefilotArray = tefilot[0];
-                                    tefilot[1].forEach(item => {
-                                        finalTefilotArray.push(item);
-                                    });
+                                    finalTefilotArray = tefilot[0].concat(tefilot[1]);
                                     pagesFunctions.sortItem(finalTefilotArray, 'hour');
                                     // debug(finalTefilotArray);
                                 } else {
@@ -141,7 +138,7 @@ function router() {
                             }
                         }
                     }
-                    const zmanim = await pagesFunctions.getAllZmanim();
+                    const zmanim = await pagesFunctions.getAllZmanim(req, res);
                     const userDiv = pagesFunctions.userDiv(req);
                     debug(search);
                     res.render('pages/searchTefila', {
@@ -279,10 +276,10 @@ async function tefilotSearch(req, search, synagogues) {
 async function getLocZmanim(synagogues) {
     let locZmanim = {};
     try {
-        locZmanim = await getZmanim(new Date(), synagogues[0].city.toLowerCase(), synagogues[0].country.toLowerCase(), 'week');
+        locZmanim = await zmanimFunction.getZmanim(new Date(), synagogues[0].city.toLowerCase(), synagogues[0].country.toLowerCase(), 'week');
         const shabbatDate = pagesFunctions.getShabbatDate();
-        const locZmanimShabbat = await getZmanim(shabbatDate, synagogues[0].city.toLowerCase(), synagogues[0].country.toLowerCase(), 'shabbat');
-        locZmanim.kosherZmanim.shabbat = locZmanimShabbat.kosherZmanim.shabbat;
+        locZmanim = await zmanimFunction.getZmanim(shabbatDate, synagogues[0].city.toLowerCase(), synagogues[0].country.toLowerCase(), 'shabbat');
+        // locZmanim.shabbat.kosherZmanim = locZmanimShabbat.kosherZmanim.shabbat;
     } catch (err) {
         debug('getZmanim', err);
     }
@@ -325,10 +322,5 @@ async function getTefilotSearch(queryObject) {
     return [arrayWeek, arrayShabbat]
 }
 
-// async function getTefilotTimes(city, tefilot) {
-//     const loc = await City.collection.findOne({city: city});
-//     debug(loc);
-//     // const Zmanim = getAllZmanim();
-// }
 
 module.exports = router;

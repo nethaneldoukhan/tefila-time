@@ -38,7 +38,7 @@
 					<li class="pad5-10 borL bor-gr col-gy-b li_form-city">
 						<form id="form-city">
 							<i class="fas fa-map-marker-alt"></i>
-							<input id="form-dity_input" type="text" name="city" placeholder="הכנס עיר" value="<%= zmanim.location.city %>, <%= zmanim.location.country %>" data-israel="<%= zmanim.israel %>" />
+							<input id="form-dity_input" type="text" name="city" placeholder="הכנס עיר" value="<%= zmanim.week.location.city %>, <%= zmanim.week.location.country %>" data-israel="<%= zmanim.week.israel %>" />
 						</form>
 					</li>
 
@@ -94,12 +94,12 @@
 						<div class="mar0-20">
 							<a href="/calendar" target="_blank" class="floatR bc-gy-b wid600 heig17 hidden_long hoursAnimate block col-w rel">
 								<span class="bar_hours wid1200 abso">
-									<% zmanim.hours.forEach((l) => { %>
+									<% zmanim.week.hours.forEach((l) => { %>
 										<%= l.name %>: <%= l.time %>. 
 									<% }) %>
 								</span>
 								<span class="bar_hours wid1200 abso">
-									<% zmanim.hours.forEach((l) => { %>
+									<% zmanim.week.hours.forEach((l) => { %>
 										<%= l.name %>: <%= l.time %>. 
 									<% }) %>
 								</span>
@@ -113,7 +113,7 @@
 							<%= zmanim.parasha%>
 						</div>
 						<div class="fs-13 wid100 marT10">
-							<% zmanim.zmanimShabbat.forEach((i) => { %>
+							<% zmanim.shabbat.hours.forEach((i) => { %>
 								<div class="ta-l pad0-5">
 									<span class="block floatR"><%= i.name %>:</span>
 									<span class="block floatL"><%= i.time %></span>

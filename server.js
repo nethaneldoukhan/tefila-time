@@ -54,8 +54,9 @@ app.get('/', (req, res) => {
         const areaData = await pagesFunctions.getSlideArea();
         // debug(areaData);
         const synagogues = await pagesFunctions.getSynagogueHomePage();
-        const zmanim = await pagesFunctions.getAllZmanim();
+        const zmanim = await pagesFunctions.getAllZmanim(req, res);
         const userDiv = pagesFunctions.userDiv(req);
+        console.log(req.cookies);
         res.render('pages/index', {
             pageTitle: 'דף הבית',
             userDiv,
@@ -69,7 +70,7 @@ app.get('/', (req, res) => {
 
 app.get('/faq', (req, res) => {
     (async () => {
-        const zmanim = await pagesFunctions.getAllZmanim();
+        const zmanim = await pagesFunctions.getAllZmanim(req, res);
         const userDiv = pagesFunctions.userDiv(req);
         debug(zmanim);
         res.render('pages/faq', {
@@ -83,7 +84,7 @@ app.get('/faq', (req, res) => {
 
 app.get('/conditions', (req, res) => {
     (async () => {
-        const zmanim = await pagesFunctions.getAllZmanim();
+        const zmanim = await pagesFunctions.getAllZmanim(req, res);
         if(req.user) {
             res.json(req.user);
         } else {
@@ -99,11 +100,25 @@ app.get('/conditions', (req, res) => {
 
 app.get('/contact_us', (req, res) => {
     (async () => {
-        const zmanim = await pagesFunctions.getAllZmanim();
+        const zmanim = await pagesFunctions.getAllZmanim(req, res);
         const userDiv = pagesFunctions.userDiv(req);
         debug(zmanim);
         res.render('pages/contact_us', {
             pageTitle: 'צור קשר',
+            userDiv,
+            zmanim,
+            search: ''
+        });
+    })();
+});
+
+// 404 page
+app.use(function (req, res) {
+    (async () => {
+        const zmanim = await pagesFunctions.getAllZmanim(req, res);
+        const userDiv = pagesFunctions.userDiv(req);
+        res.status(404).render('pages/error', {
+            pageTitle: 'דף לא נמצא',
             userDiv,
             zmanim,
             search: ''

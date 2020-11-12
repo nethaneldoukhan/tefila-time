@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function getLocation() {
         const data = $('#form-city input').data('israel');
         let il = '';
-        if (data) {
+        if (data == 'israel') {
             il = 'on';
         } else {
             il = 'off';

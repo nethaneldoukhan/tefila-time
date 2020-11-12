@@ -26,7 +26,7 @@ function router() {
                 try {
                     const synagogue = await getSynagogueData(id);
                     if (synagogue) {
-                        const zmanim = await pagesFunctions.getAllZmanim();
+                        const zmanim = await pagesFunctions.getAllZmanim(req, res);
                         const userDiv = pagesFunctions.userDiv(req);
                         // debug(zmanim);
                         res.render('pages/synagogue', {

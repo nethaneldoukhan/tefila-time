@@ -6,7 +6,7 @@ const Tribunal = require('../schemas/TribunalSchema');
 const Cours = require('../schemas/CoursSchema');
 const WeekTefila = require('../schemas/WeekTefilaSchema');
 const ShabbatTefila = require('../schemas/ShabbatTefilaSchema');
-const getZmanim = require('../functions/getZmanim');
+const zmanimFunction = require('../functions/zmanim');
 const pagesFunctions = require('../functions/pagesFunctions');
 
                     
@@ -16,10 +16,11 @@ async function getSynagogueData(id) {
         detail.lastUpdateDate = formatDate(detail.lastUpdateDate);
         detail.rite = nameRite(detail.rite);
         const data = await getData(id);
-        let getSynagogueZmanim = await getZmanim(new Date(), detail.city.toLowerCase(), detail.country.toLowerCase(), 'week');
+        let getSynagogueZmanim = await zmanimFunction.getZmanim(new Date(), detail.city.toLowerCase(), detail.country.toLowerCase(), 'week');
         const shabbatDate = pagesFunctions.getShabbatDate();
-        const getSynagogueZmanimShabbat = await getZmanim(shabbatDate, detail.city.toLowerCase(), detail.country.toLowerCase(), 'shabbat');
-        getSynagogueZmanim.kosherZmanim.shabbat = getSynagogueZmanimShabbat.kosherZmanim.shabbat;
+        const getSynagogueZmanimShabbat = await zmanimFunction.getZmanim(shabbatDate, detail.city.toLowerCase(), detail.country.toLowerCase(), 'shabbat');
+        debug(getSynagogueZmanimShabbat);
+        // getSynagogueZmanim.kosherZmanim.shabbat = getSynagogueZmanimShabbat.kosherZmanim.shabbat;
         getSynagogueDayTime(data, getSynagogueZmanim);
         return {'detail': detail, 'data': data};
     } catch(err) {
@@ -88,52 +89,52 @@ function getBtnCalc(day_hour, synagogueZmanim, weekDay) {
     };
     if(day_hour == 1) {
         calcs.btn = '-';
-        calcs.day_hour = synagogueZmanim.kosherZmanim[weekDay].BasicZmanim.SeaLevelSunrise.slice(11, 16);
+        calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.SeaLevelSunrise.slice(11, 16);
         // calcs.day_hour = '06:10';
         calcs.day_hours = ' לפני הנץ החמה';
     } else if(day_hour == 2) {
         calcs.btn = '-';
-        calcs.day_hour = synagogueZmanim.kosherZmanim[weekDay].BasicZmanim.CandleLighting.slice(11, 16);
+        calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.CandleLighting.slice(11, 16);
         // calcs.day_hour = '19:17';
         calcs.day_hours = ' לפני הדלקת נירות';
     } else if(day_hour == 3) {
         calcs.btn = '+';
-        calcs.day_hour = synagogueZmanim.kosherZmanim[weekDay].BasicZmanim.CandleLighting.slice(11, 16);
+        calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.CandleLighting.slice(11, 16);
         // calcs.day_hour = '19:17';
         calcs.day_hours = ' אחרי הדלקת נירות';
     } else if(day_hour == 4) {
         calcs.btn = '+';
-        calcs.day_hour = synagogueZmanim.kosherZmanim[weekDay].BasicZmanim.MinchaGedola.slice(11, 16);
+        calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.MinchaGedola.slice(11, 16);
         // calcs.day_hour = '12:33';
         calcs.day_hours = ' אחרי מנחה גדולה';
     } else if(day_hour == 5) {
         calcs.btn = '-';
-        calcs.day_hour = synagogueZmanim.kosherZmanim[weekDay].BasicZmanim.PlagHamincha.slice(11, 16);
+        calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.PlagHamincha.slice(11, 16);
         // calcs.day_hour = '19:17';
         calcs.day_hours = ' לפני פלג המנחה';
     } else if(day_hour == 6) {
         calcs.btn = '+';
-        calcs.day_hour = synagogueZmanim.kosherZmanim[weekDay].BasicZmanim.PlagHamincha.slice(11, 16);
+        calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.PlagHamincha.slice(11, 16);
         // calcs.day_hour = '19:17';
         calcs.day_hours = ' אחרי פלג המנחה';
     } else if(day_hour == 7) {
         calcs.btn = '-';
-        calcs.day_hour = synagogueZmanim.kosherZmanim[weekDay].BasicZmanim.Sunset.slice(11, 16);
+        calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.Sunset.slice(11, 16);
         // calcs.day_hour = '19:17';
         calcs.day_hours = ' לפני השקיעה';
     } else if(day_hour == 8) {
         calcs.btn = '+';
-        calcs.day_hour = synagogueZmanim.kosherZmanim[weekDay].BasicZmanim.Sunset.slice(11, 16);
+        calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.Sunset.slice(11, 16);
         // calcs.day_hour = '19:17';
         calcs.day_hours = ' אחרי השקיעה';
     } else if(day_hour == 9) {
         calcs.btn = '+';
-        calcs.day_hour = synagogueZmanim.kosherZmanim[weekDay].BasicZmanim.Tzais.slice(11, 16);
+        calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.Tzais.slice(11, 16);
         // calcs.day_hour = '19:17';
         calcs.day_hours = ' אחרי צאת הכוכבים';
     } else if(day_hour == 10) {
         calcs.btn = '-';
-        calcs.day_hour = synagogueZmanim.kosherZmanim[weekDay].BasicZmanim.Tzais72.slice(11, 16);
+        calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.Tzais72.slice(11, 16);
         // calcs.day_hour = '19:17';
         calcs.day_hours = ' אחרי ר"ת';
     }

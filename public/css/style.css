@@ -156,6 +156,10 @@ select {
     font-size: 40px;
 }
 
+.fs-300 {
+    font-size: 300px;
+}
+
 .lin_heigh-25 {
     line-height: 25px;
 }
@@ -286,6 +290,10 @@ select {
 
 .mar40-0 {
     margin: 40px 0px;
+}
+
+.mar200-0 {
+    margin: 200px 0px;
 }
 
 .mar50-100 {

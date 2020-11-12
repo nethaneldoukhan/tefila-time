@@ -33,7 +33,7 @@ function router() {
                 };
 
                 try {
-                    const zmanim = await pagesFunctions.getAllZmanim();
+                    const zmanim = await pagesFunctions.getAllZmanim(req, res);
                     const userDiv = pagesFunctions.userDiv(req);
                     accountArrays.synagogue = await Synagogue.collection.find({idUser: idUser}).toArray();
                     accountArrays.tribunal = await Tribunal.collection.find({idUser: idUser}).toArray();
@@ -71,7 +71,7 @@ function router() {
                     if (syna) {
                         if (req.user._id == syna.idUser) {
                             const synagogue = await getSynagogueData(id);
-                            const zmanim = await pagesFunctions.getAllZmanim();
+                            const zmanim = await pagesFunctions.getAllZmanim(req, res);
                             const userDiv = pagesFunctions.userDiv(req);
                             debug('authorized')
                             debug(synagogue);

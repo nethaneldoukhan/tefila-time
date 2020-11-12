@@ -13,7 +13,7 @@ function router() {
     forgotRouter.route('/')
         .get((req, res) => {
             (async () => {
-                const zmanim = await pagesFunctions.getAllZmanim();
+                const zmanim = await pagesFunctions.getAllZmanim(req, res);
                 const userDiv = pagesFunctions.userDiv(req);
                 debug(zmanim);
                 res.render('pages/forgotPass', {

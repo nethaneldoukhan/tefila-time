@@ -1,13 +1,8 @@
 const https = require('https');
-const qs = require("querystring");
-const fs = require('fs');
-const express = require('express');
-const adminRouter = express.Router();
-const debug = require('debug')('app:getZmanim');
-const {MongoClient,ObjectID} = require('mongodb');
+const debug = require('debug')('app:zmanim');
 const City = require('../schemas/CitySchema');
 const KosherZmanim = require('kosher-zmanim');
-const getZmanimJson = require('kosher-zmanim');
+const manageJson = require('./manageJson');
 
 var newCity = {
     'cityNameEn': '',
@@ -30,19 +25,23 @@ var optionZmanim = {
     complexZmanim: false
 };
 
-// var kosherZmanim = '';
 
 var zmanim = {
-    'date': '',
-    'location': {'city': '', 'country': ''},
-    'israel': false,
-    'optionZmanim': {},
-    'hours': [],
-    'parasha': '',
-    'zmanimShabbat': '',
-    'kosherZmanim': {
-        'week': '',
-        'shabbat': ''
+    'week': {
+        'date': '',
+        'location': {'city': '', 'country': ''},
+        'israel': '',
+        'optionZmanim': {},
+        'hours': [],
+        'kosherZmanim': {}
+    },
+    'shabbat': {
+        'date': '',
+        'location': {'city': '', 'country': ''},
+        'israel': '',
+        'optionZmanim': {},
+        'hours': [],
+        'kosherZmanim': {}
     }
 };
 
@@ -50,14 +49,17 @@ async function getZmanim(date, city, country, weekDay) {
     debug(date, city, country);
     try {
         optionZmanim.date = date;
-        zmanim.location.city = city;
-        zmanim.location.country = country;
-        await getCityData(city, country);
-        zmanim.optionZmanim = optionZmanim;
+        zmanim[weekDay].location.city = city;
+        zmanim[weekDay].location.country = country;
+        await getCityData(city, country, weekDay);
+        zmanim[weekDay].optionZmanim = optionZmanim;
         const getKosherZmanim = KosherZmanim.getZmanimJson(optionZmanim);
-        zmanim.kosherZmanim[weekDay] = getKosherZmanim;
+        zmanim[weekDay].kosherZmanim = getKosherZmanim;
         if (weekDay == 'week') {
-            saveZmanim(getKosherZmanim);
+            saveWeekZmanim(getKosherZmanim, weekDay);
+        }
+        if (weekDay == 'shabbat') {
+            saveShabbatZmanim(getKosherZmanim, weekDay);
         }
         return zmanim;
     } catch (e) {
@@ -66,14 +68,14 @@ async function getZmanim(date, city, country, weekDay) {
     }
 }
 
-async function getCityData(city, country) {
-    let status = await getDatafromDb(city, country);
+async function getCityData(city, country, weekDay) {
+    let status = await getDatafromDb(city, country, weekDay);
     if (!status) {
-        await getDatafromNet(city, country);
+        await getDatafromNet(city, country, weekDay);
     }
 }
 
-async function getDatafromDb(city, country) {
+async function getDatafromDb(city, country, weekDay) {
     let cityDetails = await City.collection.findOne({
         '$and': [{
             'cityNames': {'$in': [ city ] }
@@ -83,7 +85,9 @@ async function getDatafromDb(city, country) {
     debug('cityDetail', cityDetails);
     if (cityDetails) {
         if (cityDetails.countryNames.includes('israel')){
-            zmanim.israel = true;
+            zmanim[weekDay].israel = 'israel';
+        } else {
+            zmanim[weekDay].israel = 'diaspora';
         }
         optionZmanim.locationName = city;
         optionZmanim.latitude = cityDetails.latitude;
@@ -96,65 +100,64 @@ async function getDatafromDb(city, country) {
     }
 }
 
-async function getDatafromNet(city, country) {
+async function getDatafromNet(city, country, weekDay) {
     const dataCity = await getLatAndLong(city, country);
     const elevation = await getElevation(dataCity);
     const timeZone = await getTimeZone(dataCity);
-    setDataToVars(dataCity, elevation, timeZone);
+    setDataToVars(dataCity, elevation, timeZone, weekDay);
     updateCitiesDb(city, country);
 }
 
-function saveZmanim(getKosherZmanim) {
-    zmanim.kosherZmanim.week = getKosherZmanim;
+function saveWeekZmanim(kosherZmanim, weekDay) {
     let zmanimArray =
         [
             {
-                link: getKosherZmanim.BasicZmanim.AlosHashachar,
+                link: kosherZmanim.BasicZmanim.AlosHashachar,
                 name: 'עלות השחר',
                 time: ''
             },
             {
-                link: getKosherZmanim.BasicZmanim.SeaLevelSunrise,
+                link: kosherZmanim.BasicZmanim.SeaLevelSunrise,
                 name: 'הנץ החמה',
                 time: ''
             },
             {
-                link: getKosherZmanim.BasicZmanim.SofZmanShmaMGA,
+                link: kosherZmanim.BasicZmanim.SofZmanShmaMGA,
                 name: 'סו"ז ק"ש מ"א',
                 time: ''
             },
             {
-                link: getKosherZmanim.BasicZmanim.SofZmanShmaGRA,
+                link: kosherZmanim.BasicZmanim.SofZmanShmaGRA,
                 name: 'סו"ז ק"ש גר"א',
                 time: ''
             },
             {
-                link: getKosherZmanim.BasicZmanim.SofZmanTfilaMGA,
+                link: kosherZmanim.BasicZmanim.SofZmanTfilaMGA,
                 name: 'סוז"ת מ"א',
                 time: ''
             },
             {
-                link: getKosherZmanim.BasicZmanim.SofZmanTfilaGRA,
+                link: kosherZmanim.BasicZmanim.SofZmanTfilaGRA,
                 name: 'סוז"ת גר"א',
                 time: ''
             },
             {
-                link: getKosherZmanim.BasicZmanim.Chatzos,
+                link: kosherZmanim.BasicZmanim.Chatzos,
                 name: 'חצות',
                 time: ''
             },
             {
-                link: getKosherZmanim.BasicZmanim.MinchaGedola,
+                link: kosherZmanim.BasicZmanim.MinchaGedola,
                 name: 'מנחה גדולה',
                 time: ''
             },
             {
-                link: getKosherZmanim.BasicZmanim.Sunset,
+                link: kosherZmanim.BasicZmanim.Sunset,
                 name: 'שקיעה',
                 time: ''
             },
             {
-                link: getKosherZmanim.BasicZmanim.Tzais,
+                link: kosherZmanim.BasicZmanim.Tzais,
                 name: 'צאת הכוכבים',
                 time: ''
             },
@@ -163,8 +166,57 @@ function saveZmanim(getKosherZmanim) {
         const time = item.link.slice(11, 16);
         item.time = time;
     });
-    zmanim.date = getKosherZmanim.metadata.date;
-    zmanim.hours = zmanimArray;
+    zmanim[weekDay].date = kosherZmanim.metadata.date;
+    zmanim[weekDay].hours = zmanimArray;
+}
+
+function saveShabbatZmanim(kosherZmanim, weekDay) {
+    let zmanimArray =
+        [
+            {
+                link: kosherZmanim.BasicZmanim.CandleLighting,
+                name: 'ה"נ',
+                time: ''
+            },
+            {
+                link: kosherZmanim.BasicZmanim.Tzais,
+                name: 'מוצ"ש',
+                time: ''
+            },
+            {
+                link: kosherZmanim.BasicZmanim.Tzais72,
+                name: 'ר"ת',
+                time: ''
+            }
+        ];
+        zmanimArray.forEach(item => {
+        const time = item.link.slice(11, 16);
+        item.time = time;
+    });
+    zmanim[weekDay].date = kosherZmanim.metadata.date;
+    zmanim[weekDay].hours = zmanimArray;
+}
+
+async function getShabbatParasha(loc, shabbatDate) {
+    const shabbatJson = await manageJson.readJson('parashiot.json');
+    let parasha = '';
+    const arrayThisWeek = shabbatJson[loc].items.filter(item => {
+        return item.date == shabbatDate;
+    });
+    debug(arrayThisWeek);
+    arrayThisWeek.forEach(item => {
+        if (item.category == 'parashat') {
+            parasha = item.hebrew;
+        }
+    });
+    if (!parasha) {
+        parasha.items.forEach(item => {
+            if (item.category == 'holiday' && item.date == shabbatTime) {
+                parasha = item.hebrew;
+            }
+        });
+    }
+    return parasha;
 }
     
     
@@ -193,10 +245,12 @@ function getLatAndLong(city, country) {
     });
 }
 
-function setDataToVars(dataAndLongAndlat, elevation, timeZone) {
+function setDataToVars(dataAndLongAndlat, elevation, timeZone, weekDay) {
     let countryData = dataAndLongAndlat.formatted_address.toLowerCase();
     if (countryData.includes('israel')){
-        zmanim.israel = true;
+        zmanim[weekDay].israel = 'israel';
+    } else {
+        zmanim[weekDay].israel = 'diaspora';
     }
     const longAndLat = dataAndLongAndlat.geometry.location;
     optionZmanim.latitude = longAndLat.lat;
@@ -299,4 +353,7 @@ async function updateCitiesDb(city, country) {
     }
 }
 
-module.exports = getZmanim;
+module.exports = {
+    getZmanim,
+    getShabbatParasha
+};

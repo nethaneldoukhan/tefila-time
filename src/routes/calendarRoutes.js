@@ -2,8 +2,9 @@ const express = require('express');
 const debug = require('debug')('app:calendar');
 const calendarRouter = express.Router();
 const KosherZmanim = require('kosher-zmanim');
-const getZmanim = require('../functions/getZmanim');
+const zmanimFunction = require('../functions/zmanim');
 const manageJson = require('../functions/manageJson');
+const manageCookies = require('../functions/manageCookies');
 const pagesFunctions = require('../functions/pagesFunctions');
 const zmanimShabbat = require('../functions/getParasha');
 
@@ -15,7 +16,7 @@ function router() {
         .get((req, res) => {
             (async () => {
                 try {
-                    const zmanim = await pagesFunctions.getAllZmanim();
+                    const zmanim = await pagesFunctions.getAllZmanim(req, res);
                     const userDiv = pagesFunctions.userDiv(req);
                     debug(zmanim);
                     res.render('pages/calendar', {
@@ -38,15 +39,15 @@ function router() {
             let date = new Date();
             (async () => {
                 try {
-                    const zmanim = await getZmanim(date, city, country, 'week');
+                    const zmanim = await zmanimFunction.getZmanim(date, city, country, 'week');
                     // debug(zmanim);
                     if (zmanim == 9) {
                         res.json(zmanim);
                     } else {
                         // debug(zmanim);
-                        const allZmanimAndParasha = await zmanimShabbat(zmanim);
+                        // const allZmanimAndParasha = await zmanimShabbat(zmanim);
                         // debug(allZmanimAndParasha);
-                        manageJson.addToJson(allZmanimAndParasha, 'zmanim.json');
+                        manageCookies.addCookies(zmanim, req, res);
                         res.json(51);
                     }
                } catch (e) {

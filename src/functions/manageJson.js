@@ -2,7 +2,7 @@ const fs = require('fs');
 const debug = require('debug')('app:manageJson');
 
 
-function addToJson(val, name) {
+function writeToJson(val, name) {
     let infosJson = JSON.stringify(val);
     fs.writeFile(name, infosJson, function (err) {
         if (err) throw err;
@@ -10,37 +10,20 @@ function addToJson(val, name) {
     });
 }
 
-async function checkZmanim(date) {
-    let zmanimJson = '';
-    let zmanim = {};
-    let rawData = fs.readFileSync('zmanim.json');
+async function readJson(file) {
+    let data = '';
+    let rawData = fs.readFileSync(file);
     try {
-        zmanimJson = JSON.parse(rawData);
+        data = JSON.parse(rawData);
+        return data;
     } catch (err) {
-        // debbug(err);
-        return zmanim = {
-            status: 2
-        };
+        debbug(err);
+        return false;
     }
-    const dd = String(date.getDate()).padStart(2, '0');
-    const mm = String(date.getMonth() + 1).padStart(2, '0');
-    const yyyy = date.getFullYear();
-    date = yyyy + '-' + mm + '-' + dd;
-    if ( date == zmanimJson.date) {
-        zmanim = {
-            status: 0,
-            zmanimJson
-        };
-    } else {
-        zmanim = {
-            status: 1,
-            zmanimJson
-        };
-    }
-    return zmanim;
 }
 
+
 module.exports = {
-    addToJson,
-    checkZmanim
+    writeToJson,
+    readJson
 };

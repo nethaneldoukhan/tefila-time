@@ -40,7 +40,7 @@ function router() {
             (async () => {
                 try {
                     const zmanim = await zmanimFunction.getZmanim(date, city, country, 'week');
-                    // debug(zmanim);
+                    debug(zmanim);
                     if (zmanim == 9) {
                         res.json(zmanim);
                     } else {

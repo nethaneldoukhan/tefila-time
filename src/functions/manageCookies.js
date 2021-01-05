@@ -12,15 +12,15 @@ function addCookies(val, req, res) {
     // }
     res.cookie('city' , val.week.location.city, {
         expires: expireDate,
-        httpOnly: true
+        // httpOnly: true
     });
     res.cookie('country' , val.week.location.country, {
         expires: expireDate,
-        httpOnly: true
+        // httpOnly: true
     });
     res.cookie('israel' , val.week.israel, {
         expires: expireDate,
-        httpOnly: true
+        // httpOnly: true
     });
 }
 

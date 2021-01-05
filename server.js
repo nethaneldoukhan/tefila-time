@@ -10,11 +10,12 @@ const morgan = require('morgan')
 const debug = require('debug')('app:server')
 const chalk = require('chalk');
 const pagesFunctions = require('./src/functions/pagesFunctions');
-const port = 3000;
-const dataBase = {url: 'mongodb://localhost:27017', dbName: 'tefilaTime'};
+const port = process.env.PORT || 3000
+const dotenv = require('dotenv');
+dotenv.config();
+const connectionUrl = process.env.DB_URI
 const KosherZmanim = require("kosher-zmanim");
 const upload = ('file-upload');
-const Synagogue = require('./src/schemas/SynagogueSchema');
 
 
 const authRouter = require('./src/routes/authRoutes')();
@@ -113,7 +114,7 @@ app.get('/contact_us', (req, res) => {
 });
 
 // 404 page
-app.use(function (req, res) {
+app.get('*', (req, res) => {
     (async () => {
         const zmanim = await pagesFunctions.getAllZmanim(req, res);
         const userDiv = pagesFunctions.userDiv(req);
@@ -131,7 +132,7 @@ app.use(function (req, res) {
 const start = async () => {
     await mongoose.connect(
         // 'mongodb://127.0.0.1/tefilaTime', //local
-        'mongodb+srv://nati:nati1980.@tefilatime.hkuvn.mongodb.net/tefilaTime?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true', // serveur
+        connectionUrl,
         {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true}
     )
     debug('Connected to db server');

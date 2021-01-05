@@ -3,6 +3,12 @@ const debug = require('debug')('app:zmanim');
 const City = require('../schemas/CitySchema');
 const KosherZmanim = require('kosher-zmanim');
 const manageJson = require('./manageJson');
+const dotenv = require('dotenv');
+dotenv.config();
+
+const GOOGLE_API_key = process.env.GOOGLE_API_key;
+const ELEVATION_API = process.env.ELEVATION_API;
+const TIME_ZONE_API = process.env.TIME_ZONE_API
 
 var newCity = {
     'cityNameEn': '',
@@ -225,7 +231,7 @@ function getLatAndLong(city, country) {
     return new Promise((resolve, reject) => {
         const option = {
             hostname: 'maps.googleapis.com',
-            path: `/maps/api/geocode/json?address=${cityUrl}&sensor=true&key=AIzaSyCzixLXCXnqK5EIoh3ydBBzp-0ltX3EhjA`
+            path: `/maps/api/geocode/json?address=${cityUrl}&sensor=true&key=${GOOGLE_API_key}`
             };
         const request = https.get(option, (response) => {
             let body = '';
@@ -286,7 +292,7 @@ function getTimeZone(data) {
     return new Promise((resolve, reject) => {
         const option = {
             hostname: 'api.ipgeolocation.io',
-            path: `/timezone?apiKey=c07e21aadd7544d9998e763adddeac75&lat=${longAndLat.lat}&long=${longAndLat.lng}`,
+            path: `/timezone?apiKey=${TIME_ZONE_API}&lat=${longAndLat.lat}&long=${longAndLat.lng}`,
         };
         const request = https.get(option, (response) => {
             let body = '';
@@ -308,7 +314,7 @@ function getElevation(data) {
     return new Promise((resolve, reject) => {
         const option = {
             hostname: 'api.jawg.io',
-            path: `/elevations?locations=${longAndLat.lat},${longAndLat.lng}&access-token=hwNk2Jkx1r8vekbmfyBtQX737aHwnZTedVBI14LAlctzRYiphYhbPtoju9h4iCQ8`,
+            path: `/elevations?locations=${longAndLat.lat},${longAndLat.lng}&access-token=${ELEVATION_API}`,
         };
         const request = https.get(option, (response) => {
             let body = '';

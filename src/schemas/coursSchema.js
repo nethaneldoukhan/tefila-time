@@ -21,6 +21,6 @@ const coursSchema = new mongoose.Schema({
     createDate: Date,
     lastUpdateDate: Date
 });
-const Cours = mongoose.model("Cours", coursSchema);
+const Cours = mongoose.model("Cour", coursSchema);
 
 module.exports = Cours;

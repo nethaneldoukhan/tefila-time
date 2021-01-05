@@ -6,7 +6,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const mongoose = require('mongoose');
-const morgan = require('morgan')
+// const morgan = require('morgan')
 const debug = require('debug')('app:server')
 const chalk = require('chalk');
 const pagesFunctions = require('./src/functions/pagesFunctions');
@@ -42,7 +42,7 @@ app.use('/calendar', calendarRouter);
 app.use('/forgot_password', forgotRouter);
 
 app.use(express.static(path.join(__dirname, '/public')));
-app.use(morgan('tiny'));
+// app.use(morgan('tiny'));
 
 app.set('views', './src/views');
 app.set('view engine', 'ejs');

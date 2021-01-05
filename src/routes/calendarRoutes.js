@@ -36,12 +36,13 @@ function router() {
         .get((req, res) => {
             let city = req.query.city;
             let country = req.query.country;
-            let date = new Date();
+            const nowDate = new Date();
+            // const shabbatDate = getShabbatDate();
             (async () => {
                 let zmanim = {};
                 try {
-                    zmanim = await zmanimFunction.getZmanim(date, city, country, 'week');
-                    zmanim = await zmanimFunction.getZmanim(date, city, country, 'shabbat');
+                    zmanim = await zmanimFunction.getZmanim(nowDate, city, country, 'week');
+                    // zmanim = await zmanimFunction.getZmanim(date, city, country, 'shabbat');
                     debug(zmanim);
                     if (zmanim == 9) {
                         res.json(zmanim);

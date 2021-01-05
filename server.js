@@ -1,6 +1,7 @@
 const https = require('https');
 const fs = require('fs');
 const express = require('express');
+var cors = require('cors')
 const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -34,6 +35,7 @@ app.use(cookieParser());
 app.use(session({secret: 'nm'}));
 app.use(fileUpload());
 require('./src/config/passport.js')(app);
+app.use(cors())
 app.use('/auth', authRouter);
 app.use('/account', accountRouter);
 app.use('/synagogue', synagogueRouter);

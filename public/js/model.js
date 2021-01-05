@@ -48,6 +48,7 @@ async function getZmanimLoc(city){
         }
 
         if (status == 51) {
+            console.log(status);
             const url = location.href.split("?");
             if (url[1] && url[1].includes('m=')) {
                 location.href = url[0];

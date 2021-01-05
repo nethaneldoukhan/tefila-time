@@ -21,6 +21,6 @@ const tribunalSchema = new mongoose.Schema({
     createDate: Date,
     lastUpdateDate: Date
 });
-const Tribunal = mongoose.model("Tribunal", tribunalSchema);
+const Tribunal = mongoose.model("Tribuna", tribunalSchema);
 
 module.exports = Tribunal;

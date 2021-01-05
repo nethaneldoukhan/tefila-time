@@ -22,6 +22,6 @@ const synagogueSchema = new mongoose.Schema({
     createDate: Date,
     lastUpdateDate: Date
 });
-const Synagogue = mongoose.model("Synagogu", synagogueSchema);
+const Synagogue = mongoose.model("Synagogue", synagogueSchema);
 
 module.exports = Synagogue;

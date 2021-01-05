@@ -41,7 +41,7 @@ function router() {
                 let zmanim = {};
                 try {
                     zmanim = await zmanimFunction.getZmanim(date, city, country, 'week');
-                    zmanim = await zmanimFunction.getZmanim(date, city, country, 'week');
+                    zmanim = await zmanimFunction.getZmanim(date, city, country, 'shabbat');
                     debug(zmanim);
                     if (zmanim == 9) {
                         res.json(zmanim);

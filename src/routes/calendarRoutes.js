@@ -38,8 +38,10 @@ function router() {
             let country = req.query.country;
             let date = new Date();
             (async () => {
+                let zmanim = {};
                 try {
-                    const zmanim = await zmanimFunction.getZmanim(date, city, country, 'week');
+                    zmanim = await zmanimFunction.getZmanim(date, city, country, 'week');
+                    zmanim = await zmanimFunction.getZmanim(date, city, country, 'week');
                     debug(zmanim);
                     if (zmanim == 9) {
                         res.json(zmanim);

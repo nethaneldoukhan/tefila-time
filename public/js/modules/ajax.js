@@ -1,7 +1,9 @@
+const DOMAINE = 'https://mighty-chamber-84336.herokuapp.com'
+
 // get zmanim of location
 async function getZmanimLoc(loc) {
     try{
-        const response = await fetch(`https://mighty-chamber-84336.herokuapp.com/calendar/zmanimLoc?city=${loc[0]}&country=${loc[1]}`, {
+        const response = await fetch(`${DOMAINE}calendar/zmanimLoc?city=${loc[0]}&country=${loc[1]}`, {
         });
         console.log(response);
         return response.json();
@@ -17,7 +19,7 @@ async function checkExistEmail(email) {
     };
     const data = refactURI(setting);
     try{
-        const response = await fetch('http://localhost:3000/auth/checkExistEmail', {
+        const response = await fetch(`${DOMAINE}/auth/checkExistEmail`, {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
             },
@@ -42,7 +44,7 @@ async function createUser(form) {
     };
     const data = refactURI(setting);
     try{
-        const response = await fetch('http://localhost:3000/auth/sign-up', {
+        const response = await fetch(`${DOMAINE}/auth/sign-up`, {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
             },
@@ -63,7 +65,7 @@ async function login(email, password) {
     };
     const data = refactURI(setting);
     try{
-        const response = await fetch('http://localhost:3000/auth/sign-in', {
+        const response = await fetch(`${DOMAINE}/auth/sign-in`, {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
             },
@@ -79,7 +81,7 @@ async function login(email, password) {
 
 async function checkExistSynagogue(form) {
     try{
-        const response = await fetch('http://localhost:3000/synagogue/checkExistSynagogue', {
+        const response = await fetch(`${DOMAINE}/synagogue/checkExistSynagogue`, {
             method: 'POST',
             body: form
         });
@@ -92,7 +94,7 @@ async function checkExistSynagogue(form) {
 
 async function addSynagogue(form) {
     try{
-        const response = await fetch('http://localhost:3000/synagogue/addSynagogue', {
+        const response = await fetch(`${DOMAINE}/synagogue/addSynagogue`, {
             method: 'POST',
             body: form
         });
@@ -106,7 +108,7 @@ async function addSynagogue(form) {
 
 async function addTefila(form) {
     try{
-        const response = await fetch('http://localhost:3000/synagogue/addTefila', {
+        const response = await fetch(`${DOMAINE}/synagogue/addTefila`, {
             method: 'POST',
             body: form
         });
@@ -120,7 +122,7 @@ async function addTefila(form) {
 
 async function removeData(data) {
     try{
-        const response = await fetch('http://localhost:3000/synagogue/deleteData', {
+        const response = await fetch(`${DOMAINE}/synagogue/deleteData`, {
             method: 'DELETE',
             body: data
         });
@@ -133,7 +135,7 @@ async function removeData(data) {
 
 async function delSynagogue(data) {
     try{
-        const response = await fetch('http://localhost:3000/synagogue/deleteSynagogue', {
+        const response = await fetch(`${DOMAINE}/synagogue/deleteSynagogue`, {
             method: 'DELETE',
             body: data
         });
@@ -151,7 +153,7 @@ async function existNewLetter(synagogueId, email) {
     };
     const data = refactURI(setting);
     try{
-        const response = await fetch('http://localhost:3000/synagogue/checkExistNewLetter', {
+        const response = await fetch(`${DOMAINE}/synagogue/checkExistNewLetter`, {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
             },
@@ -166,7 +168,7 @@ async function existNewLetter(synagogueId, email) {
 
 async function addToNewLetter(form) {
     try{
-        const response = await fetch('http://localhost:3000/synagogue/addToNewLetter', {
+        const response = await fetch(`${DOMAINE}/synagogue/addToNewLetter`, {
             method: 'POST',
             body: form
         });
@@ -178,7 +180,7 @@ async function addToNewLetter(form) {
 
 async function sendEmailForgot(form) {
     try{
-        const response = await fetch('http://localhost:3000/forgot_password/sendForgotEmail', {
+        const response = await fetch(`${DOMAINE}/forgot_password/sendForgotEmail`, {
             method: 'POST',
             body: form
         });
@@ -190,7 +192,7 @@ async function sendEmailForgot(form) {
 
 async function getDataAutoComplete () {
     try{
-        const response = await fetch('https://mighty-chamber-84336.herokuapp.com/search/synagoguesAutoComplete', {
+        const response = await fetch(`${DOMAINE}/search/synagoguesAutoComplete`, {
             method: 'GET'
         });
         return response.json();

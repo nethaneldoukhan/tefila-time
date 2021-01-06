@@ -51,7 +51,7 @@ function router() {
                         // const allZmanimAndParasha = await zmanimShabbat(zmanim);
                         // debug(allZmanimAndParasha);
                         manageCookies.addCookies(zmanim, req, res);
-                        res.json(51);
+                        location.reload()
                     }
                } catch (e) {
                     debug(e);

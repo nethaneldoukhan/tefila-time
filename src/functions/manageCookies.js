@@ -10,7 +10,7 @@ function addCookies(val, req, res) {
     // } else {
     //     expireDate = '';
     // }
-    console.log(123)
+    debug(val.week.location.city)
     res.cookie('city' , val.week.location.city, {
         expires: expireDate,
         httpOnly: true

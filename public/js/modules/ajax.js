@@ -190,7 +190,7 @@ async function sendEmailForgot(form) {
 
 async function getDataAutoComplete () {
     try{
-        const response = await fetch('http://localhost:3000/search/synagoguesAutoComplete', {
+        const response = await fetch('https://mighty-chamber-84336.herokuapp.com/search/synagoguesAutoComplete', {
             method: 'GET'
         });
         return response.json();

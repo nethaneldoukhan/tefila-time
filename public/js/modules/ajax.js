@@ -64,6 +64,7 @@ async function login(email, password) {
         'password': password
     };
     const data = refactURI(setting);
+    console.log(setting);
     try{
         const response = await fetch(`${DOMAINE}/auth/sign-in`, {
             headers: {

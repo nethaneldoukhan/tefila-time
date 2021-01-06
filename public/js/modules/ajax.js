@@ -1,7 +1,7 @@
 // get zmanim of location
 async function getZmanimLoc(loc) {
     try{
-        const response = await fetch(`http://localhost:3000/calendar/zmanimLoc?city=${loc[0]}&country=${loc[1]}`, {
+        const response = await fetch(`https://mighty-chamber-84336.herokuapp.com/calendar/zmanimLoc?city=${loc[0]}&country=${loc[1]}`, {
         });
         console.log(response);
         return response.json();

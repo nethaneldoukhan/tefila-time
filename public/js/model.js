@@ -47,18 +47,13 @@ async function getZmanimLoc(city){
             status = 11;
         }
 
-        if (status == NaN) {
-            console.log(status);
-            let expireDate = new Date(2534023000000);
-            document.cookie = `city=${status.week.location.city}; expires=${expireDate}; path=/`;
-            document.cookie = `country=${status.week.location.country}; expires=${expireDate}; path=/`;
-            document.cookie = `israel=${status.week.israel}; expires=${expireDate}; path=/`;
+        if (status == 51) {
             const url = location.href.split("?");
-            // if (url[1] && url[1].includes('m=')) {
-            //     location.href = url[0];
-            // } else {
+            if (url[1] && url[1].includes('m=')) {
+                location.href = url[0];
+            } else {
                 location.reload();
-            // } 
+            } 
         }
     } else {
         status = 2;

@@ -3,7 +3,7 @@ const DOMAINE = 'https://mighty-chamber-84336.herokuapp.com'
 // get zmanim of location
 async function getZmanimLoc(loc) {
     try{
-        const response = await fetch(`${DOMAINE}calendar/zmanimLoc?city=${loc[0]}&country=${loc[1]}`, {
+        const response = await fetch(`${DOMAINE}/calendar/zmanimLoc?city=${loc[0]}&country=${loc[1]}`, {
         });
         console.log(response);
         return response.json();

@@ -27,7 +27,7 @@ function htmlLoginRegist() {
                     אם אין לך עדיין חשבון, אפשר ללחוץ על "הרשמה" ולהירשם בקלות ובמהירות !
                 </p>
 
-                <form action="/auth/sign-in" method="post" id="form-log">
+                <form id="form-log">
 
                     <div class="mar20-0">
 

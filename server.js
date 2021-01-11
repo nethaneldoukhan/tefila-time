@@ -32,7 +32,6 @@ const fileUpload = require('express-fileupload');
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cookieParser());
-app.use(session({secret: 'nm'}));
 app.use(fileUpload());
 require('./src/config/passport.js')(app);
 app.use(cors())
@@ -42,6 +41,7 @@ app.use('/synagogue', synagogueRouter);
 app.use('/search', searchRouter);
 app.use('/calendar', calendarRouter);
 app.use('/forgot_password', forgotRouter);
+app.use(session({secret: 'nm'}));
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(morgan('tiny'));

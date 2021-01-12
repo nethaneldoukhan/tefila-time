@@ -59,20 +59,20 @@ async function createUser(form) {
     }
 }
 
-async function login(email, password) {
-    const setting = {
-        'email': email,
-        'password': password
-    };
-    const data = refactURI(setting);
-    console.log(setting);
+async function login(form) {
+    // const setting = {
+    //     'email': email,
+    //     'password': password
+    // };
+    // const data = refactURI(setting);
+    // console.log(setting);
     try{
         const response = await fetch(`${DOMAINE}/auth/sign-in`, {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-            },
+            // headers: {
+            //   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            // },
             method: 'POST',
-            body: data
+            body: form
         });
         console.log(response);
         return response.json();

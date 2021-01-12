@@ -78,9 +78,13 @@ async function checkValuesRegist(theForm){
 }
 
 async function login(theForm) {
-    const email = $(theForm[0]).val();
-    const password = $(theForm[1]).val();
-    const checkUser = await ajax.login(email, password);
+    let formData = new FormData();
+    formData.append('email', $(theForm[0]).val())
+    formData.append('password', $(theForm[1]).val())
+    // const email = $(theForm[0]).val();
+    // const password = $(theForm[1]).val();
+    // const checkUser = await ajax.login(email, password);
+    const checkUser = await ajax.login(formData);
     console.log(checkUser);
     if (checkUser == 1) {
         return checkUser;

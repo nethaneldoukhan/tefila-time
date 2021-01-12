@@ -54,7 +54,7 @@ function router() {
             if (req.user) {
                 debug('authorized')
                 res.json(req.user);
-                debug(req.user);
+                // debug(req.user);
             } else {
                 res.json(1);
             }

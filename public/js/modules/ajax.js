@@ -1,5 +1,5 @@
-// const DOMAINE = 'https://mighty-chamber-84336.herokuapp.com'
-const DOMAINE = 'http://localhost:3000'
+const DOMAINE = 'https://mighty-chamber-84336.herokuapp.com'
+// const DOMAINE = 'http://localhost:3000'
 
 // get zmanim of location
 async function getZmanimLoc(loc) {

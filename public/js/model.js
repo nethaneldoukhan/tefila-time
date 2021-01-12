@@ -85,8 +85,8 @@ async function login(theForm) {
     if (checkUser == 1) {
         return checkUser;
     } else {
-        // location.href = 'https://mighty-chamber-84336.herokuapp.com/account';
-        location.href = 'http://localhost:3000/account';
+        location.href = 'https://mighty-chamber-84336.herokuapp.com/account';
+        // location.href = 'http://localhost:3000/account';
     }
 }
 

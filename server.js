@@ -14,7 +14,7 @@ const pagesFunctions = require('./src/functions/pagesFunctions');
 const port = process.env.PORT || 3000
 const dotenv = require('dotenv');
 dotenv.config();
-const connectionUrl = process.env.DB_URI
+const connectionUrl = process.env.DB_URI;
 const KosherZmanim = require("kosher-zmanim");
 const upload = ('file-upload');
 
@@ -38,7 +38,7 @@ app.use(session({secret: 'nm',
 }));
 app.use(fileUpload());
 require('./src/config/passport.js')(app);
-app.use(cors())
+app.use(cors());
 app.use('/auth', authRouter);
 app.use('/account', accountRouter);
 app.use('/synagogue', synagogueRouter);

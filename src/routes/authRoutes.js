@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const bcrypt = require('bcrypt');
 const debug = require('debug')('app:authRoutes');
 const User = require('../schemas/UserSchema');
 
@@ -8,18 +9,18 @@ const authRouter = express.Router();
 function router() {
     authRouter.route('/sign-up')
         .put((req, res) => {
-            const user = {
-                lastName: req.body.lName,
-                firstName: req.body.fName,
-                email: req.body.email,
-                password: req.body.password,
-                roleUser: req.body.roleUser,
-                token: req.body.token,
-                createDate: req.body.createDate,
-                lastUpdateDate: ''
-            };
-            debug(user);
             (async () => {
+                const user = {
+                    lastName: req.body.lName,
+                    firstName: req.body.fName,
+                    email: req.body.email,
+                    password: await bcrypt.hash(req.body.password, 2),
+                    roleUser: req.body.roleUser,
+                    token: req.body.token,
+                    createDate: req.body.createDate,
+                    lastUpdateDate: ''
+                };
+                debug(user);
                 let response = {
                     'status': '',
                     'tables': []

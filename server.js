@@ -53,12 +53,6 @@ app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
 
-// app.get('*',function(req,res,next){
-//     if(req.headers['x-forwarded-proto']!='https')
-//       res.redirect('https://mighty-chamber-84336.herokuapp.com'+req.url)
-//     else
-//       next() /* Continue to other routes if we're not redirecting */
-// })
 
 app.get('/', (req, res) => {
     (async () => {

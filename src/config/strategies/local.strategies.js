@@ -28,7 +28,6 @@ function localStrategy() {
                 } catch (err) {
                     debug(err.stack);
                 }
-                client.close();
             })();
         }))
 }

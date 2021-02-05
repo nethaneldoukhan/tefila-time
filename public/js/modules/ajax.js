@@ -1,5 +1,5 @@
-const DOMAINE = 'https://mighty-chamber-84336.herokuapp.com'
-// const DOMAINE = 'http://localhost:3000'
+// const DOMAINE = 'https://mighty-chamber-84336.herokuapp.com'
+const DOMAINE = 'http://localhost:3000'
 
 // get zmanim of location
 async function getZmanimLoc(loc) {
@@ -40,9 +40,11 @@ async function createUser(form) {
         'fName': form[0],
         'email': form[2],
         'password': form[3],
-        'token': form[6],
-        'createDate': form[7]
+        'roleUser': form[6],
+        'token': form[7],
+        'createDate': form[8]
     };
+    console.log(setting);
     const data = refactURI(setting);
     try{
         const response = await fetch(`${DOMAINE}/auth/sign-up`, {

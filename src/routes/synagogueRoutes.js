@@ -147,7 +147,7 @@ function router() {
                     'result': ''
                 }
                 try {
-                    const data = await Synagogue.collection.findOne( {_id: new ObjectID(dataId) });
+                    // const data = await Synagogue.collection.findOne( {_id: new ObjectID(dataId) });
                     const allowedUser = await checkAllowedUser(req, dataId);
                     if (allowedUser) {
                         const removeAllSynagogueData = await deleteSynagogueData(dataId);

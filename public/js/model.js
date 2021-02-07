@@ -1,4 +1,5 @@
 import * as ajax from "./modules/ajax.js";
+import { DOMAINE } from "./config.js";
 
 // check animation active
 function checkAccessibility() {
@@ -89,8 +90,7 @@ async function login(theForm) {
     if (checkUser == 1) {
         return checkUser;
     } else {
-        // location.href = 'https://mighty-chamber-84336.herokuapp.com/account';
-        location.href = 'http://localhost:3000/account';
+        location.href = `${DOMAINE}/account`;
     }
 }
 

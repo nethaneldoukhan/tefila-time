@@ -25,7 +25,6 @@
     "postman": "^0.2.0",
     "schema": "^0.2.1"
   },
-  "stack": "heroku-20",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

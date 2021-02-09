@@ -15,8 +15,8 @@ async function getAllZmanim(req, res) {
             zmanim = await zmanimFunction.getZmanim(shabbatDate, checkCookies.cookiesValues.city.toLowerCase(), checkCookies.cookiesValues.country.toLowerCase(), 'shabbat');
             debug(zmanim);
             } else {
-            zmanim = await zmanimFunction.getZmanim(nowDate, 'jerusalem', 'israel', 'week');
-            zmanim = await zmanimFunction.getZmanim(nowDate, 'jerusalem', 'israel', 'shabbat');
+            zmanim = await zmanimFunction.getZmanim(nowDate, 'ירושלים', 'ישראל', 'week');
+            zmanim = await zmanimFunction.getZmanim(nowDate, 'ירושלים', 'ישראל', 'shabbat');
             manageCookies.addCookies(zmanim, req, res);
         }
         zmanim.parasha = await zmanimFunction.getShabbatParasha(zmanim.week.israel, shabbatDate);        

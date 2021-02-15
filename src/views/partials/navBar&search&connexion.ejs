@@ -309,19 +309,21 @@
     <div class="window_connexion message_close"></div>
     <div class="container">
 
-        <form id="search_synagogue" class="floatR mar0-150" action="/search/synagogue" method="GET">
-            <div>
-                <i class="fa fa-search"></i>
-                <input id="search_synagogue_input" name="q" type="text" class="search-control" placeholder="חפש בית כנסת" <% if (search) { %> value="<%= search.barSearch %>" <% } %> />
+        <div class="sarch-syna max-cont mar-auto">
+            <form id="search_synagogue" class="floatR mar0-150-md" action="/search/synagogue" method="GET">
+                <div>
+                    <i class="fa fa-search"></i>
+                    <input id="search_synagogue_input" name="q" type="text" class="search-control" placeholder="חפש בית כנסת" <% if (search) { %> value="<%= search.barSearch %>" <% } %> />
+                </div>
+            </form>
+
+            <!-- connexion/user name -->
+            <div class="floatR">
+                <%- userDiv.connexion %>
             </div>
-        </form>
 
-        <!-- connexion/user name -->
-        <div class="floatR">
-            <%- userDiv.connexion %>
+            <div class="clear"></div>
         </div>
-
-        <div class="clear"></div>
 
     </div>
     

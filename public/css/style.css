@@ -276,7 +276,7 @@ select {
     margin: 5px 5px 0px
 }
 
-.mar0-150 {
+.mar0-150-md {
     margin: 0px 150px;
 }
 
@@ -344,6 +344,10 @@ select {
     width: 130px;
 }
 
+.wid140 {
+    width: 140px;
+}
+
 .wid150 {
     width: 150px;
 }
@@ -366,6 +370,10 @@ select {
 
 .wid260 {
     width: 260px;
+}
+
+.wid280 {
+    width: 280px;
 }
 
 .wid300 {
@@ -420,10 +428,12 @@ select {
 
 .wid20pc {
     width: 20%;
+    min-width: 185px;
 }
 
 .wid44pc {
     width: 44%;
+    min-width: 502px;
 }
 
 .wid50pc {
@@ -831,6 +841,7 @@ select {
     background-color: rgba(0, 0, 0, 0.575);
     position: fixed;
     top: 0px;
+    /* right: -15px; */
     overflow-x: hidden;
     overflow-y: auto;
     z-index: 120;
@@ -918,6 +929,14 @@ select {
     color: grey;
 }
 
+.map {
+    width: 50%;
+}
+
+.disp-b-sm {
+    display: none;
+}
+
 .point {
     cursor: pointer;
 }
@@ -1003,6 +1022,24 @@ a.ui-button:active,
     header .wid600 {
         width: 550px;
     }
+
+    .slider-area.wid1024, 
+    .img_pano {
+        width: 752px;
+    }
+
+    .slider-area.heig256, 
+    .img_pano {
+        height: 188px;
+    }
+
+    .mar0-150-md {
+        margin: 0px 0px 0px 20px;
+    }
+
+    .synagogue-container .wid800{
+        width: 620px;
+    }
 }
 
 
@@ -1041,6 +1078,22 @@ a.ui-button:active,
 
     .menu_ul li:last-child {
         display: none;
+    }
+
+    .bkAsideBar.wid260,
+    .bk-infos.wid800 {
+        width: 100%;
+    }
+
+    .bkAsideBar .newsLetter {
+        width: 40%;
+        float: right;
+        margin-top: 60px;
+    }
+
+    .bkAsideBar .paypal {
+        width: 40%;
+        float: left;
     }
 
     footer div div div div:first-child {
@@ -1127,6 +1180,23 @@ a.ui-button:active,
         width: 100px !important;
     }
 
+    .slider-area.wid1024, 
+    .img_pano {
+        width: 620px;
+    }
+
+    .slider-area.heig256, 
+    .img_pano {
+        height: 155px;
+    }
+
+    .tag_pano {
+        bottom: 15px;
+        left: 15px;
+        margin: 0;
+        padding: 2px;
+    }
+
     h1 {
         margin: 35px 0px;
     }
@@ -1134,7 +1204,56 @@ a.ui-button:active,
     .menu_ul li:nth-child(6) {
         display: none;
     }
+
+    #search_synagogue {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .sarch-syna.max-cont {
+        width: 100%;
+    }
+
+    .sarch-syna .floatR {
+        float: none;
+        text-align: center;
+    }
     
+    .search-control {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .nav-user_command {
+        float: left;
+    }
+
+    .wid20pc {
+        width: 100%;
+    }
+
+    .wid30pc {
+        width: 100%;
+    }
+
+    .wid44pc {
+        width: 502px;
+    }
+
+    .wid44pc.mar0-30 {
+        margin: 0;
+    }
+
+    .wid20pc.floatR,
+    .wid44pc.floatR {
+        float: none;
+        margin: auto;
+    }
+
+    .map {
+        width: 100%;
+    }
+
     footer .wid25 {
         width: 100%;
         margin-top: 20px;
@@ -1248,8 +1367,79 @@ a.ui-button:active,
     .menu_ul li:nth-child(5) {
         display: none;
     }
+
+    .wid682,
+    .slider-area.wid1024, 
+    .img_pano {
+        width: 400px;
+    }
+
+    .heig170,
+    .slider-area.heig256, 
+    .img_pano {
+        height: 100px;
+    }
+
+    .marB120 {
+        margin-bottom: 220px;
+    }
+
+    .bot--80 {
+        margin-bottom: -60px;
+    }
+
+    .bk-rite-sm {
+        width: 100%;
+        margin-top: 0px;
+        text-align: end;
+    }
+
+    .synagogue-header,
+    .synagogue-header ul {
+        width: 100%;
+    }
+
+    .synagogue-header li.wid150 {
+        width: 300px;
+    }
+
+    .bkAsideBar .newsLetter,
+    .bkAsideBar .paypal {
+        width: 100%;
+    }
+
 }
 
+@media screen and (max-width: 550px) {
+
+    .wid44pc {
+        min-width: 0;
+        width: 90%;
+        text-align: center; 
+    }
+
+    .wid44pc .wid115x115.floatR{
+        float: none;
+    }
+
+}
+
+    
+@media screen and (max-width: 430px) {
+
+    .wid682,
+    .slider-area.wid1024, 
+    .img_pano {
+        width: 300px;
+    }
+
+    .heig170,
+    .slider-area.heig256, 
+    .img_pano {
+        height: 75px;
+    }
+
+}
 
 /* @media screen and (max-width: 467px) {
 
@@ -1258,6 +1448,10 @@ a.ui-button:active,
  
 @media screen and (max-width: 414px) {
 
+    
+    .menu_ul li:nth-child(4) {
+        display: none;
+    }
 
     /* pas tedila-time */
     .lp {
@@ -1291,4 +1485,13 @@ a.ui-button:active,
     .menu_ul li:first-child i {
         display: inline;
     }
+}
+
+
+@media screen and (max-width: 333px) {
+
+    .disp-b-sm {
+        display: block;
+    }
+
 }

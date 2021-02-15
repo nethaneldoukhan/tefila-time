@@ -100,9 +100,9 @@
                         <% } %>
                     </h6>
 
-                    <% finalTefilotArray.forEach((item, index) => { %>
                         <nav>
                             <ul class="wid100pc">
+                                <% finalTefilotArray.forEach((item, index) => { %>
                                 <li>
                                     <a class="in_block wid100pc allBor mar10-0 col-bl c-blu_h shad_btn" href="/synagogue/<%= item.synagogueId %>">
 
@@ -150,10 +150,10 @@
                                         <span class="clear"></span>
                                     </a>
                                 </li>
+                                <% }); %>
                             </ul>
                         </nav>
-                    <% });
-                } else if (finalTefilotArray) { %>
+                    <% } else if (finalTefilotArray) { %>
                     <p class="bold">לא נמצאו תוצאות</p>
                 <% } else { %>
                     <p class="bold">החיפוש ריק</p>

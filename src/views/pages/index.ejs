@@ -51,48 +51,47 @@
 
 					<div>
 						<% if (synagogues && synagogues[0]) { %>
-		
-							<% synagogues.forEach((item, index) => { %>
-								<nav>
-									<ul class="wid100pc">
-										<li>
-											<a class="in_block wid100pc allBor mar10-0 col-bl c-blu_h shad_btn" href="/synagogue/<%= item._id %>">
-		
-												<span class="in_block wid115x115 pad5 floatR upload_img">
-													<% if(item.photo) { %>
-														<img class="wid115x115 bor_rad5" src="/assets/img/BK/<%= item.photo %>" alt="תמונה <%= item.name %>" />
-													<% } %>
+							<nav>
+								<ul class="wid100pc">
+									<% synagogues.forEach((item, index) => { %>
+									<li>
+										<a class="in_block wid100pc allBor mar10-0 col-bl c-blu_h shad_btn" href="/synagogue/<%= item._id %>">
+
+											<span class="in_block wid115x115 pad5 floatR upload_img">
+												<% if(item.photo) { %>
+													<img class="wid115x115 bor_rad5" src="/assets/img/BK/<%= item.photo %>" alt="תמונה <%= item.name %>" />
+												<% } %>
+											</span>
+
+											<span class="in_block mar20-10 floatR">
+
+												<span class="in_block fs-20 bold">
+													<%= item.name %>
 												</span>
-		
-												<span class="in_block mar20-10 floatR">
-		
-													<span class="in_block fs-20 bold">
-														<%= item.name %>
+
+												<br>
+
+												<span class="in_block mar15-0">
+													
+													<span class="in_block wid260">
+														<%= item.street %> <%= item.streetNumber %> <%= item.city %>
 													</span>
-		
-													<br>
-		
-													<span class="in_block mar15-0">
-														
-														<span class="in_block wid260">
-															<%= item.street %> <%= item.streetNumber %> <%= item.city %>
-														</span>
-		
-														<span class="in_block">
-															נוסח: <%= item.rite %>
-														</span>
-		
+
+													<span class="in_block">
+														נוסח: <%= item.rite %>
 													</span>
-		
+
 												</span>
-		
-												<span class="clear"></span>
-											</a>
-										</li>
-									</ul>
-								</nav>
-							<% });
-						} else { %>
+
+											</span>
+
+											<span class="clear"></span>
+										</a>
+									</li>
+									<% }); %>
+								</ul>
+							</nav>
+						<% } else { %>
 							<p class="bold">הרשימה ריקה</p>
 						<% } %>
 					</div>

@@ -34,7 +34,7 @@ function userDiv(req) {
                         <i class="fas fa-user-alt"></i>
                         שלום ${req.user.firstName}
                     </a>`,
-            'connexion':  `<nav>
+            'connexion':  `<nav class="nav-user_command">
                                 <div>   
                                     <span class="btn-user_command fs-20 pad15 col-blu c-blu_h point menu1">
                                         <i class="fas fa-user-alt"></i>

@@ -2,18 +2,18 @@
 function htmlLoginRegist() {
     let loginReg = 
     `<div class="message_box">
-        <div class="con-box wid300 allBor">
+        <div class="con-box wid280 allBor">
             <div class="btn_close col-w right--20 top-0">
                 <i class="fas fa-times"></i>
             </div>
             <nav class="con-header">
                 
                 <ul>
-                    <li class="col-w wid150 pad10-0 point bc-gy-l_h actif">
+                    <li class="col-w wid140 pad10-0 point bc-gy-l_h actif">
                     התחברות
                     </li>
 
-                    <li class="col-w wid150 pad10-0 point bc-gy-l_h">
+                    <li class="col-w wid140 pad10-0 point bc-gy-l_h">
                         הרשמה
                     </li>
                 </ul>

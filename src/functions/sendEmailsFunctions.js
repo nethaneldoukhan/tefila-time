@@ -16,20 +16,22 @@ async function sendMail(receiversEmail, subject, email) {
 
     try {
         let transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            // host: 'smtp.mail.yahoo.com',
+            // host: "smtp.gmail.com",
+            host: 'smtp.mail.yahoo.com',
             port: 465,
             secure: true, // true for 465, false for other ports
             auth: {
-                user: 'nsd.developpement',
-                // user: 'natdoukhan@yahoo.fr',
-                pass: 'sassi1980',
-                // pass: 'nati1980',
+                // user: 'nsd.developpement',
+                user: 'natdoukhan',
+                // pass: 'sassi1980',
+                // pass: 'nati1980',drwmaoimugqdstll
+                pass: 'drwmaoimugqdstll',
             },
         });
 
         let info = await transporter.sendMail({
-            from: '"do_not_reply@tefila-time.com" <nsd.developpement@tefila-time.com>', // sender address
+            // from: '"do_not_reply@tefila-time.com" <nsd.developpement@tefila-time.com>', // sender address
+            from: '"do_not_reply@tefila-time.com" <natdoukhan@yahoo.fr>', // sender address
             to: receiversEmail, // list of receivers
             subject: subject, // Subject line
             text: email.text, // plain text body

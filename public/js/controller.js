@@ -53,7 +53,6 @@ $('.soon').click(function () {
     view.alert(mainMessage, 45);
 });
 
-
 // get zmanim of location
 $('#form-city').submit(async function (e) {
     e.preventDefault();
@@ -156,6 +155,11 @@ $('.window_connexion').on('submit', '#add_syngogue_form', async function (e) {
         console.log('not ok');
         view.checkValues(inputs, divError, synagogueStatus);
     }
+});
+
+// hover help text not click on input
+$('.window_connexion').on('click', '.fa-question-circle', function (e) {
+    e.preventDefault();
 });
 
 // load the image on select it

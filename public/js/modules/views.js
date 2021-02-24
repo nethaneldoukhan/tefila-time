@@ -46,7 +46,7 @@ function htmlLoginRegist() {
                     </div>
 
                     <div>
-                        <div class="floatR ta-r disp-n">
+                        <div class="floatR ta-r">
                             <input type="checkbox" name="keep_con" id="keep_con" class="input_design" />
                             <label for="keep_con" class="fs-13">השאר מחובר</label>
                         </div>

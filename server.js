@@ -11,6 +11,7 @@ const morgan = require('morgan')
 const debug = require('debug')('app:server')
 const chalk = require('chalk');
 const pagesFunctions = require('./src/functions/pagesFunctions');
+const manageCookies = require('./src/functions/manageCookies');
 const port = process.env.PORT || 3000
 const dotenv = require('dotenv');
 dotenv.config();
@@ -19,12 +20,7 @@ const KosherZmanim = require("kosher-zmanim");
 const upload = ('file-upload');
 
 
-const authRouter = require('./src/routes/authRoutes')();
-const synagogueRouter = require('./src/routes/synagogueRoutes')();
-const accountRouter = require('./src/routes/accountRoutes')();
-const searchRouter = require('./src/routes/searchRoutes')();
-const calendarRouter = require('./src/routes/calendarRoutes')();
-const forgotRouter = require('./src/routes/forgotRoutes')();
+
 const fileUpload = require('express-fileupload');
 
 
@@ -39,18 +35,42 @@ app.use(session({secret: 'nm',
 app.use(fileUpload());
 require('./src/config/passport.js')(app);
 app.use(cors());
-app.use('/auth', authRouter);
-app.use('/account', accountRouter);
-app.use('/synagogue', synagogueRouter);
-app.use('/search', searchRouter);
-app.use('/calendar', calendarRouter);
-app.use('/forgot_password', forgotRouter);
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(morgan('tiny'));
 
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
+
+
+// check token
+app.get('*', (req, res, next) => {
+    (async () => {
+        if (!req.user) {
+            const cookies = manageCookies.checkUserCookies(req);
+            if (cookies.status === 0) {
+                const status = await manageCookies.signInToken(req, res);
+                debug(status);
+            }
+        }
+        next();
+    })();
+});
+
+
+const authRouter = require('./src/routes/authRoutes')();
+const synagogueRouter = require('./src/routes/synagogueRoutes')();
+const accountRouter = require('./src/routes/accountRoutes')();
+const searchRouter = require('./src/routes/searchRoutes')();
+const calendarRouter = require('./src/routes/calendarRoutes')();
+const forgotRouter = require('./src/routes/forgotRoutes')();
+
+app.use('/auth', authRouter);
+app.use('/account', accountRouter);
+app.use('/synagogue', synagogueRouter);
+app.use('/search', searchRouter);
+app.use('/calendar', calendarRouter);
+app.use('/forgot_password', forgotRouter);
 
 
 
@@ -135,8 +155,8 @@ app.get('*', (req, res) => {
 
 const start = async () => {
     await mongoose.connect(
-        // 'mongodb://127.0.0.1/tefilaTime', //local
-        connectionUrl,
+        'mongodb://127.0.0.1/tefilaTime', //local
+        // connectionUrl,
         {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true}
     )
     debug('Connected to db server');

@@ -31,10 +31,11 @@ function router() {
                     tribunal: [],
                     cours: []
                 };
-
+                debug(idUser);
                 try {
                     const zmanim = await pagesFunctions.getAllZmanim(req, res);
                     const userDiv = pagesFunctions.userDiv(req);
+                    debug(idUser);
                     accountArrays.synagogue = await Synagogue.collection.find({idUser: idUser}).toArray();
                     accountArrays.tribunal = await Tribunal.collection.find({idUser: idUser}).toArray();
                     accountArrays.cours = await Cours.collection.find({idUser: idUser}).toArray();

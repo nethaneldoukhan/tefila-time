@@ -1,9 +1,21 @@
 const fs = require('fs');
 const debug = require('debug')('app:manageCookies');
+const User = require('../schemas/UserSchema');
 
+let expireDate = new Date(2534023000000);
+
+function addUserCookies(user, req, res) {
+    res.cookie('username', user.email, {
+        expires: expireDate,
+        httpOnly: true
+    });
+    res.cookie('token', user.token, {
+        expires: expireDate,
+        httpOnly: true
+    });
+}
 
 function addCookies(val, req, res) {
-    let expireDate = new Date(2534023000000);
     // let expireDate = '';
     // if (req.cookies.accept == true) {
     //     expireDate = new Date(25340230000000);
@@ -11,18 +23,34 @@ function addCookies(val, req, res) {
     //     expireDate = '';
     // }
     debug(val.week.location.city)
-    res.cookie('city' , val.week.location.city, {
+    res.cookie('city', val.week.location.city, {
         expires: expireDate,
         httpOnly: true
     });
-    res.cookie('country' , val.week.location.country, {
+    res.cookie('country', val.week.location.country, {
         expires: expireDate,
         httpOnly: true
     });
-    res.cookie('israel' , val.week.israel, {
+    res.cookie('israel', val.week.israel, {
         expires: expireDate,
         httpOnly: true
     });
+}
+
+function checkUserCookies (req) {
+    let cookies = {
+        'status': 0,
+        'cookiesValues': {}
+    }
+    if(req.cookies.username && req.cookies.token) {
+        cookies.cookiesValues = {
+            'username': req.cookies.username,
+            'token': req.cookies.token
+        }
+    } else {
+        cookies.status = 1;
+    }
+    return cookies;
 }
 
 function checkCookies (req) {
@@ -42,8 +70,31 @@ function checkCookies (req) {
     return cookies;
 }
 
+async function signInToken(req, res) {
+    debug('hiii');
+    debug(req.cookies);
+    try {
+        const result = await User.collection.findOne({'email': req.cookies.username, 'token': req.cookies.token});
+        debug(result);
+        if (result) {
+            debug('ok');
+            req.login(result, () => {
+                addUserCookies(result, req, res);
+            });
+            return 0;
+        } else {
+            return 1;
+        }
+    } catch (e) {
+        debug(e);
+    }
+}
+
 
 module.exports = {
+    addUserCookies,
     addCookies,
-    checkCookies
+    checkUserCookies,
+    checkCookies,
+    signInToken
 };

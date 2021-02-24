@@ -80,8 +80,9 @@ async function checkValuesRegist(theForm){
 
 async function login(theForm) {
     let formData = new FormData();
-    formData.append('email', $(theForm[0]).val())
-    formData.append('password', $(theForm[1]).val())
+    formData.append('email', $(theForm[0]).val());
+    formData.append('password', $(theForm[1]).val());
+    formData.append('keep_con', $(theForm[2]).prop('checked'));
     // const email = $(theForm[0]).val();
     // const password = $(theForm[1]).val();
     // const checkUser = await ajax.login(email, password);

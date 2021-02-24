@@ -3,6 +3,8 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const debug = require('debug')('app:authRoutes');
 const User = require('../schemas/UserSchema');
+const manageCookies = require('../functions/manageCookies');
+
 
 const authRouter = express.Router();
 
@@ -61,17 +63,49 @@ function router() {
             }
         });
 
+
     authRouter.route('/sign-in')
-        .post(passport.authenticate('local', {
-            successRedirect: '/auth/profile',
-            failureRedirect: '/auth/profile'
-        }));
+        // .post(passport.authenticate('local', {
+        //     successRedirect: '/auth/profile',
+        //     failureRedirect: '/auth/profile'
+        // }));
+        .post((req, res) => {
+            (async () => {
+                const user = {
+                    email: req.body.email,
+                    password: req.body.password,
+                    keepCon: req.body.keep_con
+                };
+                debug(user);
+
+                try {
+                    const result = await User.collection.findOne({'email': user.email});
+                    debug(result);
+                    const isMatch = await bcrypt.compare(user.password, result.password);
+                    if (isMatch) {
+                        debug('ok');
+                        req.login(result, () => {
+                            if(user.keepCon === 'true') {
+                                manageCookies.addUserCookies(result, req, res);
+                            }
+                        });
+                    } else {
+                        debug('not ok');
+                    }
+                    res.redirect('/auth/profile');
+                } catch (e) {
+                    debug(e);
+                }
+            })();
+        });
 
 
     authRouter.route('/logout')
         .get((req, res) => {
             req.logout();
             debug(req.user);
+            res.clearCookie('username');
+            res.clearCookie('token');
             res.redirect('/');
         });
 

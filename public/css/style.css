@@ -433,6 +433,9 @@ select {
 
 .wid44pc {
     width: 44%;
+}
+
+.list-container.wid44pc {
     min-width: 502px;
 }
 
@@ -886,6 +889,10 @@ select {
     background-color: white;
 }
 
+.con-body a {
+    display: inline-block;
+}
+
 .upload_img {
     background-image: url("../assets/img/site/no_image.png");
     background-repeat: no-repeat;
@@ -1040,30 +1047,22 @@ a.ui-button:active,
     .synagogue-container .wid800{
         width: 620px;
     }
-}
 
-
-
-@media screen and (max-width: 1024px) {    
-
-    /* header .wid600 {
+    .pub.wid30pc {
         width: 100%;
-    } */
+        text-align: center;
+    }
 
-    /* pas tedila-time */
-    .conditions {
-        width: 560px;
-        margin: auto;
-    }
- 
-    .produits {
-        width: 460p;
-    }
- 
-    .nav_bas {
-        width: 43%;
+    .pub img {
+        width: 30%;
     }
 }
+
+
+
+/* @media screen and (max-width: 1024px) {    
+
+} */
 
 
 @media screen and (max-width: 1023px) {    
@@ -1094,6 +1093,30 @@ a.ui-button:active,
     .bkAsideBar .paypal {
         width: 40%;
         float: left;
+    }
+
+    .bkAsideBar {
+        width: 22%;
+    }
+
+    .bkBody {
+        width: 73%;
+    }
+
+    .synagogue-container .wid800 {
+        width: 100%;
+    }
+
+    .list_tefila li {
+        width: 100%;
+    }
+
+    .list_tefila li .wid400 {
+        width: 350px;
+    }
+
+    .message-body nav {
+        width: 97%;
     }
 
     footer div div div div:first-child {
@@ -1210,11 +1233,11 @@ a.ui-button:active,
         margin-bottom: 20px;
     }
 
-    .sarch-syna.max-cont {
+    .search-syna.max-cont {
         width: 100%;
     }
 
-    .sarch-syna .floatR {
+    .search-syna .floatR {
         float: none;
         text-align: center;
     }
@@ -1228,15 +1251,31 @@ a.ui-button:active,
         float: left;
     }
 
+    .wid682,
+    .slider-area.wid1024, 
+    .img_pano {
+        width: 600px;
+    }
+
+    .heig170,
+    .slider-area.heig256, 
+    .img_pano {
+        height: 150px;
+    }
+
+    .wid100-sm {
+        width: 100%;
+    }
+
     .wid20pc {
         width: 100%;
     }
 
-    .wid30pc {
+    /* .wid30pc {
         width: 100%;
-    }
+    } */
 
-    .wid44pc {
+    .list-container.wid44pc {
         width: 502px;
     }
 
@@ -1245,9 +1284,51 @@ a.ui-button:active,
     }
 
     .wid20pc.floatR,
-    .wid44pc.floatR {
+    .wid44pc.floatR,
+    .wid44pc.floatL {
         float: none;
         margin: auto;
+    }
+
+    .pub img {
+        width: 100%;
+    }
+
+    .list_tefila li .wid400 {
+        width: 250px;
+    }
+
+    .message_box .wid700 {
+        width: 280px;
+    }
+
+    #add_syngogue_form .wid44pc {
+        margin: 20px auto;
+        width: 90%;
+    }
+
+    #add_syngogue_form .wid96pc {
+        width: 95%;
+    }
+
+    #add_syngogue_form .wid300 {
+        width: 100%;
+    }
+
+    .message-body ul {
+        width: unset;
+    }
+
+    .message-body li .floatR {
+        float: none;
+    }
+
+    .message-body li .wid400 {
+        width: 90%;
+    }
+
+    .container-btn-account-add.wid700 {
+        width: 100%;
     }
 
     .map {
@@ -1271,91 +1352,6 @@ a.ui-button:active,
         display: inline !important;
     }
 
- 
-    /* pas tedila-time */
-    .menu_haut li, .barre_site li {
-        display: block;
-        text-align: center;
-    }
- 
-    .cart {
-        margin-right: 10px;
-    }
- 
-    .sticky {
-        position: static;
-    }
- 
-    .conditions {
-        width: 100%;
-    }
-
-    .conditions p {
-        width: 100%;
-        margin-right: 0px;
-        margin-left: 0px;
-    }
- 
-    .defil {
-        width: 100%;
-    }
-
-    .defil a {
-        margin-right: 15px;
-    }
-
-    .produits a, .produits img {
-        width: 100%;
-        box-sizing: border-box;
-    }
- 
-    .brand img {
-        width: 100%;
-    }
-
-    .apple_watch > div {
-        width: 100%;
-    }
-
-    .overflow {
-        overflow: scroll;
-    }
- 
-    .panier_commande {
-        margin: auto;
-        width: 720px;
-    }
-
-    .cart_total {
-        width: auto;
-    }
-
-    .billing, .your_order {
-        width: 100%;
-    }
-
-    .nav_bas {
-        padding-top: 40px;
-        width: 90%;
-    }
-
-    footer .email {
-        width: 200px;
-    }
- 
-    .float_l, .float_r{
-        float: none;
-    }
-
-    .float_lR {
-        float: left;
-    }
-
-    .float_rR {
-        float: right;
-    }
- 
-     
 }
 
 @media screen and (max-width: 646px) {
@@ -1385,7 +1381,16 @@ a.ui-button:active,
     }
 
     .bot--80 {
-        margin-bottom: -60px;
+        margin-bottom: -80px;
+    }
+
+    .bk-title-sm {
+        margin-top: 30px;
+        max-width: calc(100% - 120px);
+    }
+
+    .bk-title-sm .fs-40 {
+        font-size: 25px;
     }
 
     .bk-rite-sm {
@@ -1408,17 +1413,29 @@ a.ui-button:active,
         width: 100%;
     }
 
+    .container-btn-account-add .max-cont {
+        width: 100%;
+    }
+
+    .container-btn-account-add .max-cont a {
+        display: block;
+        text-align: center;
+    }
+
 }
 
 @media screen and (max-width: 550px) {
 
-    .wid44pc {
+    .list-container.wid44pc {
         min-width: 0;
         width: 90%;
         text-align: center; 
     }
 
     .wid44pc .wid115x115.floatR{
+        float: none;
+    }
+    .list_tefila li .data_name {
         float: none;
     }
 
@@ -1453,14 +1470,14 @@ a.ui-button:active,
         display: none;
     }
 
-    /* pas tedila-time */
-    .lp {
-        font-size: 35px;
+    #synagogueList {
+        text-align: center;
     }
 
-    .panier_commande {
-        width: 500px;
+    #synagogueList nav li .floatR {
+        float: none;
     }
+
 }
 
 @media screen and (max-width: 374px) {

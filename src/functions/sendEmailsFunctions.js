@@ -16,12 +16,15 @@ async function sendMail(receiversEmail, subject, email) {
 
     try {
         let transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
+            // host: "smtp.gmail.com",
+            host: 'smtp.mail.yahoo.com',
             port: 465,
             secure: true, // true for 465, false for other ports
             auth: {
-                user: 'nsd.developpement',
-                pass: 'sassi1980',
+                // user: 'nsd.developpement',
+                user: 'natdoukhan@yahoo.fr',
+                // pass: 'sassi1980',
+                pass: 'nati1980',
             },
         });
 

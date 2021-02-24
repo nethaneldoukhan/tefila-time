@@ -7,7 +7,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const mongoose = require('mongoose');
-const morgan = require('morgan')
+const fileUpload = require('express-fileupload');
+const morgan = require('morgan');
 const debug = require('debug')('app:server')
 const chalk = require('chalk');
 const pagesFunctions = require('./src/functions/pagesFunctions');
@@ -18,10 +19,6 @@ dotenv.config();
 const connectionUrl = process.env.DB_URI;
 const KosherZmanim = require("kosher-zmanim");
 const upload = ('file-upload');
-
-
-
-const fileUpload = require('express-fileupload');
 
 
 
@@ -155,8 +152,8 @@ app.get('*', (req, res) => {
 
 const start = async () => {
     await mongoose.connect(
-        'mongodb://127.0.0.1/tefilaTime', //local
-        // connectionUrl,
+        // 'mongodb://127.0.0.1/tefilaTime', //local
+        connectionUrl,
         {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true}
     )
     debug('Connected to db server');

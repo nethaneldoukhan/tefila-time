@@ -467,6 +467,10 @@ select {
     padding: 0px 10px;
 }
 
+.pad0-20 {
+    padding: 0px 20px;
+}
+
 .pad5-10 {
     padding: 5px 10px;
 }
@@ -732,6 +736,10 @@ select {
     outline: none;
 }
 
+.newPass-container {
+    max-width: 600px;
+}
+
 .newsLetter input, #form_forgotPass input {
     border: 1px #066093 solid;
     padding: 7px;
@@ -820,7 +828,7 @@ select {
     outline: none;
 }
 
-.search-control:focus-within, .con-box input:focus-within, .con-box select:focus-within, #form-city input:focus-within, #formSearchSynagogue input:focus-within, #formSearchTefila input:focus-within, #formSearchTefila select:focus-within {
+.search-control:focus-within, .con-box input:focus-within, .con-box select:focus-within, #form-city input:focus-within, #formSearchSynagogue input:focus-within, #formSearchTefila input:focus-within, #formSearchTefila select:focus-within, #form-newPass input:focus-within {
     box-shadow: 0px 0px 4px 1px #066093;
 }
 
@@ -861,6 +869,14 @@ select {
 
 .con-header li:last-child {
     border-radius: 5px 0px 0px 0px;
+}
+
+.setting-body li a {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    color: black;
+    padding: 10px;
 }
 
 .actif {
@@ -911,7 +927,8 @@ select {
     cursor: pointer;
 }
 
-.con-box .input_design {
+.con-box .input_design,
+#form-newPass .input_design {
     padding: 9px 40px;
     border: 1px grey solid;
     border-radius: 5px;
@@ -925,7 +942,8 @@ select {
     outline: none;
 }
 
-.con-box .fa-envelope, .con-box .fa-lock, .con-box .fa-synagogue, .con-box .fa-map-marker-alt, .con-box .fa-globe, .con-box .fa-phone-square {
+.con-box .fa-envelope, .con-box .fa-lock, .con-box .fa-synagogue, .con-box .fa-map-marker-alt, .con-box .fa-globe, .con-box .fa-phone-square,
+#form-newPass .fa-lock {
     width: 37px;
     height: 37px;
     line-height: 37px !important;
@@ -1271,6 +1289,12 @@ a.ui-button:active,
         width: 100%;
     }
 
+    .setting-account.wid20pc,
+    .setting-synagogue.wid20pc {
+        width: 200px;
+        margin: 0 !important;
+    }
+
     /* .wid30pc {
         width: 100%;
     } */
@@ -1302,6 +1326,43 @@ a.ui-button:active,
         width: 280px;
     }
 
+    .btn-setting {
+        margin-top: -40px !important;
+    }
+
+    .fa-user-cog,
+    .fa-sliders-h {
+        position: absolute;
+        left: -39px;
+        top: 0px;
+        padding: 6px 12px;
+    }
+
+    .setting-account .setting-body,
+    .setting-synagogue .setting-body {
+        background-color: rgb(233, 233, 233);
+        padding-bottom: 10px;
+        border-radius: 0px 0px 3px 3px;
+        position: absolute;
+        transition: right 500ms;
+    }
+
+    .setting-account .setting-body {
+        right: -115px;
+    }
+
+    .setting-synagogue .setting-body {
+        right: -160px;
+    }
+
+    .btn-setting:hover .setting-body {
+        right: 0px;
+    }
+
+    .setting-body h3 {
+        margin-top: 0;
+    }
+
     #add_syngogue_form .wid44pc {
         margin: 20px auto;
         width: 90%;
@@ -1327,8 +1388,8 @@ a.ui-button:active,
         width: 90%;
     }
 
-    .container-btn-account-add.wid700 {
-        width: 100%;
+    .container-btn-account-add.wid65pc {
+        width: 85%;
     }
 
     .map {

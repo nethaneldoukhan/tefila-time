@@ -55,35 +55,43 @@
 				</div>
 
 				<div>
-					<div class="floatR wid250 marL30 bkAsideBar">
-
-						<h3 class="pad5 col-w ta-c">
-							שנה פרטים
-						</h3>
-			
-						<ul>
-			
-							<li>
-								עידכון פרטים
-							</li>
-			
-							<li>
-								החלפת סיסמא
-							</li>
-			
-							<li>
-								הוספת/החלפת תמונות
-							</li>
-			
-							<li>
-								הגדרות (payPal)
-							</li>
-			
-							<li>
-								<a href="javascript:void(0)" id="del_synagogue" data-id="<%= synagogue.detail._id %>">מחק בית הכנסת</a>
-							</li>
-			
-						</ul>
+					<div class="setting-synagogue floatR wid250 marL30 bkAsideBar">
+						<div class="btn-setting rel">
+							<div class="setting-body">
+								<h3 class="pad5 col-w ta-c">
+									<i class="fas fa-sliders-h bc_blu-lin"></i>
+									שנה פרטים
+								</h3>
+					
+								<ul>
+					
+									<li>
+										<a href="javascript:void(0)" id="update_synagogue_details" data-id="<%= synagogue.detail._id %>" class="c-blu_h">
+											עידכון פרטים
+										</a>
+									</li>
+					
+									<li>
+										<a href="javascript:void(0)" id="update_synagogue_image" data-id="<%= synagogue.detail._id %>" class="c-blu_h">
+											הוספת/החלפת תמונות
+										</a>
+									</li>
+					
+									<li>
+										<a href="javascript:void(0)" id="seting_paypal" data-id="<%= synagogue.detail._id %>" class="c-blu_h">
+											הגדרות (payPal)
+										</a>
+									</li>
+					
+									<li>
+										<a href="javascript:void(0)" id="del_synagogue" data-id="<%= synagogue.detail._id %>" class="c-blu_h">
+											מחק בית הכנסת
+										</a>
+									</li>
+					
+								</ul>
+							</div>
+						</div>
 					</div>
 
 					<div class="bkBody wid100-sm floatR">

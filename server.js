@@ -13,7 +13,7 @@ const debug = require('debug')('app:server')
 const chalk = require('chalk');
 const pagesFunctions = require('./src/functions/pagesFunctions');
 const manageCookies = require('./src/functions/manageCookies');
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 const dotenv = require('dotenv');
 dotenv.config();
 const connectionUrl = process.env.DB_URI;

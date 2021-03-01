@@ -4,40 +4,40 @@
 <section>
     <div class="container">
 
-        <div class="floatR wid250">
+        <div class="setting-account floatR wid20pc bkAsideBar">
+            <div class="btn-setting rel">
+                <div class="setting-body">
+                    <h3 class="pad5 col-w ta-c">
+                        <i class="fas fa-user-cog bc_blu-lin"></i>
+                        פעולות בחשבון
+                    </h3>
 
-            <h3 class="pad5 col-w ta-c">
-                פעולות בחשבון
-            </h3>
+                    <ul>
 
-            <ul>
+                        <li>
+                            <a href="javascript:void(0)" id="edit_account_details" data-id="<%= idUser %>" class="c-blu_h">
+                                עידכון פרטים
+                            </a>
+                        </li>
 
-                <li>
-                    עידכון פרטים
-                </li>
+                        <li>
+                            <a href="javascript:void(0)" id="update_password" data-id="<%= idUser %>" class="c-blu_h">
+                                החלפת סיסמא
+                            </a>
+                        </li>
 
-                <li>
-                    החלפת סיסמא
-                </li>
+                        <li>
+                            <a href="javascript:void(0)" id="del_account" data-id="<%= idUser %>" class="c-blu_h">
+                                מחק חשבון
+                            </a>
+                        </li>
 
-                <li>
-                    הוספת/החלפת תמונות
-                </li>
-
-                <li>
-                    הגדרות (payPal)
-                </li>
-
-                <li>
-                    <a href="javascript:void(0)" id="del_account" data-id="<%= idUser %>">
-                        מחק חשבון
-                    </a>
-                </li>
-
-            </ul>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div class="container-btn-account-add floatR wid700">
+        <div class="container-btn-account-add floatR wid65pc pad0-20">
 
             <div class="max-cont mar-auto">
                 <a href="javascript:void(0);" id="add_synagogue" class="btn-box c-yw_h mar15">
@@ -69,7 +69,7 @@
                         <% accountArrays.synagogue.forEach((item) => { %>
                             
                             <li>
-                                <a href="/account/synagogue/<%= item._id %>" class="in_block allBor mar10-0 col-bl c-blu_h shad_btn">
+                                <a href="/account/synagogue/<%= item._id %>" class="in_block allBor mar10-0 pad10 col-bl c-blu_h shad_btn">
 
                                     <span class="in_block wid60x60 pad5 floatR upload_img">
 						                <% if(item.photo) { %>

@@ -40,7 +40,7 @@ function router() {
                         res.redirect('/?m=not_exist')
                     }
                 } catch (err) {
-                debug('Error', err)
+                    debug('Error', err)
                 }
             })();
         });

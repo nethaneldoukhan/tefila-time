@@ -1,13 +1,14 @@
 const fs = require('fs');
+const API_URl = process.env.API_URl;
 const nodemailer = require('nodemailer');
 const debug = require('debug')('app:sendEmails');
 
 
-async function forgotPass(doc) {
+async function forgotPass(user) {
     const subject = 'שיחזור סיסמא';
-    const email = buildForgotPassEmail(subject, doc);
+    const email = buildForgotPassEmail(subject, user);
     
-    const status = await sendMail(doc.email, subject, email);
+    const status = await sendMail(user.email, subject, email);
     return status;
 }
 
@@ -46,7 +47,7 @@ async function sendMail(receiversEmail, subject, email) {
     }
 }
 
-function buildForgotPassEmail(title, doc) {
+function buildForgotPassEmail(title, user) {
 
     let body = 
         `<tbody>
@@ -54,7 +55,7 @@ function buildForgotPassEmail(title, doc) {
             <tr>
                 <td colspan="0" style="padding: 40px 30px 20px;">
                     <span style="color: #066093;font-size: 18px;">
-                        שלום ${doc.firstName},
+                        שלום ${user.firstName},
                     </span>
                 </td>
             </tr>
@@ -62,25 +63,28 @@ function buildForgotPassEmail(title, doc) {
             <tr>
 
                 <td style="padding: 20px 30px;">
-                    נשלח לך דוא"ל זה לפי בקשתך לקבל את הסיסמא שלך בתפילה טיים.
-                    <br>
-                    אם קבלת מייל זה ולא בקשת לקבל את הסיסמא שלך, נא להתעלם ממייל זה. אך ליתר ביטחון, עדיף לך לשנות את
-                    הסיסמא שלך.
+                    נשלח לך דוא"ל זה לפי בקשתך לאפס את סיסמתך בתפילה טיים.
                 </td>
             </tr>
 
             <tr>
                 <td style="padding: 20px 30px;">
-                    הסיסמא שלך היא: ${doc.password}.
+                    נא לילחוץ על קישור זה להשלים את התהליך: <br>
+                    ${API_URl}forgot_password/reset/${user.resetPasswordToken} <br>
+                    או להעתיק אותו בדפדפן.
                 </td>
             </tr>
 
             <tr>
                 <td style="padding: 20px 30px;">
-                    נא לחזור לאתר תפילה טיים ולהכניס את הסיסמא שלך
-                    <br>
-                    <a href="http://tefila-time.com" target="_blank">http://tefila-time.com</a>
-                    .
+                    הקישור יפוג תוך שעה מקבלת מייל זה.
+                </td>
+            </tr>
+
+            <tr>
+                <td style="padding: 20px 30px;">
+                    אם קבלת מייל זה ולא בקשת לאפס את סיסמתך, נא להתעלם. אך ליתר ביטחון, עדיף לך לשנות את
+                    סיסמתך.
                 </td>
             </tr>
 
@@ -102,14 +106,14 @@ function buildForgotPassEmail(title, doc) {
 
 
 
-        שלום ${doc.fName},
+        שלום ${user.fName},
         
         נשלח לך דוא"ל זה לפי לבקשתך לקבל את הסיסמא שלך בתפילה טיים.
         <br>
         אם קבלת מייל זה ולא בקשת לקבל את הסיסמא שלך, נא להתעלם ממייל זה. אך ליתר ביטחון, עדיף לך לשנות את
         הסיסמא שלך.
         
-        הסיסמא שלך היא: ${doc.password}.
+        הסיסמא שלך היא: ${user.password}.
         
         נא לחזור לאתר תפילה טיים ולהכניס את הסיסמא שלך
         <br>
@@ -152,7 +156,7 @@ function templateEmail(title, message, unsuscribe) {
             </tr>`
     }
     const templateEmail =
-    `<!doctype html>
+    `<!usertype html>
     <html lang="he" >
     
     <head>

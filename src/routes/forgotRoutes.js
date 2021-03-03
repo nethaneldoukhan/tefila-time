@@ -109,7 +109,7 @@ function router() {
                             if (newUser.ok === 1) {
                                 res.json(0);
                             } else {
-                                res.json(50);
+                                res.json(1);
                             }
                         } else {
                             res.json(2);

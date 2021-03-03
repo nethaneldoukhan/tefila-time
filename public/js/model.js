@@ -123,6 +123,17 @@ async function checkVakueNewPassword(theForm) {
     return allStatus;
 }
 
+async function resetPassword(theForm) {
+    let formData = new FormData(theForm);
+    const settings = await ajax.resetPassword(formData);
+    console.log(settings);
+    if(settings === 0) {
+        location.href = `${DOMAINE}?m=update_ok`;
+    } else {
+        return 50;
+    }
+}
+
 async function updatePassword(theForm) {
     let formData = new FormData(theForm);
     const settings = await ajax.updatePassword(formData);
@@ -421,6 +432,7 @@ export {
     login,
     createUser,
     checkVakueNewPassword,
+    resetPassword,
     updatePassword,
     checkVakueNewSynagogue,
     addSynagogue,

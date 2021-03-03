@@ -140,6 +140,24 @@ $('#update_password').click(function () {
     view.updatePassword(mainWindow);
 });
 
+// check new password reset values
+$('#form-newPass-reset').submit(async function (e) {
+    e.preventDefault();
+    const form = document.getElementById('form-newPass-reset');
+    const passwordStatus = await model.checkVakueNewPassword(form,);
+    console.log(passwordStatus);
+    if (passwordStatus[0] == 0) {
+        const newPasswordStatus = await model.resetPassword(form);
+        if(newPasswordStatus === 50) {
+            view.alert(mainMessage, 50);
+        }
+    } else {
+        const divError = $('.comment_error');
+        const inputs = $('.input_form-newPass');
+        view.checkValues(inputs, divError, passwordStatus);
+    }
+});
+
 // check new password values
 $('.window_connexion').on('submit', '#form-newPass', async function (e) {
     e.preventDefault();

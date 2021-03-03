@@ -828,7 +828,7 @@ select {
     outline: none;
 }
 
-.search-control:focus-within, .con-box input:focus-within, .con-box select:focus-within, #form-city input:focus-within, #formSearchSynagogue input:focus-within, #formSearchTefila input:focus-within, #formSearchTefila select:focus-within, #form-newPass input:focus-within {
+.search-control:focus-within, .con-box input:focus-within, .con-box select:focus-within, #form-city input:focus-within, #formSearchSynagogue input:focus-within, #formSearchTefila input:focus-within, #formSearchTefila select:focus-within, #form-newPass input:focus-within, #form-newPass-reset input:focus-within {
     box-shadow: 0px 0px 4px 1px #066093;
 }
 
@@ -928,7 +928,8 @@ select {
 }
 
 .con-box .input_design,
-#form-newPass .input_design {
+#form-newPass .input_design,
+#form-newPass-reset .input_design {
     padding: 9px 40px;
     border: 1px grey solid;
     border-radius: 5px;
@@ -943,7 +944,7 @@ select {
 }
 
 .con-box .fa-envelope, .con-box .fa-lock, .con-box .fa-synagogue, .con-box .fa-map-marker-alt, .con-box .fa-globe, .con-box .fa-phone-square,
-#form-newPass .fa-lock {
+#form-newPass .fa-lock, #form-newPass-reset .fa-lock {
     width: 37px;
     height: 37px;
     line-height: 37px !important;

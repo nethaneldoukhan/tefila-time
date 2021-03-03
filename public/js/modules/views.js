@@ -609,7 +609,7 @@ function addListSynagogue (object) {
         divImg = `<img class="wid60x60 bor_rad5" src="/assets/img/BK/${object.photo}" alt="תמונת ${object.name}" />`
     }
     return `<li>
-                <a href="/account/synagogue/${object._id}" class="in_block allBor mar10-0 col-bl c-blu_h shad_btn">
+                <a href="/account/synagogue/${object._id}" class="in_block allBor mar10-0 pad10 col-bl c-blu_h shad_btn">
 
                     <span class="in_block wid60x60 pad5 floatR upload_img">
                         ${divImg}

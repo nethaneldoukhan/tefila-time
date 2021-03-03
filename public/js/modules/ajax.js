@@ -84,6 +84,19 @@ async function login(form) {
     }
 }
 
+async function resetPassword(form) {
+    try{
+        const response = await fetch(`${DOMAINE}/forgot_password/update_password`, {
+            method: 'POST',
+            body: form
+        });
+        console.log(response);
+        return response.json();
+    } catch(err) {
+        console.log(err)
+    }
+}
+
 async function updatePassword(form) {
     try{
         const response = await fetch(`${DOMAINE}/account/update_password`, {
@@ -232,6 +245,7 @@ export {
     checkExistEmail,
     createUser,
     login,
+    resetPassword,
     updatePassword,
     checkExistSynagogue,
     addSynagogue,

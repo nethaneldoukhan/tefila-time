@@ -205,7 +205,6 @@ function htmlAddSynagogue() {
                 </h4>
             </div>
 
-            <!-- register -->
             <div class="con-body pad10">
 
                 <p class="col-gy-b">
@@ -405,6 +404,53 @@ function htmlAddSynagogue() {
         </div>
     </div>`;
     return addSynagogue;
+}
+
+function htmlUpdatePassword() {
+    let updatePassword = 
+        `<div class="message_box">
+        <div class="con-box wid700 allBor">
+            <div class="btn_close col-w right--20 top-0">
+                <i class="fas fa-times"></i>
+            </div>
+
+            <div class="con-header">
+                <h4 class="col-w pad10-0 bc_blu-lin bor_rad5-top">
+                    עידכון סיסמא
+                </h4>
+            </div>
+
+            <div class="con-body pad10">
+                
+                <form method="POST" action="/account/update_password" id="form-newPass">
+
+                <div class="mar20-0">
+
+                    <label for="newPass" class="bold mar10-0">סיסמא חדשה</label>
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" id="newPass" placeholder="סיסמא חדשה" class="input_design input_form-newPass wid96pc bs" autofocus />
+                    <span class="col-r">*</span>
+                    <span class="comment_error fs-13 col-r"></span> <br />
+                    
+                </div>
+
+                <div class="mar20-0">
+
+                    <label for="newPass-confirm" class="bold mar10-0">אישור סיסמא</label>
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="confirm" id="newPass-confirm" placeholder="אישור סיסמא" class="input_design input_form-newPass wid96pc bs" />
+                    <span class="col-r">*</span>
+                    <span class="comment_error fs-13 col-r"></span> <br />
+                    
+                </div>
+
+                <input type="submit" value="עדכן את הסיסמא" class="btn mar20-0 col-w c-yw_h pad9-40 bor_rad5" />
+
+            </form>
+            </div>
+        </div>
+    </div>`;
+    return updatePassword;
 }
 
 // conscruct select of day zmanim in window add tefila
@@ -632,6 +678,7 @@ export {
     htmlLoginRegist,
     alert,
     htmlAddSynagogue,
+    htmlUpdatePassword,
     htmlAddTefila,
     addListSynagogue,
     buildSelectSearchTefila,

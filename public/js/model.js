@@ -27,8 +27,12 @@ function checkQueryUrl(urlParams) {
             numCode = 47;
         } else if (queryString == 'not_exist') {
             numCode = 46;
+        }  else if (queryString == 'not_exist_reset') {
+            numCode = 44;
         } else if (queryString == 'error') {
-            numCode = 50;
+            numCode = 50;update_ok
+        } else if (queryString == 'update_ok') {
+            numCode = 51;
         }
     }
     return numCode;
@@ -107,6 +111,27 @@ async function createUser(theForm){
     }
     const settings = await ajax.createUser(arr);
     return settings;
+}
+
+async function checkVakueNewPassword(theForm) {
+    const password1 = confirmPassword($(theForm[0]).val(), $(theForm[1]).val());
+    const password2 = confirmPassword($(theForm[1]).val(), $(theForm[0]).val());
+    
+    //status 0: ok. 4: code < 8 num. 5: code1 != code2.
+    const allStatus = [password1 + password2, password1, password2];
+
+    return allStatus;
+}
+
+async function updatePassword(theForm) {
+    let formData = new FormData(theForm);
+    const settings = await ajax.updatePassword(formData);
+    console.log(settings);
+    if(settings === 0) {
+        location.href = `${DOMAINE}/account?m=update_ok`;
+    } else {
+        return 50;
+    }
 }
 
 async function checkVakueNewSynagogue(form) {
@@ -395,6 +420,8 @@ export {
     checkValuesRegist,
     login,
     createUser,
+    checkVakueNewPassword,
+    updatePassword,
     checkVakueNewSynagogue,
     addSynagogue,
     addTefila,

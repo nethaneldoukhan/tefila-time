@@ -152,8 +152,8 @@ app.get('*', (req, res) => {
 
 const start = async () => {
     await mongoose.connect(
-        // 'mongodb://127.0.0.1/tefilaTime', //local
-        connectionUrl,
+        'mongodb://127.0.0.1/tefilaTime', //local
+        // connectionUrl,
         {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true}
     )
     debug('Connected to db server');

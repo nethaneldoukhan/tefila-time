@@ -84,6 +84,19 @@ async function login(form) {
     }
 }
 
+async function updatePassword(form) {
+    try{
+        const response = await fetch(`${DOMAINE}/account/update_password`, {
+            method: 'POST',
+            body: form
+        });
+        console.log(response);
+        return response.json();
+    } catch(err) {
+        console.log(err)
+    }
+}
+
 async function checkExistSynagogue(form) {
     try{
         const response = await fetch(`${DOMAINE}/synagogue/checkExistSynagogue`, {
@@ -160,7 +173,7 @@ async function existNewLetter(synagogueId, email) {
     try{
         const response = await fetch(`${DOMAINE}/synagogue/checkExistNewLetter`, {
             headers: {
-              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                "Content-Type": "application/json"
             },
             method: 'POST',
             body: data
@@ -219,6 +232,7 @@ export {
     checkExistEmail,
     createUser,
     login,
+    updatePassword,
     checkExistSynagogue,
     addSynagogue,
     addTefila,

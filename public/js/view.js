@@ -240,13 +240,18 @@ function resetValues(vals, divError) {
 function statusAddToNewLetter(div, input, status) {
     resetValues(input, div);
     if (status == 51) {
-    var message = "נרשמת בהצלחה.";
-    var status = `<i class="fas fa-check mar0-10"></i>`;
-    $(div).addClass('col-gn');
+        var message = "נרשמת בהצלחה.";
+        var status = `<i class="fas fa-check mar0-10"></i>`;
+        $(div).addClass('col-gn');
     } else {
         var message = "אירעה שגיעה. הבקשה לא נקלטה במערכת.";
     }
     $(div).html(status + message);
+}
+
+function updatePassword(updatePasswordDiv){
+    const html = views.htmlUpdatePassword();
+    updatePasswordDiv.html(html);
 }
 
 function addSynagogue(addSynagogueDiv){
@@ -348,6 +353,8 @@ function getErrorMessage(numCode) {
         message = 'העיר לא נמצאת.'
     } else if (numCode == 11) {
         message = 'נא להכניס שם עיר ושם מדינה בצורה הזאת: \n "עיר, מדינה".'
+    } else if (numCode == 44) {
+        message = 'הקישור לא קיים או פג תוקף.';
     } else if (numCode == 45) {
         message = 'השירות בבניה.\n אנחנו עובדים שיופעל בקרוב בע"ה.';
     } else if (numCode == 46) {
@@ -409,6 +416,7 @@ export {
     loadImage,
     checkValuesLog,
     statusAddToNewLetter,
+    updatePassword,
     addSynagogue,
     windowAddTefila,
     enableAndDisable,

@@ -1,7 +1,9 @@
 const express = require('express');
 const accountRouter = express.Router();
+const bcrypt = require('bcrypt');
 const { MongoClient, ObjectID } = require('mongodb');
 const debug = require('debug')('app:account');
+const User = require('../schemas/UserSchema');
 const Synagogue = require('../schemas/SynagogueSchema');
 const Tribunal = require('../schemas/TribunalSchema');
 const Cours = require('../schemas/CoursSchema');
@@ -95,7 +97,47 @@ function router() {
                 }
             })();
         });
+
+
+    accountRouter.route('/update_password')
+        .post((req, res) => {
+            const user = req.user;
+            const password = req.body.password;
+            const confirmPassword = req.body.confirm;
+            debug(user);
+            debug(password);
+            debug(confirmPassword);
+            const validePassword = validPassword(password, confirmPassword);
+            debug(validePassword);
+            if (validePassword === 0) {
+                (async () => {
+                    try {
+                        const hashPassword =  await bcrypt.hash(password, 2);
+                        newUser = await User.collection.findOneAndUpdate( {_id: new ObjectID (user._id) }, { "$set": { 'password': hashPassword }});
+                        if (newUser.ok === 1) {
+                            res.json(0);
+                        } else {
+                            res.json(50);
+                        }
+                    } catch (err) {
+                        debug(err);
+                        res.json(50);
+                    }
+                })();
+            } else {
+                res.json('Field/s not valid or empty');
+            }
+        });
+        
     return accountRouter;
+}
+
+function validPassword(password, confirmPassword) {
+    if (password != confirmPassword || password.length < 8) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 module.exports = router;

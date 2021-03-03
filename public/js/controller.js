@@ -134,9 +134,33 @@ $('.window_connexion').on('submit', '#form-log', async function (e) {
     }
 });
 
+// window update password
+$('#update_password').click(function () {
+    console.log('update_password');
+    view.updatePassword(mainWindow);
+});
+
+// check new password values
+$('.window_connexion').on('submit', '#form-newPass', async function (e) {
+    e.preventDefault();
+    const form = document.getElementById('form-newPass');
+    const passwordStatus = await model.checkVakueNewPassword(form);
+    console.log(passwordStatus);
+    if (passwordStatus[0] == 0) {
+        const newPasswordStatus = await model.updatePassword(form);
+        if(newPasswordStatus === 50) {
+            view.alert(mainMessage, 50);
+        }
+    } else {
+        const divError = $('.comment_error');
+        const inputs = $('.input_form-newPass');
+        view.checkValues(inputs, divError, passwordStatus);
+    }
+});
+
 // window add new synagogue
 $('#add_synagogue').click(function () {
-    // const addSynagogueHtml = $('.window_connexion');
+    console.log('update_password');
     view.addSynagogue(mainWindow);
 });
 

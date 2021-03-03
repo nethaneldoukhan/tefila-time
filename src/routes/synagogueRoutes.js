@@ -473,7 +473,7 @@ function uploadFiles(req, synagogue) {
         let photo = req.files.photo;
         const newName = (Math.floor(Math.random() * 99999999) + 10000000);
         photo.name = newName + '_' + photo.name.replace(/ /g,'_');
-        const photoUploadPath = 'public/assets/img/bk/' + photo.name;
+        const photoUploadPath = 'public/assets/img/BK/' + photo.name;
         photo.mv(photoUploadPath, function(err) {
             if (err) {
                 return 'Error upload photo';

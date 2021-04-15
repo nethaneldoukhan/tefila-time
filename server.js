@@ -41,18 +41,18 @@ app.set('view engine', 'ejs');
 
 
 // check token
-app.get('*', (req, res, next) => {
-    (async () => {
-        if (!req.user) {
-            const cookies = manageCookies.checkUserCookies(req);
-            if (cookies.status === 0) {
-                const status = await manageCookies.signInToken(req, res);
-                debug(status);
-            }
-        }
-        next();
-    })();
-});
+// app.get('*', (req, res, next) => {
+//     (async () => {
+//         if (!req.user) {
+//             const cookies = manageCookies.checkUserCookies(req);
+//             if (cookies.status === 0) {
+//                 const status = await manageCookies.signInToken(req, res);
+//                 debug(status);
+//             }
+//         }
+//         next();
+//     })();
+// });
 
 
 const authRouter = require('./src/routes/authRoutes')();

@@ -2,6 +2,7 @@ const express = require('express');
 const forgotRouter = express.Router();
 const bcrypt = require('bcrypt');
 const debug = require('debug')('app:forgot');
+const uuid = require('uuid');
 const { ObjectID } = require('mongodb');
 const User = require('../schemas/UserSchema');
 const pagesFunctions = require('../functions/pagesFunctions');
@@ -35,7 +36,9 @@ function router() {
                     const email = req.body.email;
                     debug(email);
                     let user = '';
-                    const token = Math.floor(Math.random() * 999999999999999) + 10000000;
+                    // const token = Math.floor(Math.random() * 999999999999999) + 10000000;
+                    const token = uuid.v4();
+                    debug(token);
                     user = await User.collection.findOne({ 'email': email});
                     debug(user);
                     debug(token);

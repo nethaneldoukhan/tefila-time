@@ -1,7 +1,7 @@
 import * as model from "./model.js";
 import * as view from "./view.js";
 
-export function init() { }
+export function init() { initMap() }
 
 
 
@@ -478,8 +478,26 @@ $('body').on('click', '#NLAnimations', function () {
     }
 });
 
-// autocomplete gogle maps
+// autocomplete google maps
 function initialize() {
     var input = document.getElementById('form-dity_input');
     new google.maps.places.Autocomplete(input);
+}
+
+function initMap() {
+    if($("#map").data('locationlat')) {
+        const lat = $("#map").data('locationlat');
+        const lng = $("#map").data('locationlng');
+        const position = { lat: lat, lng: lng };
+
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 15,
+            center: position,
+        });
+
+        const marker = new google.maps.Marker({
+            position: position,
+            map: map,
+        });
+    }
 }

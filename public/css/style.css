@@ -956,7 +956,8 @@ select {
 }
 
 .map {
-    width: 50%;
+    width: 60%;
+    height: 150px;
 }
 
 .disp-b-sm {

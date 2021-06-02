@@ -742,10 +742,8 @@
 						</ul>
 
 					</nav>
-
-					<div class="map floatL">
-						<iframe src="https://www.google.com/maps?q=<%= synagogue.detail.latitude %>,<%= synagogue.detail.longitude %>&amp;output=embed" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-					</div>
+					
+					<div id="map" class="map floatL" data-locationlat="<%= synagogue.detail.latitude %>" data-locationlng="<%= synagogue.detail.longitude %>"></div>
 
 					<div class="clear"></div>
 
@@ -755,5 +753,6 @@
 			<hr>
 
 		</section>
-
+		
+		
 <%- include('../partials/footer') %>

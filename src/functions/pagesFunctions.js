@@ -55,7 +55,27 @@ function userDiv(req) {
                                         </li>
                                     </ul>
                                 </div>
-                            </nav>`
+                            </nav>`,
+            'connexionMobile':  `<nav class="nav-user_command">
+                                    <div>   
+                                        <span class="btn-user_command fs-2 col-blu c-blu_h point menu1">
+                                            ${req.user.firstName.substring(0, 1).toUpperCase()}
+                                        <span>
+                                    
+                                        <ul class="menu2 pad3-0">
+                                            <li class="bc-gy-xl_h">
+                                                <a href="/account" class="pad10-20 block col-blu">
+                                                החשבון שלי
+                                                </a>
+                                            </li>
+                                            <li class="bc-gy-xl_h">
+                                                <a href="/auth/logout" class="pad10-20 block col-blu">
+                                                יציאה
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </nav>`
         };
     } else {
         htmlData  = {
@@ -66,7 +86,10 @@ function userDiv(req) {
             'connexion': `<a href="javascript:void(0)" class="btn-connexion btn-box c-yw_h">
                             <i class="fas fa-lock"></i>
                             התחבר/הרשם
-                        </a>`
+                        </a>`,
+            'connexionMobile': `<a href="javascript:void(0)" class="btn-connexion btn-box c-yw_h">
+                                    <i class="far fa-user-circle fs-20"></i>
+                                </a>`
         };
     }
     return htmlData;

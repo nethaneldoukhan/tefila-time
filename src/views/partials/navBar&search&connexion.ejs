@@ -10,7 +10,7 @@
             </li> -->
 
 
-            <li class="pad10-20 borR bor-w">
+            <li class="pad10-20">
                 <a href="/" class="col-w c-yw_h">
                     דף הבית
                 </a>
@@ -300,11 +300,41 @@
             </li>
 
         </ul>
-        <button type="button" class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </button>
+    
+        <div class="logo-site-mobile disp-n">
+            <a href="/">
+                <img src="/assets/img/site/ShurtLogo.png" alt="Logo Tefila Time" title="Tefila Time">
+            </a>
+        </div>
+
+        <div class="lang-con-mobile disp-n">
+            <div class="col-w menu1">
+                <i class="fas fa-globe"></i>
+                <ul class="menu2">
+                    <li class="pad5">
+                        <a href="/">
+                        <img class="icon_lang opac8_h" src="/assets/img/site/israel-flag-3d-icon-32.png" alt="Logo hebrew" title="Hebrew" />
+                    </a>
+                    </li>
+                    <li class="pad5">
+                        <a href="/en">
+                            <img class="icon_lang opac8_h" src="/assets/img/site/united-states-of-america-flag-3d-icon-32.png" alt="Logo english" title="English" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="con-mobile">
+                <%- userDiv.connexionMobile %>
+            </div>
+
+            <button type="button" class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+
     </nav>
 </section>
 
@@ -323,7 +353,7 @@
             </form>
 
             <!-- connexion/user name -->
-            <div class="floatR">
+            <div class="con-pc floatR">
                 <%- userDiv.connexion %>
             </div>
 

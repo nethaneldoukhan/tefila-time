@@ -81,16 +81,18 @@ function router() {
                 try {
                     const result = await User.collection.findOne({'email': user.email});
                     debug(result);
-                    const isMatch = await bcrypt.compare(user.password, result.password);
-                    if (isMatch) {
-                        debug('ok');
-                        req.login(result, () => {
-                            if(user.keepCon === 'true') {
-                                manageCookies.addUserCookies(result, req, res);
-                            }
-                        });
-                    } else {
-                        debug('not ok');
+                    if(result) {
+                        const isMatch = await bcrypt.compare(user.password, result.password);
+                        if (isMatch) {
+                            debug('ok');
+                            req.login(result, () => {
+                                if(user.keepCon === 'true') {
+                                    manageCookies.addUserCookies(result, req, res);
+                                }
+                            });
+                        } else {
+                            debug('not ok');
+                        }
                     }
                     res.redirect('/auth/profile');
                 } catch (e) {

@@ -38,8 +38,8 @@ async function sendMail(receiversEmail, subject, email) {
         });
 
         let info = await transporter.sendMail({
-            // from: '"do_not_reply@tefila-time.com" <nsd.developpement@tefila-time.com>', // sender address
-            from: '"do_not_reply@tefila-time.com" <natdoukhan@yahoo.fr>', // sender address
+            // from: '"no-reply@tefila-time.com" <nsd.developpement@tefila-time.com>', // sender address
+            from: '"no-reply@tefila-time.com" <natdoukhan@yahoo.fr>', // sender address
             to: receiversEmail, // list of receivers
             subject: subject, // Subject line
             text: email.text, // plain text body

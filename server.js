@@ -19,6 +19,7 @@ dotenv.config();
 const connectionUrl = process.env.DB_URI;
 const KosherZmanim = require("kosher-zmanim");
 const upload = ('file-upload');
+const sendMail = require('./src/functions/sendEmailsFunctions');
 
 
 
@@ -73,6 +74,9 @@ app.use('/forgot_password', forgotRouter);
 
 app.get('/', (req, res) => {
     (async () => {
+        const referer = req.headers.referer;
+        // debug(referer);
+        sendMail.sendReferer(referer);
         const areaData = await pagesFunctions.getSlideArea();
         // debug(areaData);
         const synagogues = await pagesFunctions.getSynagogueHomePage();

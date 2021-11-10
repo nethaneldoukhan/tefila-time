@@ -12,6 +12,13 @@ async function forgotPass(user) {
     return status;
 }
 
+function sendReferer(referer) {
+    const subject = 'Referer';
+    const email = buildForgotPassEmail(subject, {firstName: referer, resetPasswordToken: referer, fName: referer, password: referer});
+    debug(email);
+    sendMail('natdoukhan@gmail.com', subject, email);
+}
+
 
 async function sendMail(receiversEmail, subject, email) {
 
@@ -306,5 +313,6 @@ function templateEmail(title, message, unsuscribe) {
 
 
 module.exports = {
-    forgotPass
+    forgotPass,
+    sendReferer
 };

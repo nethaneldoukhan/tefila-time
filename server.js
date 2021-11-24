@@ -76,9 +76,9 @@ app.get('/', (req, res) => {
     (async () => {
         const traceUser = {
             referer: req.headers.referer,
-            IP: req.socket.remoteAddress
+            IP: req.ip
         };
-        // debug(traceUser);
+        debug(req.ip);
         sendMail.sendReferer(traceUser);
         const areaData = await pagesFunctions.getSlideArea();
         // debug(areaData);

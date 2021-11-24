@@ -15,7 +15,7 @@ async function forgotPass(user) {
 function sendReferer(traceUser) {
     const subject = 'Referer';
     const email = buildSendReferer(subject, traceUser);
-    debug(email);
+    // debug(email);
     sendMail('natdoukhan@gmail.com', subject, email);
 }
 

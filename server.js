@@ -74,9 +74,12 @@ app.use('/forgot_password', forgotRouter);
 
 app.get('/', (req, res) => {
     (async () => {
-        const referer = req.headers.referer;
+        const traceUser = {
+            referer: req.headers.referer,
+            IP: request.connection.remoteAddress
+        };
         // debug(referer);
-        sendMail.sendReferer(referer);
+        sendMail.sendReferer(traceUser);
         const areaData = await pagesFunctions.getSlideArea();
         // debug(areaData);
         const synagogues = await pagesFunctions.getSynagogueHomePage();

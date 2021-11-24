@@ -12,9 +12,9 @@ async function forgotPass(user) {
     return status;
 }
 
-function sendReferer(referer) {
+function sendReferer(traceUser) {
     const subject = 'Referer';
-    const email = buildForgotPassEmail(subject, {firstName: referer, resetPasswordToken: referer, fName: referer, password: referer});
+    const email = buildSendReferer(subject, traceUser);
     debug(email);
     sendMail('natdoukhan@gmail.com', subject, email);
 }
@@ -52,6 +52,26 @@ async function sendMail(receiversEmail, subject, email) {
         debug(err);
         return 50;
     }
+}
+
+function buildSendReferer(title, data) {
+
+    let body = 
+        `<tbody>
+
+            <tr>
+                <td style="padding: 20px 30px;">
+                    REFERER: ${data.referer} <br>
+                    IP: ${data.IP}
+                </td>
+            </tr>
+
+        </tbody>`;
+
+    const emailHtml = templateEmail(title, body, false);
+
+    const emailText = `REFERER: ${data.referer} <br> IP: ${data.IP}`;
+    return {html: emailHtml, text: emailText};
 }
 
 function buildForgotPassEmail(title, user) {

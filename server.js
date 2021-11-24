@@ -1,7 +1,8 @@
 const https = require('https');
 const fs = require('fs');
 const express = require('express');
-var cors = require('cors')
+var cors = require('cors');
+const requestIp = require('request-ip');
 const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -33,6 +34,7 @@ app.use(session({secret: 'nm',
 app.use(fileUpload());
 require('./src/config/passport.js')(app);
 app.use(cors());
+app.use(requestIp.mw());
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(morgan('tiny'));
@@ -76,9 +78,9 @@ app.get('/', (req, res) => {
     (async () => {
         const traceUser = {
             referer: req.headers.referer,
-            IP: req.ip
+            IP: req.clientIp
         };
-        debug(req.ip);
+        debug(req.clientIp);
         sendMail.sendReferer(traceUser);
         const areaData = await pagesFunctions.getSlideArea();
         // debug(areaData);

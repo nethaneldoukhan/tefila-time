@@ -116,6 +116,7 @@ app.get('/faq', (req, res) => {
 app.get('/conditions', (req, res) => {
     (async () => {
         const zmanim = await pagesFunctions.getAllZmanim(req, res);
+        const userDiv = pagesFunctions.userDiv(req);
         if(req.user) {
             res.json(req.user);
         } else {

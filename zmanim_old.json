@@ -1,0 +1,192 @@
+{
+    "week": {
+        "date": "2020-11-12",
+        "location": {
+            "city": "jerusalem",
+            "country": "israel"
+        },
+        "israel": "israel",
+        "optionZmanim": {
+            "date": "2020-11-14",
+            "timeZoneId": "Asia/Jerusalem",
+            "locationName": "jerusalem",
+            "latitude": 31.768319,
+            "longitude": 35.21371,
+            "elevation": 778.2998,
+            "complexZmanim": false
+        },
+        "hours": [
+            {
+                "link": "2020-11-12T04:50:10+02:00",
+                "name": "עלות השחר",
+                "time": "04:50"
+            },
+            {
+                "link": "2020-11-12T06:04:57+02:00",
+                "name": "הנץ החמה",
+                "time": "06:04"
+            },
+            {
+                "link": "2020-11-12T08:08:02+02:00",
+                "name": "סו\"ז ק\"ש מ\"א",
+                "time": "08:08"
+            },
+            {
+                "link": "2020-11-12T08:44:02+02:00",
+                "name": "סו\"ז ק\"ש גר\"א",
+                "time": "08:44"
+            },
+            {
+                "link": "2020-11-12T09:13:04+02:00",
+                "name": "סוז\"ת מ\"א",
+                "time": "09:13"
+            },
+            {
+                "link": "2020-11-12T09:37:04+02:00",
+                "name": "סוז\"ת גר\"א",
+                "time": "09:37"
+            },
+            {
+                "link": "2020-11-12T11:23:08+02:00",
+                "name": "חצות",
+                "time": "11:23"
+            },
+            {
+                "link": "2020-11-12T11:49:39+02:00",
+                "name": "מנחה גדולה",
+                "time": "11:49"
+            },
+            {
+                "link": "2020-11-12T16:45:49+02:00",
+                "name": "שקיעה",
+                "time": "16:45"
+            },
+            {
+                "link": "2020-11-12T17:19:17+02:00",
+                "name": "צאת הכוכבים",
+                "time": "17:19"
+            }
+        ],
+        "kosherZmanim": {
+            "metadata": {
+                "date": "2020-11-12",
+                "type": "net.sourceforge.zmanim.ZmanimCalendar",
+                "algorithm": "US National Oceanic and Atmospheric Administration Algorithm",
+                "location": "jerusalem",
+                "latitude": "31.768319",
+                "longitude": "35.21371",
+                "elevation": "778.2998",
+                "timeZoneName": "GMT+02:00",
+                "timeZoneID": "Asia/Jerusalem",
+                "timeZoneOffset": "2.0"
+            },
+            "BasicZmanim": {
+                "BeginAstronomicalTwilight": "2020-11-12T04:41:04+02:00",
+                "AlosHashachar": "2020-11-12T04:50:10+02:00",
+                "Alos72": "2020-11-12T04:52:57+02:00",
+                "BeginNauticalTwilight": "2020-11-12T05:09:56+02:00",
+                "BeginCivilTwilight": "2020-11-12T05:39:14+02:00",
+                "Sunrise": "2020-11-12T06:00:27+02:00",
+                "SeaLevelSunrise": "2020-11-12T06:04:57+02:00",
+                "SofZmanShmaMGA": "2020-11-12T08:08:02+02:00",
+                "SofZmanShmaGRA": "2020-11-12T08:44:02+02:00",
+                "SofZmanTfilaMGA": "2020-11-12T09:13:04+02:00",
+                "SofZmanTfilaGRA": "2020-11-12T09:37:04+02:00",
+                "Chatzos": "2020-11-12T11:23:08+02:00",
+                "SunTransit": "2020-11-12T11:23:08+02:00",
+                "MinchaGedola": "2020-11-12T11:49:39+02:00",
+                "MinchaKetana": "2020-11-12T14:28:44+02:00",
+                "PlagHamincha": "2020-11-12T15:35:01+02:00",
+                "CandleLighting": "2020-11-12T16:23:19+02:00",
+                "SeaLevelSunset": "2020-11-12T16:41:19+02:00",
+                "Sunset": "2020-11-12T16:45:49+02:00",
+                "EndCivilTwilight": "2020-11-12T17:07:01+02:00",
+                "Tzais": "2020-11-12T17:19:17+02:00",
+                "EndNauticalTwilight": "2020-11-12T17:36:19+02:00",
+                "Tzais72": "2020-11-12T17:53:19+02:00",
+                "EndAstronomicalTwilight": "2020-11-12T18:05:11+02:00",
+                "ShaahZmanisGra": "PT53M1.846S",
+                "TemporalHour": "PT53M1.846S",
+                "ShaahZmanisMGA": "PT1H5M1.846S"
+            }
+        }
+    },
+    "shabbat": {
+        "date": "2020-11-14",
+        "location": {
+            "city": "jerusalem",
+            "country": "israel"
+        },
+        "israel": "israel",
+        "optionZmanim": {
+            "date": "2020-11-14",
+            "timeZoneId": "Asia/Jerusalem",
+            "locationName": "jerusalem",
+            "latitude": 31.768319,
+            "longitude": 35.21371,
+            "elevation": 778.2998,
+            "complexZmanim": false
+        },
+        "hours": [
+            {
+                "link": "2020-11-14T16:22:10+02:00",
+                "name": "ה\"נ",
+                "time": "16:22"
+            },
+            {
+                "link": "2020-11-14T17:18:17+02:00",
+                "name": "מוצ\"ש",
+                "time": "17:18"
+            },
+            {
+                "link": "2020-11-14T17:52:10+02:00",
+                "name": "ר\"ת",
+                "time": "17:52"
+            }
+        ],
+        "kosherZmanim": {
+            "metadata": {
+                "date": "2020-11-14",
+                "type": "net.sourceforge.zmanim.ZmanimCalendar",
+                "algorithm": "US National Oceanic and Atmospheric Administration Algorithm",
+                "location": "jerusalem",
+                "latitude": "31.768319",
+                "longitude": "35.21371",
+                "elevation": "778.2998",
+                "timeZoneName": "GMT+02:00",
+                "timeZoneID": "Asia/Jerusalem",
+                "timeZoneOffset": "2.0"
+            },
+            "BasicZmanim": {
+                "BeginAstronomicalTwilight": "2020-11-14T04:42:33+02:00",
+                "AlosHashachar": "2020-11-14T04:51:41+02:00",
+                "Alos72": "2020-11-14T04:54:42+02:00",
+                "BeginNauticalTwilight": "2020-11-14T05:11:30+02:00",
+                "BeginCivilTwilight": "2020-11-14T05:40:53+02:00",
+                "Sunrise": "2020-11-14T06:02:11+02:00",
+                "SeaLevelSunrise": "2020-11-14T06:06:42+02:00",
+                "SofZmanShmaMGA": "2020-11-14T08:09:04+02:00",
+                "SofZmanShmaGRA": "2020-11-14T08:45:04+02:00",
+                "SofZmanTfilaMGA": "2020-11-14T09:13:51+02:00",
+                "SofZmanTfilaGRA": "2020-11-14T09:37:51+02:00",
+                "Chatzos": "2020-11-14T11:23:26+02:00",
+                "SunTransit": "2020-11-14T11:23:26+02:00",
+                "MinchaGedola": "2020-11-14T11:49:50+02:00",
+                "MinchaKetana": "2020-11-14T14:28:12+02:00",
+                "PlagHamincha": "2020-11-14T15:34:11+02:00",
+                "CandleLighting": "2020-11-14T16:22:10+02:00",
+                "SeaLevelSunset": "2020-11-14T16:40:10+02:00",
+                "Sunset": "2020-11-14T16:44:41+02:00",
+                "EndCivilTwilight": "2020-11-14T17:05:59+02:00",
+                "Tzais": "2020-11-14T17:18:17+02:00",
+                "EndNauticalTwilight": "2020-11-14T17:35:22+02:00",
+                "Tzais72": "2020-11-14T17:52:10+02:00",
+                "EndAstronomicalTwilight": "2020-11-14T18:04:18+02:00",
+                "ShaahZmanisGra": "PT52M47.386S",
+                "TemporalHour": "PT52M47.386S",
+                "ShaahZmanisMGA": "PT1H4M47.386S"
+            }
+        }
+    },
+    "parasha": "פרשת חיי שרה"
+}

@@ -123,6 +123,7 @@ app.get('/conditions', (req, res) => {
             debug(zmanim);
             res.render('pages/conditions', {
                 pageTitle: 'תנאי שימוש',
+                userDiv,
                 zmanim,
                 search: ''
             });

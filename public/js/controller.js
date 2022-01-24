@@ -480,8 +480,12 @@ $('body').on('click', '#NLAnimations', function () {
 
 // autocomplete google maps
 function initialize() {
+    const options = {
+        types: ['(regions)'],
+        // componentRestrictions: {country: 'uk'}
+    }
     var input = document.getElementById('form-dity_input');
-    new google.maps.places.Autocomplete(input);
+    new google.maps.places.Autocomplete(input, options);
 }
 
 function initMap() {

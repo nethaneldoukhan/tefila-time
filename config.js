@@ -11,7 +11,7 @@ const DB_URI = process.env.DB_URI
 
 const JWT = process.env.JWT
 
-const GOOGLE_API_key = process.env.GOOGLE_API_key
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
 const ELEVATION_API = process.env.ELEVATION_API
 const TIME_ZONE_API = process.env.TIME_ZONE_API
 
@@ -24,7 +24,7 @@ module.exports = {
     PORT,
     DB_URI,
     JWT,
-    GOOGLE_API_key,
+    GOOGLE_API_KEY,
     ELEVATION_API,
     TIME_ZONE_API
 }

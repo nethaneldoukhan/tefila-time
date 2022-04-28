@@ -3,7 +3,7 @@ const debug = require('debug')('app:zmanim');
 const City = require('../schemas/CitySchema');
 const KosherZmanim = require('kosher-zmanim');
 const manageJson = require('./manageJson');
-const { GOOGLE_API_key, ELEVATION_API, TIME_ZONE_API } = require('../../config')
+const { GOOGLE_API_KEY, ELEVATION_API, TIME_ZONE_API } = require('../../config')
 
 
 var newCity = {
@@ -227,7 +227,7 @@ function getLatAndLong(city, country) {
     return new Promise((resolve, reject) => {
         const option = {
             hostname: 'maps.googleapis.com',
-            path: `/maps/api/geocode/json?address=${cityUrl}&sensor=true&key=${GOOGLE_API_key}`
+            path: `/maps/api/geocode/json?address=${cityUrl}&sensor=true&key=${GOOGLE_API_KEY}`
             };
         const request = https.get(option, (response) => {
             let body = '';

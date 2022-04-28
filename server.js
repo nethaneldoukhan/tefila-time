@@ -162,7 +162,11 @@ const start = async () => {
     await mongoose.connect(
         // 'mongodb://127.0.0.1/tefilaTime', //local
         DB_URI,
-        {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true}
+        {
+            useNewUrlParser: true,
+            // useFindAndModify: false,
+            useUnifiedTopology: true
+        }
     )
     debug('Connected to db server');
 

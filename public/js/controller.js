@@ -337,7 +337,7 @@ $('#form_forgotPass').submit(async function (e) {
 })();
 
 // event listener auto complete google maps
-google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addListener(window, 'load', initialize);
 
 
 // functions

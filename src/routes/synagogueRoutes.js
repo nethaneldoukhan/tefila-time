@@ -10,6 +10,7 @@ const ShabbatTefila = require('../schemas/ShabbatTefilaSchema');
 const pagesFunctions = require('../functions/pagesFunctions');
 const getSynagogueData = require('../functions/pagesSynagogueFunctions.js');
 const synagogueRouter = express.Router();
+const { GOOGLE_API_KEY } = require('../../config');
 
 
 function router() {
@@ -447,7 +448,7 @@ function getGeolocation(synagogue) {
     return new Promise((resolve, reject) => {
         const option = {
             hostname: 'maps.googleapis.com',
-            path: `/maps/api/geocode/json?address=${adress}&sensor=true&key=AIzaSyCzixLXCXnqK5EIoh3ydBBzp-0ltX3EhjA`
+            path: `/maps/api/geocode/json?address=${adress}&sensor=true&key=${GOOGLE_API_KEY}`
             };
         const request = https.get(option, (response) => {
             let body = '';

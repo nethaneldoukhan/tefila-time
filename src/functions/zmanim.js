@@ -3,12 +3,8 @@ const debug = require('debug')('app:zmanim');
 const City = require('../schemas/CitySchema');
 const KosherZmanim = require('kosher-zmanim');
 const manageJson = require('./manageJson');
-const dotenv = require('dotenv');
-dotenv.config();
+const { GOOGLE_API_key, ELEVATION_API, TIME_ZONE_API } = require('../../config')
 
-const GOOGLE_API_key = process.env.GOOGLE_API_key;
-const ELEVATION_API = process.env.ELEVATION_API;
-const TIME_ZONE_API = process.env.TIME_ZONE_API
 
 var newCity = {
     'cityNameEn': '',

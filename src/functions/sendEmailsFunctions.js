@@ -1,6 +1,6 @@
 const fs = require('fs');
-const API_URl = process.env.API_URl;
 const nodemailer = require('nodemailer');
+const { HOST } = require('../../config');
 const debug = require('debug')('app:sendEmails');
 
 
@@ -97,7 +97,7 @@ function buildForgotPassEmail(title, user) {
             <tr>
                 <td style="padding: 20px 30px;">
                     נא לילחוץ על קישור זה להשלים את התהליך: <br>
-                    ${API_URl}forgot_password/reset/${user.resetPasswordToken} <br>
+                    ${HOST}forgot_password/reset/${user.resetPasswordToken} <br>
                     או להעתיק אותו בדפדפן.
                 </td>
             </tr>

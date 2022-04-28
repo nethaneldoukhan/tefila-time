@@ -14,20 +14,17 @@ const debug = require('debug')('app:server')
 const chalk = require('chalk');
 const pagesFunctions = require('./src/functions/pagesFunctions');
 const manageCookies = require('./src/functions/manageCookies');
-const port = process.env.PORT || 3000;
-const dotenv = require('dotenv');
-dotenv.config();
-const connectionUrl = process.env.DB_URI;
 const KosherZmanim = require("kosher-zmanim");
 const upload = ('file-upload');
 const sendMail = require('./src/functions/sendEmailsFunctions');
+const { PORT, DB_URI, JWT } = require('./config')
 
 
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cookieParser());
-app.use(session({secret: 'nm',
+app.use(session({secret: JWT,
     resave: true,
     saveUninitialized: true
 }));
@@ -164,13 +161,13 @@ app.get('*', (req, res) => {
 const start = async () => {
     await mongoose.connect(
         // 'mongodb://127.0.0.1/tefilaTime', //local
-        connectionUrl,
+        DB_URI,
         {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true}
     )
     debug('Connected to db server');
 
-    app.listen(port, () => {
-        debug(`listening on port ${chalk.green(port)}`)
+    app.listen(PORT, () => {
+        debug(`listening on port ${chalk.green(PORT)}`)
     });
 }
 

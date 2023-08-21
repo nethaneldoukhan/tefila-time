@@ -1,3 +1,3 @@
 # tefila-time
 
-Demo https://tefila-time.herokuapp.com
+Demo https://tefila-time.nat-digital.com

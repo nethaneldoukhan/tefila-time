@@ -3,7 +3,7 @@ const { ObjectID } = require('mongodb');
 const debug = require('debug')('app:schema');
 
 const tribunalSchema = new mongoose.Schema({
-    idUser: ObjectID,
+    // idUser: ObjectID,
     name: String,
     nameEn: String,
     rite: Number,

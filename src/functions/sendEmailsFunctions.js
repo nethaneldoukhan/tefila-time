@@ -19,6 +19,13 @@ function sendReferer(traceUser) {
     sendMail('natdoukhan@gmail.com', subject, email);
 }
 
+function sendError(errTitle, err) {
+    const subject = 'ERROR Tefila-Time ' + errTitle
+    const email = `<br>${err}`
+    // debug(email)
+    sendMail('natdoukhan@gmail.com', subject, { html: email, text: '' })
+}
+
 
 async function sendMail(receiversEmail, subject, email) {
 
@@ -252,7 +259,7 @@ function templateEmail(title, message, unsuscribe) {
     
                                         <a href="http://tefila-time.com">
                                             <img class="logo" src="https://i.ibb.co/TbWdHPw/LogoSite.png" alt="LogoSite"
-                                                border="0" style='width:100px;text-align:center;vertical-align:center;'>
+                                                border="0" width="100" style='width:100px;text-align:center;vertical-align:center;'>
                                         </a>
     
                                     </td>
@@ -334,5 +341,6 @@ function templateEmail(title, message, unsuscribe) {
 
 module.exports = {
     forgotPass,
-    sendReferer
+    sendReferer,
+    sendError
 };

@@ -4,7 +4,7 @@ dotenv.config()
 
 
 const ENV = process.env.ENV
-const HOST = process.env.HOST;
+const HOST = process.env.HOST
 const PORT = process.env.PORT || 3000
 const DB_URI = process.env.DB_URI
 

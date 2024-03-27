@@ -17,14 +17,17 @@ const manageCookies = require('./src/functions/manageCookies');
 const KosherZmanim = require("kosher-zmanim");
 const upload = ('file-upload');
 const sendMail = require('./src/functions/sendEmailsFunctions');
-const { PORT, DB_URI, JWT } = require('./config')
+const { ENV, PORT, DB_URI, JWT } = require('./config')
+
+let DB_ERROR = ''
 
 
 
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(session({secret: JWT,
+app.use(session({
+    secret: JWT,
     resave: true,
     saveUninitialized: true
 }));
@@ -39,6 +42,16 @@ app.use(morgan('tiny'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
+app.use((req, res, next) => {
+    if (DB_ERROR) {
+        sendMail.sendError('Failed to connected to db server', DB_ERROR)
+        res.status(500).render('pages/errorDB', {
+            pageTitle: 'Error'
+        })
+    } else {
+        next()
+    }
+})
 
 // check token
 // app.get('*', (req, res, next) => {
@@ -73,18 +86,17 @@ app.use('/forgot_password', forgotRouter);
 
 app.get('/', (req, res) => {
     (async () => {
-        const traceUser = {
-            referer: req.headers.referer,
-            IP: req.clientIp
-        };
-        // debug(req.clientIp);
-        sendMail.sendReferer(traceUser);
+        // const traceUser = {
+        //     referer: req.headers.referer,
+        //     IP: req.clientIp
+        // };
+        // sendMail.sendReferer(traceUser);
         const areaData = await pagesFunctions.getSlideArea();
         // debug(areaData);
         const synagogues = await pagesFunctions.getSynagogueHomePage();
         const zmanim = await pagesFunctions.getAllZmanim(req, res);
         const userDiv = pagesFunctions.userDiv(req);
-        console.log(req.cookies);
+        debug(req.cookies);
         res.render('pages/index', {
             pageTitle: 'דף הבית',
             userDiv,
@@ -114,7 +126,7 @@ app.get('/conditions', (req, res) => {
     (async () => {
         const zmanim = await pagesFunctions.getAllZmanim(req, res);
         const userDiv = pagesFunctions.userDiv(req);
-        if(req.user) {
+        if (req.user) {
             res.json(req.user);
         } else {
             debug(zmanim);
@@ -159,16 +171,17 @@ app.get('*', (req, res) => {
 
 
 const start = async () => {
-    await mongoose.connect(
-        // 'mongodb://127.0.0.1/tefilaTime', //local
-        DB_URI,
-        {
-            useNewUrlParser: true,
-            // useFindAndModify: false,
-            useUnifiedTopology: true
-        }
-    )
-    debug('Connected to db server');
+    try {
+        await mongoose.connect(
+            // 'mongodb://127.0.0.1/tefilaTime', //local
+            DB_URI,
+        )
+        debug('Connected to db server');
+    } catch (err) {
+        debug('Failed to connected to db server\n', err);
+        DB_ERROR = err
+        sendMail.sendError('Failed to connected to db server', err)
+    }
 
     app.listen(PORT, () => {
         debug(`listening on port ${chalk.green(PORT)}`)

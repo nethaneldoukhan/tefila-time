@@ -178,7 +178,7 @@ const start = async () => {
         )
         debug('Connected to db server');
     } catch (err) {
-        debug('Failed to connected to db server\n', err);
+        debug('Failed to connected to db server: ', err);
         DB_ERROR = err
         sendMail.sendError('Failed to connected to db server', err)
     }

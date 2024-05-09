@@ -1,7 +1,7 @@
 const express = require('express');
 const https = require('https');
 const fs = require('fs');
-const { MongoClient, ObjectID } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const debug = require('debug')('app:synagogueRoutes');
 const Synagogue = require('../schemas/SynagogueSchema');
 const NewLetter = require('../schemas/NewLetterSchema');
@@ -148,7 +148,7 @@ function router() {
                     'result': ''
                 }
                 try {
-                    // const data = await Synagogue.collection.findOne( {_id: new ObjectID(dataId) });
+                    // const data = await Synagogue.collection.findOne( {_id: ObjectId.createFromHexString(dataId) });
                     const allowedUser = await checkAllowedUser(req, dataId);
                     if (allowedUser) {
                         const removeAllSynagogueData = await deleteSynagogueData(dataId);
@@ -211,7 +211,7 @@ function router() {
                     const tefilaCollection = getDataCollection(tefila.tefilaType);
                     const addTefila = await insertTefila(tefilaCollection, tefila);
                     if (addTefila[0]) {
-                        Synagogue.collection.findOneAndUpdate( {_id: new ObjectID (req.body.synagogueId) }, { "$set": {'lastUpdateDate': req.body.createDate}});
+                        Synagogue.collection.findOneAndUpdate( {_id: ObjectId.createFromHexString(req.body.synagogueId) }, { "$set": {'lastUpdateDate': req.body.createDate}});
                         response.status = 'ok';
                         response.tables = addTefila;
                     } else {
@@ -242,12 +242,12 @@ function router() {
                 try {
                     const collectionData = getDataCollection(req.body.dataType);
                     debug(collectionData);
-                    const data = await collectionData.collection.findOne( {_id: new ObjectID(req.body.dataId) });
+                    const data = await collectionData.collection.findOne( {_id: ObjectId.createFromHexString(req.body.dataId) });
                     const allowedUser = await checkAllowedUser(req, data.synagogueId);
                     if (allowedUser) {
                         const removeData = await deleteData(collectionData, req.body.dataId);
                         if (removeData.n == 1) {
-                            Synagogue.collection.findOneAndUpdate( {_id: new ObjectID (data.synagogueId) }, { "$set": {'lastUpdateDate': req.body.date}});
+                            Synagogue.collection.findOneAndUpdate( {_id: ObjectId.createFromHexString(data.synagogueId) }, { "$set": {'lastUpdateDate': req.body.date}});
                             response.status = 'Ok';
                             response.result = removeData;
                             res.json(response);
@@ -377,7 +377,7 @@ function checkValuesNewTefila(tefila) {
 }
 
 async function checkAllowedUser(req, synagogueId) {
-    const result = await Synagogue.collection.find({ _id: new ObjectID(synagogueId) }).toArray();
+    const result = await Synagogue.collection.find({ _id: ObjectId.createFromHexString(synagogueId) }).toArray();
     debug(result);
     if (result[0].idUser == req.user._id) {
         debug('OK');
@@ -403,7 +403,7 @@ async function insertTefila(tefilaCollection, tefila) {
 }
 
 async function deleteData(collection, dataId) {
-    const results = await collection.collection.deleteOne({_id: new ObjectID(dataId) });
+    const results = await collection.collection.deleteOne({_id: ObjectId.createFromHexString(dataId) });
     return results.result;
 }
 
@@ -506,7 +506,7 @@ async function insertSynagogue(synagogue) {
 }
 
 async function deleteImg(synagogueId) {
-    const dataSynagogue = await Synagogue.collection.findOne( {_id: new ObjectID(synagogueId) });
+    const dataSynagogue = await Synagogue.collection.findOne( {_id: ObjectId.createFromHexString(synagogueId) });
     if (dataSynagogue.photo) {
         deleteFile('public/assets/img/BK/' + dataSynagogue.photo);
     }

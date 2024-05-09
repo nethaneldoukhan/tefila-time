@@ -1,7 +1,7 @@
 const express = require('express');
 const accountRouter = express.Router();
 const bcrypt = require('bcrypt');
-const { MongoClient, ObjectID } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const debug = require('debug')('app:account');
 const User = require('../schemas/UserSchema');
 const Synagogue = require('../schemas/SynagogueSchema');
@@ -67,7 +67,7 @@ function router() {
                     debug(id);
                     let syna = '';
                     try {
-                        syna = await Synagogue.collection.findOne({ _id: new ObjectID(id)});
+                        syna = await Synagogue.collection.findOne({ _id: ObjectId.createFromHexString(id)});
                     } catch (err) {
                         debug(err);
                     }
@@ -113,7 +113,7 @@ function router() {
                 (async () => {
                     try {
                         const hashPassword =  await bcrypt.hash(password, 2);
-                        newUser = await User.collection.findOneAndUpdate( {_id: new ObjectID (user._id) }, { "$set": { 'password': hashPassword }});
+                        newUser = await User.collection.findOneAndUpdate( {_id: ObjectId.createFromHexString(user._id) }, { "$set": { 'password': hashPassword }});
                         if (newUser.ok === 1) {
                             res.json(0);
                         } else {

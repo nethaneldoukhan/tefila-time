@@ -4,7 +4,6 @@ const fs = require('fs');
 const express = require('express');
 const searchRouter = express.Router();
 const debug = require('debug')('app:search');
-const {MongoClient, ObjectID} = require('mongodb');
 const zmanimFunction = require('../functions/zmanim');
 const pagesFunctions = require('../functions/pagesFunctions');
 const Synagogue = require('../schemas/SynagogueSchema');

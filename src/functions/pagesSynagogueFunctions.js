@@ -1,6 +1,6 @@
 const fs = require('fs');
 const debug = require('debug')('app:pagesSynagogueFunctions');
-const { MongoClient, ObjectID } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const Synagogue = require('../schemas/SynagogueSchema');
 const Tribunal = require('../schemas/TribunalSchema');
 const Cours = require('../schemas/CoursSchema');
@@ -12,7 +12,7 @@ const pagesFunctions = require('../functions/pagesFunctions');
                     
 async function getSynagogueData(id) {
     try {
-        let detail = await Synagogue.collection.findOne({ _id: new ObjectID(id)});
+        let detail = await Synagogue.collection.findOne({ _id: ObjectId.createFromHexString(id)});
         detail.lastUpdateDate = formatDate(detail.lastUpdateDate);
         detail.rite = nameRite(detail.rite);
         const data = await getData(id);

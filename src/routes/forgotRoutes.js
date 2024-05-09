@@ -3,7 +3,7 @@ const forgotRouter = express.Router();
 const bcrypt = require('bcrypt');
 const debug = require('debug')('app:forgot');
 const uuid = require('uuid');
-const { ObjectID } = require('mongodb');
+const { ObjectId } = require('mongodb');
 const User = require('../schemas/UserSchema');
 const pagesFunctions = require('../functions/pagesFunctions');
 const sendEmailsFunctions = require('../functions/sendEmailsFunctions');
@@ -45,7 +45,7 @@ function router() {
                     if (user) {
                         user.resetPasswordToken = token.toString();
                         user.resetPasswordExpires = Date.now() + 3600000;
-                        newUser = await User.collection.findOneAndUpdate( { _id: new ObjectID(user._id) }, { "$set": user });
+                        newUser = await User.collection.findOneAndUpdate( { _id: ObjectId.createFromHexString(user._id) }, { "$set": user });
                         debug(newUser);
                         debug(user);
                         if (newUser.ok === 1) {
@@ -108,7 +108,7 @@ function router() {
                             user.password = await bcrypt.hash(password, 2)
                             user.resetPasswordToken = undefined;
                             user.resetPasswordExpires = undefined;
-                            newUser = await User.collection.findOneAndUpdate( {_id: new ObjectID (user._id) }, { "$set": user});
+                            newUser = await User.collection.findOneAndUpdate( {_id: ObjectId.createFromHexString(user._id) }, { "$set": user});
                             if (newUser.ok === 1) {
                                 res.json(0);
                             } else {

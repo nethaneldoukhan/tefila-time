@@ -6,7 +6,6 @@ function writeToJson(val, name) {
     let infosJson = JSON.stringify(val);
     fs.writeFile(name, infosJson, function (err) {
         if (err) throw err;
-        debug('Created json!')
     });
 }
 

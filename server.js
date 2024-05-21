@@ -92,11 +92,9 @@ app.get('/', (req, res) => {
         // };
         // sendMail.sendReferer(traceUser);
         const areaData = await pagesFunctions.getSlideArea();
-        // debug(areaData);
         const synagogues = await pagesFunctions.getSynagogueHomePage();
         const zmanim = await pagesFunctions.getAllZmanim(req, res);
         const userDiv = pagesFunctions.userDiv(req);
-        debug(req.cookies);
         res.render('pages/index', {
             pageTitle: 'דף הבית',
             userDiv,
@@ -112,7 +110,6 @@ app.get('/faq', (req, res) => {
     (async () => {
         const zmanim = await pagesFunctions.getAllZmanim(req, res);
         const userDiv = pagesFunctions.userDiv(req);
-        debug(zmanim);
         res.render('pages/faq', {
             pageTitle: 'שו"ת',
             userDiv,
@@ -129,7 +126,6 @@ app.get('/conditions', (req, res) => {
         if (req.user) {
             res.json(req.user);
         } else {
-            debug(zmanim);
             res.render('pages/conditions', {
                 pageTitle: 'תנאי שימוש',
                 userDiv,
@@ -144,7 +140,6 @@ app.get('/contact_us', (req, res) => {
     (async () => {
         const zmanim = await pagesFunctions.getAllZmanim(req, res);
         const userDiv = pagesFunctions.userDiv(req);
-        debug(zmanim);
         res.render('pages/contact_us', {
             pageTitle: 'צור קשר',
             userDiv,

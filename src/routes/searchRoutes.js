@@ -29,7 +29,6 @@ function router() {
                     const synagoguesList = synagoguesListHe.concat(synagoguesListEn);
                     res.json(synagoguesList);
                 } catch (err) {
-                    debug('autoComplete', err);
                     res.json('error');
                 }
             })();
@@ -118,20 +117,15 @@ function router() {
                     } else if (req.query.name || req.query.nameEn || req.query.street 
                         || req.query.city || req.query.country || req.query.rite) { // from advanced search
                         synagogues = await synagoguesSearch(req, search);
-                        debug(synagogues);
                        if (synagogues[0]) {
                             tefilot = await tefilotSearch(req, search, synagogues);
-                            debug(tefilot);
-                            debug(search);
                             if (tefilot[0][0] || tefilot[1][0]) {
                                 let locZmanim = await getLocZmanim(synagogues);
                                 if (locZmanim) {
                                     refactCollecTefilot(tefilot, locZmanim, synagogues);
                                     finalTefilotArray = tefilot[0].concat(tefilot[1]);
                                     pagesFunctions.sortItem(finalTefilotArray, 'hour');
-                                    // debug(finalTefilotArray);
                                 } else {
-                                    debug(locZmanim);
                                     res.redirect('/search/tefila?m=error');
                                 }
                             }
@@ -139,7 +133,6 @@ function router() {
                     }
                     const zmanim = await pagesFunctions.getAllZmanim(req, res);
                     const userDiv = pagesFunctions.userDiv(req);
-                    debug(search);
                     res.render('pages/searchTefila', {
                         pageTitle: 'חיפוש תפילה',
                         userDiv,
@@ -148,7 +141,6 @@ function router() {
                         search
                     });
                 } catch (err) {
-                    debug('Error', err);
                     res.redirect('/search/tefila?m=error');
                 }
             })();
@@ -195,7 +187,6 @@ async function synagoguesSearch(req, search) {
         querySynagoguesArray.push(rite);
         search.rite = req.query.rite;
     }
-    debug(querySynagoguesArray);
     const querySynagoguesObject = { "$and": querySynagoguesArray };
     let synagogues = await getSynagoguesSearch(querySynagoguesObject);
     return synagogues;
@@ -238,7 +229,6 @@ async function tefilotSearch(req, search, synagogues) {
     const synagogesId = synagogues.map(synagogue => {
         return synagogue._id.toString();
     });
-    debug(synagogesId);
     // let country = {'synagogueId': {"$in": synagogesId}};
     queryTefilaArray.push({'synagogueId': {"$in": synagogesId}});
     if (req.query.tefila) {
@@ -265,8 +255,6 @@ async function tefilotSearch(req, search, synagogues) {
         queryTefilaArray.push(day);
         search.day = req.query.day;
     }
-    debug(queryTefilaArray);
-    debug(queryTefilaArray[1]);
     const queryObject = { "$and": queryTefilaArray };
     let tefilot = await getTefilotSearch(queryObject);
     return tefilot;
@@ -302,7 +290,6 @@ function refactCollecTefilot(tefilot, locZmanim, synagogues) {
             const synagogueFound = synagogues.find(synagogue => {
                 return synagogue._id == item.synagogueId;
             });
-            // debug(synagogueFound);
             item.tefilaType = nameTefilaType(item.tefilaType);
             item.nameSyna = synagogueFound.name;
             item.rite = synagogueFound.rite;

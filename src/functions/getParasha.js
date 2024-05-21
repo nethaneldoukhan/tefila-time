@@ -26,8 +26,8 @@ function getParasha(zmanim) {
         loc = 3448439;
     }
     let year = zmanim.date.slice(0, 4);
-    let month = zmanim.date.slice(05, 07);
-    let day = zmanim.date.slice(08, 10);
+    let month = zmanim.date.slice(5, 7);
+    let day = zmanim.date.slice(8, 10);
     return new Promise((resolve, reject) => {
         const option = {
             hostname: 'hebcal.com',
@@ -41,7 +41,6 @@ function getParasha(zmanim) {
             });
             response.on('end', () => {
                 const data = JSON.parse(body);
-                // debug(data);
                 resolve(data);
             });
         });
@@ -66,24 +65,24 @@ function getShabbatParasha(parasha, zmanim, shabbatTime) {
 
 function saveZmanim(kosherZmanim, zmanim) {
     let zmanimShabbatArray =
-        [
-            {
-                link: kosherZmanim.BasicZmanim.CandleLighting,
-                name: 'ה"נ',
-                time: ''
-            },
-            {
-                link: kosherZmanim.BasicZmanim.Tzais,
-                name: 'מוצ"ש',
-                time: ''
-            },
-            {
-                link: kosherZmanim.BasicZmanim.Tzais72,
-                name: 'ר"ת',
-                time: ''
-            }
-        ];
-        zmanimShabbatArray.forEach(item => {
+    [
+        {
+            link: kosherZmanim.BasicZmanim.CandleLighting,
+            name: 'ה"נ',
+            time: ''
+        },
+        {
+            link: kosherZmanim.BasicZmanim.Tzais,
+            name: 'מוצ"ש',
+            time: ''
+        },
+        {
+            link: kosherZmanim.BasicZmanim.Tzais72,
+            name: 'ר"ת',
+            time: ''
+        }
+    ];
+    zmanimShabbatArray.forEach(item => {
         const time = item.link.slice(11, 16);
         item.time = time;
     });
@@ -94,7 +93,6 @@ function getShabbatDate() {
     const nowDate = new Date();
     const formats = {weekday: "short"};
     let weekDay = nowDate.toLocaleDateString("en", formats);
-    debug(weekDay);
     let num = 0;
     switch (weekDay) {
         case 'Sun':
@@ -126,7 +124,6 @@ function getShabbatDate() {
     const shabbatMonth = shabbatDateToMilS.getMonth() + 1;
     const shabbatYear = shabbatDateToMilS.getFullYear();
     const shabbatDate = shabbatYear + "-" + ('0' + shabbatMonth).slice(-2) + "-" + ('0' + shabbatDay).slice(-2);
-    debug(shabbatDate);
     return shabbatDate;
 }
 

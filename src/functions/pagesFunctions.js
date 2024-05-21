@@ -13,13 +13,12 @@ async function getAllZmanim(req, res) {
         if (checkCookies.status == 0) {
             zmanim = await zmanimFunction.getZmanim(nowDate, checkCookies.cookiesValues.city.toLowerCase(), checkCookies.cookiesValues.country.toLowerCase(), 'week');
             zmanim = await zmanimFunction.getZmanim(shabbatDate, checkCookies.cookiesValues.city.toLowerCase(), checkCookies.cookiesValues.country.toLowerCase(), 'shabbat');
-            debug(zmanim);
             } else {
             zmanim = await zmanimFunction.getZmanim(nowDate, 'ירושלים', 'ישראל', 'week');
             zmanim = await zmanimFunction.getZmanim(nowDate, 'ירושלים', 'ישראל', 'shabbat');
             manageCookies.addCookies(zmanim, req, res);
         }
-        zmanim.parasha = await zmanimFunction.getShabbatParasha(zmanim.week.israel, shabbatDate);        
+        zmanim.parasha = await zmanimFunction.getShabbatParasha(zmanim.week.israel, shabbatDate);     
         return zmanim;
     } catch (e) {
         debug(e);
@@ -135,7 +134,6 @@ function getShabbatDate() {
     const nowDate = new Date();
     const formats = {weekday: "short"};
     let weekDay = nowDate.toLocaleDateString("en", formats);
-    debug(weekDay);
     let num = 0;
     switch (weekDay) {
         case 'Sun':
@@ -167,7 +165,6 @@ function getShabbatDate() {
     const shabbatMonth = shabbatDateToMilS.getMonth() + 1;
     const shabbatYear = shabbatDateToMilS.getFullYear();
     const shabbatDate = shabbatYear + "-" + ('0' + shabbatMonth).slice(-2) + "-" + ('0' + shabbatDay).slice(-2);
-    debug(shabbatDate);
     return shabbatDate;
 }
 

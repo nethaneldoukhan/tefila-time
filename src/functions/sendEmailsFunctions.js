@@ -15,14 +15,12 @@ async function forgotPass(user) {
 function sendReferer(traceUser) {
     const subject = 'Referer';
     const email = buildSendReferer(subject, traceUser);
-    // debug(email);
     sendMail('natdoukhan@gmail.com', subject, email);
 }
 
 function sendError(errTitle, err) {
     const subject = 'ERROR Tefila-Time ' + errTitle
     const email = `<br>${err}`
-    // debug(email)
     sendMail('natdoukhan@gmail.com', subject, { html: email, text: '' })
 }
 

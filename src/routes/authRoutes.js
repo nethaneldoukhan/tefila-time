@@ -22,7 +22,6 @@ function router() {
                     createDate: req.body.createDate,
                     lastUpdateDate: ''
                 };
-                debug(user);
                 let response = {
                     'status': '',
                     'tables': []
@@ -55,9 +54,7 @@ function router() {
     authRouter.route('/profile')
         .get((req, res) => {
             if (req.user) {
-                debug('authorized')
                 res.json(req.user);
-                // debug(req.user);
             } else {
                 res.json(1);
             }
@@ -76,23 +73,18 @@ function router() {
                     password: req.body.password,
                     keepCon: req.body.keep_con
                 };
-                debug(user);
 
                 try {
                     const result = await User.collection.findOne({'email': user.email});
-                    debug(result);
                     if(result) {
                         const isMatch = await bcrypt.compare(user.password, result.password);
                         if (isMatch) {
-                            debug('ok');
                             req.login(result, () => {
                                 if(user.keepCon === 'true') {
                                     manageCookies.addUserCookies(result, req, res);
                                 }
                             });
-                        } else {
-                            debug('not ok');
-                        }
+                        } else { }
                     }
                     res.redirect('/auth/profile');
                 } catch (e) {
@@ -105,7 +97,6 @@ function router() {
     authRouter.route('/logout')
         .get((req, res) => {
             req.logout();
-            debug(req.user);
             res.clearCookie('username');
             res.clearCookie('token');
             res.redirect('/');
@@ -114,7 +105,6 @@ function router() {
     authRouter.route('/checkExistEmail')
         .post((req, res) => {
             const email = req.body.email;
-            debug(email);
             (async () => {
                 let response = {
                     'status': ''
@@ -151,19 +141,15 @@ function checkValues(user) {
 
 async function checkExistEmail(email) {
     const result = await User.collection.find({'email': email}).toArray();
-    debug(result);
     if (result[0]) {
-        debug('exist');
         return true;
     } else {
-        debug('not exist');
         return false;
     }
 }
 
 async function insertUser(user) {
     const results = await User.collection.insertOne(user);
-    debug(results.ops[0]);
     return results.ops;
 }
 

@@ -33,15 +33,12 @@ function router() {
                     tribunal: [],
                     cours: []
                 };
-                debug(idUser);
                 try {
                     const zmanim = await pagesFunctions.getAllZmanim(req, res);
                     const userDiv = pagesFunctions.userDiv(req);
-                    debug(idUser);
                     accountArrays.synagogue = await Synagogue.collection.find({idUser: idUser}).toArray();
                     accountArrays.tribunal = await Tribunal.collection.find({idUser: idUser}).toArray();
                     accountArrays.cours = await Cours.collection.find({idUser: idUser}).toArray();
-                    debug(accountArrays);
                     res.render('pages/account', {
                         pageTitle: 'החשבון שלי',
                         userDiv,
@@ -63,8 +60,6 @@ function router() {
             (async () => {
                 try {
                     const id = req.params.id;
-                    debug(req.user._id);
-                    debug(id);
                     let syna = '';
                     try {
                         syna = await Synagogue.collection.findOne({ _id: ObjectId.createFromHexString(id)});
@@ -76,8 +71,6 @@ function router() {
                             const synagogue = await getSynagogueData(id);
                             const zmanim = await pagesFunctions.getAllZmanim(req, res);
                             const userDiv = pagesFunctions.userDiv(req);
-                            debug('authorized')
-                            debug(synagogue);
                             res.render('pages/synagogueManager', {
                                 pageTitle: 'בית כנסת ' + synagogue.detail.name,
                                 userDiv,
@@ -104,11 +97,7 @@ function router() {
             const user = req.user;
             const password = req.body.password;
             const confirmPassword = req.body.confirm;
-            debug(user);
-            debug(password);
-            debug(confirmPassword);
             const validePassword = validPassword(password, confirmPassword);
-            debug(validePassword);
             if (validePassword === 0) {
                 (async () => {
                     try {

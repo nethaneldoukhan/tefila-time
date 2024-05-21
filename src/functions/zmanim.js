@@ -48,7 +48,6 @@ var zmanim = {
 };
 
 async function getZmanim(date, city, country, weekDay) {
-    debug(date, city, country);
     try {
         optionZmanim.date = date;
         zmanim[weekDay].location.city = city;
@@ -84,7 +83,6 @@ async function getDatafromDb(city, country, weekDay) {
         }, {
             'countryNames': { '$in': [ country ] }
         }]});
-    debug('cityDetail', cityDetails);
     if (cityDetails) {
         if (cityDetails.countryNames.includes('israel')){
             zmanim[weekDay].israel = 'israel';
@@ -205,7 +203,6 @@ async function getShabbatParasha(loc, shabbatDate) {
     const arrayThisWeek = shabbatJson[loc].items.filter(item => {
         return item.date == shabbatDate;
     });
-    debug(arrayThisWeek);
     arrayThisWeek.forEach(item => {
         if (item.category == 'parashat') {
             parasha = item.hebrew;

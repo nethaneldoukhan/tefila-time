@@ -19,7 +19,6 @@ async function getSynagogueData(id) {
         let getSynagogueZmanim = await zmanimFunction.getZmanim(new Date(), detail.city.toLowerCase(), detail.country.toLowerCase(), 'week');
         const shabbatDate = pagesFunctions.getShabbatDate();
         const getSynagogueZmanimShabbat = await zmanimFunction.getZmanim(shabbatDate, detail.city.toLowerCase(), detail.country.toLowerCase(), 'shabbat');
-        debug(getSynagogueZmanimShabbat);
         // getSynagogueZmanim.kosherZmanim.shabbat = getSynagogueZmanimShabbat.kosherZmanim.shabbat;
         getSynagogueDayTime(data, getSynagogueZmanim);
         return {'detail': detail, 'data': data};
@@ -178,7 +177,6 @@ function convertMinutesToTime(endTimeMin) {
         minutes = 60 - minutes;
     }
     const newTime = ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2);
-    // debug({'newTime to synagogue': newTime});
     return newTime;
 }
 

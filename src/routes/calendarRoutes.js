@@ -18,7 +18,6 @@ function router() {
                 try {
                     const zmanim = await pagesFunctions.getAllZmanim(req, res);
                     const userDiv = pagesFunctions.userDiv(req);
-                    debug(zmanim);
                     res.render('pages/calendar', {
                         pageTitle: 'לוח שנה',
                         userDiv,
@@ -43,13 +42,10 @@ function router() {
                 try {
                     zmanim = await zmanimFunction.getZmanim(nowDate, city, country, 'week');
                     // zmanim = await zmanimFunction.getZmanim(date, city, country, 'shabbat');
-                    debug(zmanim);
                     if (zmanim == 9) {
                         res.json(zmanim);
                     } else {
-                        // debug(zmanim);
                         // const allZmanimAndParasha = await zmanimShabbat(zmanim);
-                        // debug(allZmanimAndParasha);
                         manageCookies.addCookies(zmanim, req, res);
                         res.json(51);
                     }

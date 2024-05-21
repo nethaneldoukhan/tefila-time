@@ -15,9 +15,6 @@ function localStrategy() {
             (async () => {
                 let client;
                 try {
-                    debug(username)
-                    debug(password)
-
                     const user = await User.collection.findOne({'email': username})
                     const isMatch = await bcrypt.compare(password, user.password)
                     if (isMatch) {

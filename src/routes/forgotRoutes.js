@@ -19,7 +19,6 @@ function router() {
             (async () => {
                 const zmanim = await pagesFunctions.getAllZmanim(req, res);
                 const userDiv = pagesFunctions.userDiv(req);
-                debug(zmanim);
                 res.render('pages/forgotPass', {
                     pageTitle: 'שכחתי סיסמא',
                     userDiv,
@@ -34,20 +33,14 @@ function router() {
             (async () => {
                 try {
                     const email = req.body.email;
-                    debug(email);
                     let user = '';
                     // const token = Math.floor(Math.random() * 999999999999999) + 10000000;
                     const token = uuid.v4();
-                    debug(token);
                     user = await User.collection.findOne({ 'email': email});
-                    debug(user);
-                    debug(token);
                     if (user) {
                         user.resetPasswordToken = token.toString();
                         user.resetPasswordExpires = Date.now() + 3600000;
                         newUser = await User.collection.findOneAndUpdate( { _id: ObjectId.createFromHexString(user._id) }, { "$set": user });
-                        debug(newUser);
-                        debug(user);
                         if (newUser.ok === 1) {
                             const status = sendEmailsFunctions.forgotPass(user);
                             res.json(status);
@@ -67,11 +60,9 @@ function router() {
     forgotRouter.route('/reset/:token')
         .get((req, res) => {
             const token = req.params.token;
-                debug(token);
                 (async () => {
                 try {
                     const user = await User.collection.findOne({ 'resetPasswordToken': token, 'resetPasswordExpires': { $gt: Date.now() }});
-                    debug(user);
                     if (user) {
                         const zmanim = await pagesFunctions.getAllZmanim(req, res);
                         const userDiv = pagesFunctions.userDiv(req);
@@ -96,9 +87,6 @@ function router() {
             const password = req.body.password;
             const confirmPassword = req.body.confirm;
             const token = req.body.token;
-            debug(token);
-            debug(password);
-            debug(confirmPassword);
             const validePassword = validPassword(password, confirmPassword);
             if (validePassword === 0) {
                 (async () => {

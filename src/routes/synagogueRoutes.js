@@ -29,7 +29,6 @@ function router() {
                     if (synagogue) {
                         const zmanim = await pagesFunctions.getAllZmanim(req, res);
                         const userDiv = pagesFunctions.userDiv(req);
-                        // debug(zmanim);
                         res.render('pages/synagogue', {
                             pageTitle: 'בית כנסת ' + synagogue.detail.name,
                             userDiv,
@@ -53,7 +52,6 @@ function router() {
                 name: req.body.name,
                 street: req.body.street
             };
-            debug(values);
             (async () => {
                 let response = {
                     'status': '',
@@ -82,8 +80,6 @@ function router() {
 
     synagogueRouter.route('/addSynagogue')
         .post((req, res) => {
-            debug(req.files);
-            debug(req.body);
             let synagogue = {
                 idUser: req.user._id,
                 name: req.body.name,
@@ -104,7 +100,6 @@ function router() {
                 createDate: req.body.createDate,
                 lastUpdateDate:  req.body.createDate
             };
-            debug(synagogue);
 
             (async () => {
                 let response = {
@@ -119,7 +114,6 @@ function router() {
                             await getGeolocation(synagogue);
                             const upload = uploadFiles(req, synagogue);
                             const addSynagogue = await insertSynagogue(synagogue);
-                            debug('add');
                             response.status = 'ok';
                             response.tables = addSynagogue;
                             res.json(response);
@@ -141,7 +135,6 @@ function router() {
     synagogueRouter.route('/deleteSynagogue')
         .delete((req, res) => {
             const dataId = req.body.dataId;
-            debug(req.body);
             (async () => {
                 let response = {
                     'status': '',
@@ -152,7 +145,6 @@ function router() {
                     const allowedUser = await checkAllowedUser(req, dataId);
                     if (allowedUser) {
                         const removeAllSynagogueData = await deleteSynagogueData(dataId);
-                        // debug('aaa', removeAllSynagogueData);
                         if (removeAllSynagogueData) {
                             await deleteImg(dataId);
                             const removeSynagogue = await deleteData(Synagogue, dataId);
@@ -198,7 +190,6 @@ function router() {
             tefila.days = req.body.days
         };
         tefila.createDate = req.body.createDate;
-        debug(tefila);
         (async () => {
             let response = {
                 'status': '',
@@ -233,7 +224,6 @@ function router() {
     synagogueRouter.route('/deleteData')
         .delete((req, res) => {
             const data = req.body;
-            debug(req.body);
             (async () => {
                 let response = {
                     'status': '',
@@ -241,7 +231,6 @@ function router() {
                 }
                 try {
                     const collectionData = getDataCollection(req.body.dataType);
-                    debug(collectionData);
                     const data = await collectionData.collection.findOne( {_id: ObjectId.createFromHexString(req.body.dataId) });
                     const allowedUser = await checkAllowedUser(req, data.synagogueId);
                     if (allowedUser) {
@@ -277,7 +266,6 @@ function router() {
                synagogueId: req.body.synagogueId,
                email: req.body.email
             };
-            debug(values);
             (async () => {
                 let response = {
                     'status': ''
@@ -307,7 +295,6 @@ function router() {
                 email: req.body.email,
                 createDate: req.body.createDate
             };
-            debug(addNewLetter);
             (async () => {
                 let response = {
                     'status': '',
@@ -319,7 +306,6 @@ function router() {
                         const existEmail = await checkEmail(addNewLetter);
                         if (existEmail === false) {
                             const results = await NewLetter.collection.insertOne(addNewLetter);
-                            debug(results.ops[0]);
                             response.status = 'ok';
                             response.tables = results.ops;
                             res.json(response);
@@ -378,12 +364,9 @@ function checkValuesNewTefila(tefila) {
 
 async function checkAllowedUser(req, synagogueId) {
     const result = await Synagogue.collection.find({ _id: ObjectId.createFromHexString(synagogueId) }).toArray();
-    debug(result);
     if (result[0].idUser == req.user._id) {
-        debug('OK');
         return true;
     } else {
-        debug('ERROR');
         return false;
     }
 }
@@ -398,7 +381,6 @@ function getDataCollection(tefilaType) {
 
 async function insertTefila(tefilaCollection, tefila) {
     const results = await tefilaCollection.collection.insertOne(tefila);
-    debug(results.ops[0]);
     return results.ops;
 }
 
@@ -411,7 +393,6 @@ async function deleteSynagogueData(dataId) {
     const resultsWeekTefila = await WeekTefila.collection.deleteMany({synagogueId: dataId });
     const resultsShabbatTefila = await ShabbatTefila.collection.deleteMany({synagogueId: dataId });
     const resultsNewLetter = await NewLetter.collection.deleteMany({synagogueId: dataId });
-    debug(resultsNewLetter);
     if (resultsWeekTefila.result.ok == 1 && resultsShabbatTefila.result.ok == 1 && resultsNewLetter.result.ok == 1) {
         return true;
     } else {
@@ -421,24 +402,18 @@ async function deleteSynagogueData(dataId) {
 
 async function checkEmail(addNewLetter) {
     const result = await NewLetter.collection.find({'synagogueId': addNewLetter.synagogueId, 'email': addNewLetter.email}).toArray();
-    debug(result);
     if (result[0]) {
-        debug('exist');
         return true;
     } else {
-        debug('not exist');
         return false;
     }
 }
 
 async function checkSynagogue(synagogue) {
     const result = await Synagogue.collection.find({'name': synagogue.name, 'street': synagogue.street}).toArray();
-    debug(result);
     if (result[0]) {
-        debug('exist');
         return true;
     } else {
-        debug('not exist');
         return false;
     }
 }
@@ -458,10 +433,8 @@ function getGeolocation(synagogue) {
             });
             response.on('end', () => {
                 const data = JSON.parse(body).results[0].geometry.location;
-                debug(data);
                 synagogue.latitude = data.lat;
                 synagogue.longitude = data.lng;
-                debug(synagogue);
                 resolve();
             });
         });
@@ -481,7 +454,6 @@ function uploadFiles(req, synagogue) {
             }
         });
         synagogue.photo = photo.name;
-        debug('upload photo');
     }
     if (req.files && req.files.panoramic && req.files.panoramic.size < 2000000) {
         let panoramic = req.files.panoramic;
@@ -494,14 +466,11 @@ function uploadFiles(req, synagogue) {
             }
         });
         synagogue.panoramic = panoramic.name;
-        debug('upload panoramic');
     }
 }
 
 async function insertSynagogue(synagogue) {           
     const results = await Synagogue.collection.insertOne(synagogue);
-    debug(Synagogue);
-    debug(results.ops[0]);
     return results.ops;
 }
 
@@ -518,7 +487,6 @@ async function deleteImg(synagogueId) {
 function deleteFile(path) {
     fs.unlink(path, function (err) {
         if (err) throw err;
-        debug('Delete!', path);
     });
 }
 

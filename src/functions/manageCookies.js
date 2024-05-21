@@ -22,7 +22,6 @@ function addCookies(val, req, res) {
     // } else {
     //     expireDate = '';
     // }
-    debug(val.week.location.city)
     res.cookie('city', val.week.location.city, {
         expires: expireDate,
         httpOnly: true
@@ -71,13 +70,9 @@ function checkCookies (req) {
 }
 
 async function signInToken(req, res) {
-    debug('hiii');
-    debug(req.cookies);
     try {
         const result = await User.collection.findOne({'email': req.cookies.username, 'token': req.cookies.token});
-        debug(result);
         if (result) {
-            debug('ok');
             req.login(result, () => {
                 addUserCookies(result, req, res);
             });

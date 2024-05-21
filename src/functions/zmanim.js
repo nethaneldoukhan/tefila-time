@@ -31,7 +31,7 @@ var optionZmanim = {
 var zmanim = {
     'week': {
         'date': '',
-        'location': {'city': '', 'country': ''},
+        'location': { 'city': '', 'country': '' },
         'israel': '',
         'optionZmanim': {},
         'hours': [],
@@ -39,7 +39,8 @@ var zmanim = {
     },
     'shabbat': {
         'date': '',
-        'location': {'city': '', 'country': ''},
+        'location': { 'city': '', 'country': '' },
+        'isJerusalem': false,
         'israel': '',
         'optionZmanim': {},
         'hours': [],
@@ -79,12 +80,14 @@ async function getCityData(city, country, weekDay) {
 async function getDatafromDb(city, country, weekDay) {
     let cityDetails = await City.collection.findOne({
         '$and': [{
-            'cityNames': {'$in': [ city ] }
+            'cityNames': { '$in': [city] }
         }, {
-            'countryNames': { '$in': [ country ] }
-        }]});
+            'countryNames': { '$in': [country] }
+        }]
+    });
     if (cityDetails) {
-        if (cityDetails.countryNames.includes('israel')){
+        zmanim.shabbat.isJerusalem = cityDetails.cityNameEn == 'jerusalem'
+        if (cityDetails.countryNames.includes('israel')) {
             zmanim[weekDay].israel = 'israel';
         } else {
             zmanim[weekDay].israel = 'diaspora';
@@ -189,9 +192,8 @@ function saveShabbatZmanim(kosherZmanim, weekDay) {
                 time: ''
             }
         ];
-        zmanimArray.forEach(item => {
-        const time = item.link.slice(11, 16);
-        item.time = time;
+    zmanimArray.forEach(item => {
+        item.time = (zmanim.shabbat.isJerusalem && item.name == 'ה"נ' ? new Date((new Date(item.link).getTime() - (20 * 60 * 1000)) + (3 * 60 * 60 * 1000)).toISOString() : item.link).slice(11, 16);
     });
     zmanim[weekDay].date = kosherZmanim.metadata.date;
     zmanim[weekDay].hours = zmanimArray;
@@ -217,15 +219,15 @@ async function getShabbatParasha(loc, shabbatDate) {
     }
     return parasha;
 }
-    
-    
+
+
 function getLatAndLong(city, country) {
     let cityUrl = encodeURIComponent(city + ', ' + country);
     return new Promise((resolve, reject) => {
         const option = {
             hostname: 'maps.googleapis.com',
             path: `/maps/api/geocode/json?address=${cityUrl}&sensor=true&key=${GOOGLE_API_KEY}`
-            };
+        };
         const request = https.get(option, (response) => {
             let body = '';
 
@@ -234,6 +236,7 @@ function getLatAndLong(city, country) {
             });
             response.on('end', () => {
                 const data = JSON.parse(body).results[0];
+                data.types.includes('locality')
                 if (!data.types.includes('locality')) {
                     reject(9);
                 }
@@ -246,7 +249,7 @@ function getLatAndLong(city, country) {
 
 function setDataToVars(dataAndLongAndlat, elevation, timeZone, weekDay) {
     let countryData = dataAndLongAndlat.formatted_address.toLowerCase();
-    if (countryData.includes('israel')){
+    if (countryData.includes('israel')) {
         zmanim[weekDay].israel = 'israel';
     } else {
         zmanim[weekDay].israel = 'diaspora';
@@ -317,7 +320,7 @@ function getElevation(data) {
             });
             response.on('end', () => {
                 let elevation = JSON.parse(body)[0].elevation;
-                
+
                 if (elevation < 0) {
                     elevation = 0;
                 }
@@ -329,7 +332,7 @@ function getElevation(data) {
 }
 
 async function updateCitiesDb(city, country) {
-    const checkExistEn = await City.collection.findOne({ 'cityNameEn': newCity.cityNameEn, 'countryNameEn': newCity.countryNameEn});
+    const checkExistEn = await City.collection.findOne({ 'cityNameEn': newCity.cityNameEn, 'countryNameEn': newCity.countryNameEn });
     if (checkExistEn) {
         let update = {};
         if (!checkExistEn.cityNames.includes(city) && !checkExistEn.countryNames.includes(country)) {
@@ -340,11 +343,11 @@ async function updateCitiesDb(city, country) {
         } else if (!checkExistEn.countryNames.includes(country)) {
             update = { 'countryNames': country };
         }
-        City.collection.findOneAndUpdate({ 'cityNameEn': newCity.cityNameEn, 'countryNameEn': newCity.countryNameEn}, { "$push": update });
+        City.collection.findOneAndUpdate({ 'cityNameEn': newCity.cityNameEn, 'countryNameEn': newCity.countryNameEn }, { "$push": update });
     } else {
         if (!newCity.cityNames.includes(city)) {
             newCity.cityNames.push(city);
-        } 
+        }
         if (!newCity.countryNames.includes(country)) {
             newCity.countryNames.push(country);
         }

@@ -13,12 +13,12 @@ async function getAllZmanim(req, res) {
         if (checkCookies.status == 0) {
             zmanim = await zmanimFunction.getZmanim(nowDate, checkCookies.cookiesValues.city.toLowerCase(), checkCookies.cookiesValues.country.toLowerCase(), 'week');
             zmanim = await zmanimFunction.getZmanim(shabbatDate, checkCookies.cookiesValues.city.toLowerCase(), checkCookies.cookiesValues.country.toLowerCase(), 'shabbat');
-            } else {
+        } else {
             zmanim = await zmanimFunction.getZmanim(nowDate, 'ירושלים', 'ישראל', 'week');
             zmanim = await zmanimFunction.getZmanim(nowDate, 'ירושלים', 'ישראל', 'shabbat');
             manageCookies.addCookies(zmanim, req, res);
         }
-        zmanim.parasha = await zmanimFunction.getShabbatParasha(zmanim.week.israel, shabbatDate);     
+        zmanim.parasha = await zmanimFunction.getShabbatParasha(zmanim.week.israel, shabbatDate);
         return zmanim;
     } catch (e) {
         debug(e);
@@ -26,14 +26,14 @@ async function getAllZmanim(req, res) {
 }
 
 function userDiv(req) {
-    let htmlData  = {};
+    let htmlData = {};
     if (req.user) {
         htmlData = {
             'nav': `<a href="/account" class="col-blu">
                         <i class="fas fa-user-alt"></i>
                         שלום ${req.user.firstName}
                     </a>`,
-            'connexion':  `<nav class="nav-user_command">
+            'connexion': `<nav class="nav-user_command">
                                 <div>   
                                     <span class="btn-user_command fs-20 pad15 col-blu c-blu_h point menu1">
                                         <i class="fas fa-user-alt"></i>
@@ -55,7 +55,7 @@ function userDiv(req) {
                                     </ul>
                                 </div>
                             </nav>`,
-            'connexionMobile':  `<nav class="nav-user_command">
+            'connexionMobile': `<nav class="nav-user_command">
                                     <div>   
                                         <span class="btn-user_command fs-2 col-blu c-blu_h point menu1">
                                             ${req.user.firstName.substring(0, 1).toUpperCase()}
@@ -77,7 +77,7 @@ function userDiv(req) {
                                 </nav>`
         };
     } else {
-        htmlData  = {
+        htmlData = {
             'nav': `<a class="col-gy-b account" href="/account">
                     <i class="fas fa-user-alt"></i>
                     החשבון שלי
@@ -95,8 +95,8 @@ function userDiv(req) {
 }
 
 async function getSlideArea() {
-    
-    let panoramicArray = await Synagogue.collection.find({"panoramic": { "$ne": "" }}).toArray();
+
+    let panoramicArray = await Synagogue.collection.find({ "panoramic": { "$ne": "" } }).toArray();
     const maxRandom = panoramicArray.length;
     let areaData = [];
     if (maxRandom > 0) {
@@ -117,7 +117,7 @@ async function getSlideArea() {
 }
 
 async function getSynagogueHomePage() {
-    let synagogues = await Synagogue.collection.find().sort({'createDate': -1}).limit(10).toArray();
+    let synagogues = await Synagogue.collection.find().sort({ 'createDate': -1 }).limit(10).toArray();
     synagogues.forEach(item => {
         if (item.rite == 1) {
             item.rite = 'ע"מ';
@@ -132,7 +132,7 @@ async function getSynagogueHomePage() {
 
 function getShabbatDate() {
     const nowDate = new Date();
-    const formats = {weekday: "short"};
+    const formats = { weekday: "short" };
     let weekDay = nowDate.toLocaleDateString("en", formats);
     let num = 0;
     switch (weekDay) {
@@ -174,43 +174,43 @@ function getBtnCalc(day_hour, synagogueZmanim, weekDay) {
         'day_hour': '',
         'day_hours': ''
     };
-    if(day_hour == 1) {
+    if (day_hour == 1) {
         calcs.btn = '-';
         calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.SeaLevelSunrise.slice(11, 16);
         calcs.day_hours = ' לפני הנץ החמה';
-    } else if(day_hour == 2) {
+    } else if (day_hour == 2) {
         calcs.btn = '-';
         calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.CandleLighting.slice(11, 16);
         calcs.day_hours = ' לפני הדלקת נירות';
-    } else if(day_hour == 3) {
+    } else if (day_hour == 3) {
         calcs.btn = '+';
         calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.CandleLighting.slice(11, 16);
         calcs.day_hours = ' אחרי הדלקת נירות';
-    } else if(day_hour == 4) {
+    } else if (day_hour == 4) {
         calcs.btn = '+';
         calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.MinchaGedola.slice(11, 16);
         calcs.day_hours = ' אחרי מנחה גדולה';
-    } else if(day_hour == 5) {
+    } else if (day_hour == 5) {
         calcs.btn = '-';
         calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.PlagHamincha.slice(11, 16);
         calcs.day_hours = ' לפני פלג המנחה';
-    } else if(day_hour == 6) {
+    } else if (day_hour == 6) {
         calcs.btn = '+';
         calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.PlagHamincha.slice(11, 16);
         calcs.day_hours = ' אחרי פלג המנחה';
-    } else if(day_hour == 7) {
+    } else if (day_hour == 7) {
         calcs.btn = '-';
         calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.Sunset.slice(11, 16);
         calcs.day_hours = ' לפני השקיעה';
-    } else if(day_hour == 8) {
+    } else if (day_hour == 8) {
         calcs.btn = '+';
         calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.Sunset.slice(11, 16);
         calcs.day_hours = ' אחרי השקיעה';
-    } else if(day_hour == 9) {
+    } else if (day_hour == 9) {
         calcs.btn = '+';
         calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.Tzais.slice(11, 16);
         calcs.day_hours = ' אחרי צאת הכוכבים';
-    } else if(day_hour == 10) {
+    } else if (day_hour == 10) {
         calcs.btn = '-';
         calcs.day_hour = synagogueZmanim[weekDay].kosherZmanim.BasicZmanim.Tzais72.slice(11, 16);
         calcs.day_hours = ' אחרי ר"ת';
@@ -222,7 +222,7 @@ function calcDayTime(dayTime, diffTime, calc) {
     const minDayTime = convertTimeToMinutes(dayTime);
     const minDiffTime = convertTimeToMinutes(diffTime);
     let endTimeMin = 0;
-    if(calc == '-') {
+    if (calc == '-') {
         endTimeMin = minDayTime - minDiffTime;
     } else {
         endTimeMin = minDayTime + minDiffTime;
@@ -241,14 +241,14 @@ function convertTimeToMinutes(time) {
 function convertMinutesToTime(endTimeMin) {
     let hours = Math.floor(endTimeMin / 60);
     let minutes = endTimeMin % 60;
-    if(hours < 0) {
+    if (hours < 0) {
         hours = hours - hours - hours;
         hours = 24 - hours;
     }
-    if(hours > 24) {
+    if (hours > 24) {
         hours = hours - 24;
     }
-    if(minutes < 0) {
+    if (minutes < 0) {
         minutes = minutes - minutes - minutes;
         minutes = 60 - minutes;
     }
@@ -257,7 +257,7 @@ function convertMinutesToTime(endTimeMin) {
 }
 
 function sortItem(array, key) {
-    array.sort(function(a, b) {
+    array.sort(function (a, b) {
         if (a[key] < b[key]) return -1;
         if (a[key] > b[key]) return 1;
         return 0;
@@ -274,5 +274,5 @@ module.exports = {
     getBtnCalc,
     calcDayTime,
     sortItem
-    
+
 };

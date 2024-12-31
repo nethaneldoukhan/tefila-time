@@ -212,7 +212,7 @@ async function getShabbatParasha(loc, shabbatDate) {
     });
     if (!parasha) {
         parasha.items.forEach(item => {
-            if (item.category == 'holiday' && item.date == shabbatTime) {
+            if (item.category == 'holiday' && item.date == shabbatDate) {
                 parasha = item.hebrew;
             }
         });

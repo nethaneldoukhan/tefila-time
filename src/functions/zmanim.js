@@ -193,7 +193,7 @@ function saveShabbatZmanim(kosherZmanim, weekDay) {
             }
         ];
     zmanimArray.forEach(item => {
-        item.time = (zmanim.shabbat.isJerusalem && item.name == 'ה"נ' ? new Date(new Date(item.link.replace('+03', '+00')).getTime() - (20 * 60 * 1000)).toISOString() : item.link).slice(11, 16);
+        item.time = (zmanim.shabbat.isJerusalem && item.name == 'ה"נ' ? new Date(new Date(item.link.replace(/\+0(2|3)/, '+00')).getTime() - (20 * 60 * 1000)).toISOString() : item.link).slice(11, 16);
     });
     zmanim[weekDay].date = kosherZmanim.metadata.date;
     zmanim[weekDay].hours = zmanimArray;
